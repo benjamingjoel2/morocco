@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 // SITE_URL can be set in Vercel once a custom domain exists.
-const site = process.env.SITE_URL || 'https://morocco.vercel.app';
+const site = process.env.SITE_URL || 'https://morocco-liart.vercel.app';
 
 export default defineConfig({
   site,

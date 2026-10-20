@@ -31,7 +31,7 @@ All photos come from the **Unsplash API** and are looked up by `scripts/fetch-me
 | `UNSPLASH_ACCESS_KEY` | only for `npm run media` | Unsplash API access key (not needed on Vercel) |
 | `PEXELS_API_KEY` | optional | Hero video |
 | `PUBLIC_FORM_ENDPOINT` | optional | URL the trip form POSTs JSON to (e.g. Formspree). Without it, the form says honestly that nothing was sent. |
-| `SITE_URL` | optional | Canonical URL for the sitemap and Open Graph (default `https://morocco.vercel.app`) |
+| `SITE_URL` | optional | Canonical URL for the sitemap and Open Graph (default `https://morocco-liart.vercel.app`) |
 
 ## SEO
 Each page has a title, meta description, canonical URL, Open Graph and Twitter tags (`public/og.jpg`) and JSON-LD. `@astrojs/sitemap` generates `sitemap-index.xml`.
