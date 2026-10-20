@@ -42,6 +42,15 @@ const ALT: Record<string, string> = {
   _V4v7BbG338: 'A Moroccan table laid with tagines and colourful dishes',
   wXbgEYQTzxY: 'Jemaa el-Fnaa square and its stalls at dusk, Marrakech',
   AGYIFWzTm1I: 'Visitors in the carved stucco courtyard of the Ben Youssef Madrasa, Marrakech',
+  IWXgmHUi6bo: 'A tiled pavilion, palms and a pool in a walled garden in Marrakech',
+  Kloc39u0yhk: 'A riad courtyard with carved wooden balconies, looking up to the sky',
+  VdwtvEUj8HM: 'The earthen kasbah of Telouet above a green valley in the High Atlas',
+  FLI9eCwu0O8: 'The sun setting over the Atlantic from the shore at Essaouira',
+  '18fvXEV1R_A': 'The minaret of the Hassan II Mosque in Casablanca',
+  YJXrVIi_vd4: 'Hand-cut zellige tiles forming a many-pointed star pattern',
+  cvucpKVTsUo: 'Tents of a desert camp at golden hour in the Erg Chebbi',
+  bNqDGEqXiEg: 'A tanner working in the stone dye vats of a Fes tannery',
+  'rpzZ2G-fC0o': 'An older Moroccan musician in a white djellaba playing a traditional lute',
 };
 
 export const getPhoto = (slot: string): PhotoRecord | undefined => {
