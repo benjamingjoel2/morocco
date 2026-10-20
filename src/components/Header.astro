@@ -20,7 +20,7 @@ const bar = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
 <header
   id="site-header"
   data-overlay={overlay ? 'true' : 'false'}
-  class:list={['fixed inset-x-0 top-0 z-50 transition-[background-color,color,border-color] duration-500 border-b', overlay ? 'border-transparent text-white' : 'border-ink/10 bg-white text-ink']}
+  class:list={['fixed inset-x-0 top-0 z-50 transition-[background-color,color,border-color] duration-500 border-b', overlay ? 'on-photo border-transparent text-white' : 'border-ink/10 bg-white text-ink']}
 >
   <div class="container-x grid h-[72px] grid-cols-3 items-center">
     <div class="flex items-center gap-8 sm:gap-12">
@@ -57,9 +57,9 @@ const bar = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
       <p class="eyebrow !text-ink/70">ⴰⵣⵓⵍ · Azul means hello in Tamazight</p>
     </nav>
     <a href="/routes/#eight-days" class="group relative hidden overflow-hidden text-white md:block">
-      <Photo slot="essaouira" class="!absolute inset-0 h-full w-full" imgClass="transition-transform duration-[1.5s] group-hover:scale-105" sizes="50vw" label="Essaouira" />
-      <div class="absolute inset-0 bg-night/35"></div>
-      <div class="relative flex h-full flex-col items-center justify-center px-8 text-center">
+      <Photo photo="essaouira" class="!absolute inset-0 h-full w-full" imgClass="transition-transform duration-[1.5s] group-hover:scale-105" sizes="50vw" label="Essaouira" />
+      <div class="absolute inset-0 bg-night/45"></div>
+      <div class="on-photo relative flex h-full flex-col items-center justify-center px-8 text-center">
         <p class="display !text-white text-[5rem]">Marrakech<br />to Fes</p>
         <span class="link-dash mt-8">See a first route</span>
       </div>
@@ -75,6 +75,7 @@ const bar = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
       const scrolled = window.scrollY > window.innerHeight * 0.85;
       solid.forEach((c) => header.classList.toggle(c, scrolled));
       header.classList.toggle('text-white', !scrolled);
+      header.classList.toggle('on-photo', !scrolled);
       header.classList.toggle('border-transparent', !scrolled);
     };
     onScroll();

@@ -81,6 +81,9 @@
   .rail::-webkit-scrollbar { display: none; }
   .rail > * { scroll-snap-align: start; }
   .text-balance { text-wrap: balance; }
+  /* Keeps light text legible over any photo, including snow and white walls */
+  .on-photo { text-shadow: 0 1px 2px rgb(0 0 0 / 0.45), 0 0 18px rgb(0 0 0 / 0.35); }
+  .on-photo svg { filter: drop-shadow(0 1px 3px rgb(0 0 0 / 0.5)); }
   .rule-dots { background-image: linear-gradient(to right, currentColor 50%, transparent 50%); background-size: 4px 1px; background-repeat: repeat-x; height: 1px; }
 }
 

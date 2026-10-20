@@ -26,7 +26,7 @@ const tripsLd = ROUTES.map((r) => ({
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(tripsLd)} />
   <PageHero
-    slot="dades"
+    photo="dades"
     eyebrow="Routes"
     title="Three ways<br />to see Morocco"
     intro="Starting points, not packages. Pick the one closest to your pace and we will reshape it around your dates and dreams."
@@ -50,7 +50,7 @@ const tripsLd = ROUTES.map((r) => ({
             <div class="col-span-3"><dt class:list={[meta, 'text-gold']}>Best for</dt><dd class="mt-1 font-serif text-lg font-light">{r.bestFor}</dd></div>
           </dl>
           <div class="mt-10 hidden md:block">
-            <Photo slot={r.slot} ratio="4/3" sizes="45vw" label={r.title} />
+            <Photo photo={r.slot} ratio="4/3" sizes="45vw" label={r.title} />
           </div>
         </div>
         <div class="reveal">

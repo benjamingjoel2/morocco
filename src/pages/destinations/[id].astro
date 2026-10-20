@@ -48,7 +48,7 @@ const ld = [
   ogImage={ogImage}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(ld)} />
-  <PageHero slot={d.slot} eyebrow={d.region} title={d.name.replace(' & ', '<br />& ').replace(', ', ',<br />')} intro={d.tagline} label={d.name} />
+  <PageHero photo={d.slot} eyebrow={d.region} title={d.name.replace(' & ', '<br />& ').replace(', ', ',<br />')} intro={d.tagline} label={d.name} />
 
   <nav aria-label="Breadcrumb" class="container-x py-5">
     <ol class="flex flex-wrap gap-2 font-sans text-[0.72rem] uppercase tracking-[0.15em] text-ink/75">
@@ -69,7 +69,7 @@ const ld = [
       </dl>
       <p class="mt-6 font-sans text-[0.72rem] uppercase tracking-[0.15em] text-ink/75">Best for · {d.bestFor.join(' · ')}</p>
     </div>
-    <Photo slot={d.slot} ratio="4/5" fluid sizes="(min-width: 768px) 50vw, 100vw" class="aspect-[4/5] min-w-0 h-full md:aspect-auto md:min-h-[640px]" label={d.name} />
+    <Photo photo={d.slot} ratio="4/5" fluid sizes="(min-width: 768px) 50vw, 100vw" class="aspect-[4/5] min-w-0 h-full md:aspect-auto md:min-h-[640px]" label={d.name} />
   </section>
 
   <section class="container-x py-24 md:py-32">
@@ -94,7 +94,7 @@ const ld = [
       <div class:list={['grid gap-1', gallery.length > 1 && 'md:grid-cols-2']}>
         {gallery.map(({ slot, p }) => (
           <figure class="reveal">
-            <Photo slot={slot} ratio={gallery.length > 1 ? '4/3' : '21/9'} sizes={gallery.length > 1 ? '(min-width: 768px) 50vw, 100vw' : '100vw'} label={d.name} />
+            <Photo photo={slot} ratio={gallery.length > 1 ? '4/3' : '21/9'} sizes={gallery.length > 1 ? '(min-width: 768px) 50vw, 100vw' : '100vw'} label={d.name} />
             <figcaption class="container-x mt-3 font-sans text-[0.72rem] uppercase tracking-[0.15em] text-ink/75">
               {p!.location} · <a href={p!.photographerUrl} class="hover:underline" rel="noopener">{p!.photographer}</a> / Unsplash
             </figcaption>
@@ -135,7 +135,7 @@ const ld = [
     <div class="mt-14 grid gap-10 sm:grid-cols-3 sm:gap-4">
       {nearby.map((n) => (
         <a href={`/destinations/${n.id}/`} class="reveal group block">
-          <Photo slot={n.slot} ratio="2/3" sizes="(min-width: 640px) 33vw, 100vw" imgClass="transition-transform duration-700 group-hover:scale-[1.03]" label={n.name} />
+          <Photo photo={n.slot} ratio="2/3" sizes="(min-width: 640px) 33vw, 100vw" imgClass="transition-transform duration-700 group-hover:scale-[1.03]" label={n.name} />
           <p class="mt-5 font-sans text-[0.72rem] uppercase tracking-[0.15em] text-ink/75">{n.region}</p>
           <h3 class="mt-2 font-serif text-[1.6rem] leading-tight">{n.name}</h3>
           <p class="body-copy mt-1 text-[1rem] text-ink/80">{n.tagline}</p>

@@ -21,7 +21,7 @@ const small = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
   overlayHeader
 >
   <PageHero
-    slot="souk"
+    photo="souk"
     eyebrow="Things to do"
     title="Say yes to the<br />second glass"
     intro="Desert nights, mountain paths, hammam steam and a festival calendar that follows the seasons. These are the experiences we build trips around."
@@ -34,7 +34,7 @@ const small = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
       <div class="mt-16 grid gap-x-6 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
         {EXPERIENCES.map((e) => (
           <article id={`exp-${e.slot}`} class="reveal scroll-mt-28">
-            <Photo slot={e.slot} ratio="3/2" sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" label={e.title} />
+            <Photo photo={e.slot} ratio="3/2" sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" label={e.title} />
             <p class:list={[small, 'mt-5 text-white/70']}>{e.tag} · {e.where}</p>
             <h3 class="mt-2 font-serif text-[1.6rem] leading-tight">{e.title}</h3>
             <p class="body-copy mt-3 text-[1rem] text-white/85">{e.text}</p>
@@ -45,7 +45,7 @@ const small = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
   </section>
 
   <section class="grid md:grid-cols-2">
-    <Photo slot="gnaoua" ratio="1/1" sizes="(min-width: 768px) 50vw, 100vw" fluid class="aspect-[1/1] min-w-0 h-full md:aspect-auto" label="Gnawa musicians" />
+    <Photo photo="gnaoua" ratio="1/1" sizes="(min-width: 768px) 50vw, 100vw" fluid class="aspect-[1/1] min-w-0 h-full md:aspect-auto" label="Gnawa musicians" />
     <div class="px-6 py-20 sm:px-12 lg:px-20">
       <p class="eyebrow">Festivals & moussems</p>
       <h2 class="display-left mt-5 text-[3.4rem] md:text-[4.4rem]">Time your trip<br />to the music</h2>
@@ -75,7 +75,7 @@ const small = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
       </div>
     </div>
     <div class="md:order-2">
-      <Photo slot="zellige" ratio="1/1" sizes="(min-width: 768px) 65vw, 100vw" fluid class="aspect-[1/1] min-w-0 h-full md:aspect-auto md:min-h-[640px]" label="Zellige tilework" />
+      <Photo photo="zellige" ratio="1/1" sizes="(min-width: 768px) 65vw, 100vw" fluid class="aspect-[1/1] min-w-0 h-full md:aspect-auto md:min-h-[640px]" label="Zellige tilework" />
     </div>
   </section>
 
@@ -83,7 +83,7 @@ const small = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
     <div class="container-x">
       <SectionHead eyebrow="Food to try" title="Best understood<br />at the table" />
       <div class="mt-16 grid gap-12 md:grid-cols-[1fr_1.4fr]">
-        <Photo slot="tagine" ratio="4/5" sizes="(min-width: 768px) 40vw, 100vw" label="Tagine" />
+        <Photo photo="tagine" ratio="4/5" sizes="(min-width: 768px) 40vw, 100vw" label="Tagine" />
         <ul class="grid content-start gap-x-10 sm:grid-cols-2">
           {FOODS.map((f) => (
             <li class="reveal border-t border-dashed border-ink/40 py-5">

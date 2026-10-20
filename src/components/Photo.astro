@@ -2,7 +2,8 @@
 import { getPhoto, unsplashUrl } from '../data/media';
 
 interface Props {
-  slot: string;
+  /** Media slot key in media.json (not named `slot`: that word is reserved by Astro). */
+  photo: string;
   /** Aspect ratio such as "4/5"; omit to fill the parent (use with h-full). */
   ratio?: string;
   sizes?: string;
@@ -16,7 +17,7 @@ interface Props {
   defer?: boolean;
 }
 
-const { slot, ratio, sizes = '100vw', eager = false, class: cls = '', imgClass = '', label, fluid = false, defer = false } = Astro.props;
+const { photo: slot, ratio, sizes = '100vw', eager = false, class: cls = '', imgClass = '', label, fluid = false, defer = false } = Astro.props;
 const photo = getPhoto(slot);
 const widths = [480, 768, 1080, 1440, 1920, 2400];
 const [rw, rh] = (ratio ?? '1/1').split('/').map(Number);

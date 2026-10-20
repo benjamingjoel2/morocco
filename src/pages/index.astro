@@ -66,7 +66,7 @@ const notes = [
     <div id="exp-rail" class="rail mt-6 flex scroll-px-5 gap-6 overflow-x-auto px-5 sm:scroll-px-8 sm:px-8 lg:scroll-px-[42px] lg:px-[42px]" tabindex="0" aria-label="Experiences">
       {EXPERIENCES.map((e) => (
         <article class="w-[82vw] shrink-0 sm:w-[513px]">
-          <Photo slot={e.slot} ratio="3/2" sizes="(min-width: 640px) 513px, 82vw" label={e.title} />
+          <Photo photo={e.slot} ratio="3/2" sizes="(min-width: 640px) 513px, 82vw" label={e.title} />
           <p class="mt-6 font-sans text-[0.72rem] uppercase tracking-[0.15em] text-white/70">{e.tag} · {e.where}</p>
           <h3 class="mt-2 font-serif text-[1.9rem] leading-tight">{e.title}</h3>
           <p class="body-copy mt-4 max-w-[440px] text-white/90">{e.text}</p>
@@ -78,7 +78,7 @@ const notes = [
 
   <!-- Welcome split -->
   <section class="grid md:grid-cols-2">
-    <Photo slot="aitbenhaddou" ratio="1/1" sizes="(min-width: 768px) 50vw, 100vw" label="Aït Benhaddou" />
+    <Photo photo="aitbenhaddou" ratio="1/1" sizes="(min-width: 768px) 50vw, 100vw" label="Aït Benhaddou" />
     <div class="reveal flex flex-col items-center justify-center bg-greige px-8 py-20 text-center">
       <Logo class="h-14 w-11 text-gold" />
       <p class="eyebrow mt-8">An independent guide to Morocco</p>
@@ -91,9 +91,9 @@ const notes = [
 
   <!-- Full-bleed statement -->
   <section class="relative isolate flex min-h-[90vh] items-center justify-center overflow-hidden text-white">
-    <Photo slot="marrakech" class="!absolute inset-0 -z-20 h-full w-full" label="Marrakech" />
-    <div class="absolute inset-0 -z-10 bg-night/40"></div>
-    <h2 class="display reveal px-4 text-center !text-white text-[4.2rem] sm:text-[6.5rem] lg:text-[8.75rem]">Come in,<br />the tea is poured</h2>
+    <Photo photo="marrakech" class="!absolute inset-0 -z-20 h-full w-full" label="Marrakech" />
+    <div class="absolute inset-0 -z-10 bg-night/45"></div>
+    <h2 class="display reveal on-photo px-4 text-center !text-white text-[4.2rem] sm:text-[6.5rem] lg:text-[8.75rem]">Come in,<br />the tea is poured</h2>
   </section>
 
   <!-- Purpose -->
@@ -130,7 +130,7 @@ const notes = [
     {pillars.map((p, i) => (
       <div class:list={['grid', i % 2 === 0 ? 'md:grid-cols-[1.86fr_1fr]' : 'md:grid-cols-[1fr_1.86fr]']}>
         <div class:list={[i % 2 === 1 && 'md:order-2']}>
-          <Photo slot={p.slot} ratio="1/1" sizes="(min-width: 768px) 65vw, 100vw" fluid class="aspect-[1/1] min-w-0 h-full md:aspect-auto md:min-h-[640px]" label={p.title.replace('<br />', ' ')} />
+          <Photo photo={p.slot} ratio="1/1" sizes="(min-width: 768px) 65vw, 100vw" fluid class="aspect-[1/1] min-w-0 h-full md:aspect-auto md:min-h-[640px]" label={p.title.replace('<br />', ' ')} />
         </div>
         <div class="reveal flex flex-col items-center justify-center bg-greige px-8 py-20 text-center">
           <h3 class="display text-[3.4rem] md:text-[4.4rem]" set:html={p.title} />
@@ -199,9 +199,9 @@ const notes = [
     <div class="mx-auto mt-14 h-28 w-px border-l border-dashed border-ink/40"></div>
   </section>
   <section class="relative isolate flex min-h-[90vh] items-center justify-center overflow-hidden text-white">
-    <Photo slot="atlasValley" class="!absolute inset-0 -z-20 h-full w-full" label="High Atlas valley" />
-    <div class="absolute inset-0 -z-10 bg-night/35"></div>
-    <h2 class="display reveal px-4 text-center !text-white text-[4.2rem] sm:text-[6.5rem] lg:text-[8.75rem]">Stay longer,<br />go deeper</h2>
+    <Photo photo="atlasValley" class="!absolute inset-0 -z-20 h-full w-full" label="High Atlas valley" />
+    <div class="absolute inset-0 -z-10 bg-night/45"></div>
+    <h2 class="display reveal on-photo px-4 text-center !text-white text-[4.2rem] sm:text-[6.5rem] lg:text-[8.75rem]">Stay longer,<br />go deeper</h2>
   </section>
 
   <!-- Quote -->
@@ -221,7 +221,7 @@ const notes = [
     <div class="mt-14 grid gap-10 sm:grid-cols-3 sm:gap-4">
       {notes.map((n) => (
         <a href={n.href} class="reveal group block">
-          <Photo slot={n.slot} ratio="2/3" sizes="(min-width: 640px) 33vw, 100vw" imgClass="transition-transform duration-700 group-hover:scale-[1.03]" label={n.by} />
+          <Photo photo={n.slot} ratio="2/3" sizes="(min-width: 640px) 33vw, 100vw" imgClass="transition-transform duration-700 group-hover:scale-[1.03]" label={n.by} />
           <p class="mt-5 font-sans text-[0.72rem] uppercase tracking-[0.15em] text-ink/75">{n.tag}</p>
           <h3 class="mt-2 font-serif text-[1.6rem] leading-tight">{n.title}</h3>
           <p class="mt-4 font-sans text-sm text-ink">{n.by}</p>
