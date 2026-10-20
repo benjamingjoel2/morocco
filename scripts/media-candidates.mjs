@@ -62,7 +62,9 @@ if (cmd === 'search') {
   const media = JSON.parse(readFileSync(OUT, 'utf8'));
   for (const arg of args) {
     const [slot, id] = arg.split('=');
-    const def = SLOTS.find((s) => s.slot === slot);
+    // Gallery slots such as "fes-g1" reuse the place check of their base slot.
+    const def = SLOTS.find((s) => s.slot === slot.replace(/-g\d+$/, ''));
+    if (!def) { console.warn(`unknown slot ${slot}`); continue; }
     const { json: full, left } = await api(`/photos/${id}`);
     const v = verify(full, def.places);
     if (!v) { console.warn(`${slot}: ${id} REJECTED (location: ${JSON.stringify(full.location)})`); continue; }

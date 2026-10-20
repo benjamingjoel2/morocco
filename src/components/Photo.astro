@@ -12,9 +12,11 @@ interface Props {
   label?: string;
   /** Crop to `ratio` but let CSS classes size the box (for split layouts). */
   fluid?: boolean;
+  /** Don't download until a script copies data-src/data-srcset across (hidden slides). */
+  defer?: boolean;
 }
 
-const { slot, ratio, sizes = '100vw', eager = false, class: cls = '', imgClass = '', label, fluid = false } = Astro.props;
+const { slot, ratio, sizes = '100vw', eager = false, class: cls = '', imgClass = '', label, fluid = false, defer = false } = Astro.props;
 const photo = getPhoto(slot);
 const widths = [480, 768, 1080, 1440, 1920, 2400];
 const [rw, rh] = (ratio ?? '1/1').split('/').map(Number);
@@ -23,8 +25,10 @@ const style = ratio && !fluid ? `aspect-ratio:${ratio}` : undefined;
 {photo ? (
   <div class:list={['relative overflow-hidden', cls]} style={`${style ?? ''};background:${photo.color}`}>
     <img
-      src={unsplashUrl(photo.src, 1440, ratio)}
-      srcset={widths.map((w) => `${unsplashUrl(photo.src, w, ratio)} ${w}w`).join(', ')}
+      src={defer ? undefined : unsplashUrl(photo.src, 1440, ratio)}
+      srcset={defer ? undefined : widths.map((w) => `${unsplashUrl(photo.src, w, ratio)} ${w}w`).join(', ')}
+      data-src={defer ? unsplashUrl(photo.src, 1440, ratio) : undefined}
+      data-srcset={defer ? widths.map((w) => `${unsplashUrl(photo.src, w, ratio)} ${w}w`).join(', ') : undefined}
       sizes={sizes}
       alt={photo.alt}
       width={ratio ? 1440 : photo.width}

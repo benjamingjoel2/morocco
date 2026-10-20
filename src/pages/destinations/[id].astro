@@ -4,6 +4,7 @@ import PageHero from '../../components/PageHero.astro';
 import Photo from '../../components/Photo.astro';
 import { DESTINATIONS, type Destination } from '../../data/destinations';
 import { DETAILS } from '../../data/destinationDetails';
+import { getPhoto, unsplashUrl } from '../../data/media';
 
 export function getStaticPaths() {
   return DESTINATIONS.map((d) => ({ params: { id: d.id }, props: { d } }));
@@ -15,6 +16,10 @@ const nearby = x.nearby.map((id) => DESTINATIONS.find((n) => n.id === id)!).filt
 const short = d.name.split(',')[0].split(' & ')[0];
 const label = 'font-sans text-[0.72rem] uppercase tracking-[0.15em] text-gold';
 const site = Astro.site!;
+const gallery = [`${d.id}-g1`, `${d.id}-g2`].map((slot) => ({ slot, p: getPhoto(slot) })).filter((g) => g.p);
+const main = getPhoto(d.slot);
+// Share previews show this destination's own photo, cropped to 1200x630
+const ogImage = main ? unsplashUrl(main.src, 1200, '40/21', 80) : undefined;
 
 const ld = [
   {
@@ -40,6 +45,7 @@ const ld = [
   title={`${d.name} travel guide: what to do, where to stay, when to go`}
   description={`${d.tagline}. Our ${d.name} guide: a perfect day, where to stay, the best time to visit, how to get there and what not to miss.`}
   overlayHeader
+  ogImage={ogImage}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(ld)} />
   <PageHero slot={d.slot} eyebrow={d.region} title={d.name.replace(' & ', '<br />& ').replace(', ', ',<br />')} intro={d.tagline} label={d.name} />
@@ -82,6 +88,21 @@ const ld = [
       ))}
     </ol>
   </section>
+
+  {gallery.length > 0 && (
+    <section class="pb-24 md:pb-32" aria-label={`Photos of ${d.name}`}>
+      <div class:list={['grid gap-1', gallery.length > 1 && 'md:grid-cols-2']}>
+        {gallery.map(({ slot, p }) => (
+          <figure class="reveal">
+            <Photo slot={slot} ratio={gallery.length > 1 ? '4/3' : '21/9'} sizes={gallery.length > 1 ? '(min-width: 768px) 50vw, 100vw' : '100vw'} label={d.name} />
+            <figcaption class="container-x mt-3 font-sans text-[0.72rem] uppercase tracking-[0.15em] text-ink/75">
+              {p!.location} · <a href={p!.photographerUrl} class="hover:underline" rel="noopener">{p!.photographer}</a> / Unsplash
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  )}
 
   <section class="bg-linen py-24 md:py-32">
     <div class="container-x grid gap-16 md:grid-cols-2">

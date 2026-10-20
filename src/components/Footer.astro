@@ -24,24 +24,28 @@ const small = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
     </div>
 
     <div class="mt-20">
-      <p class="eyebrow">Photography</p>
-      {credits.length > 0 && (
-        <ul class="mt-4 grid gap-x-8 gap-y-1.5 font-sans text-[0.78rem] text-ink/85 sm:grid-cols-2 lg:grid-cols-4">
-          {credits.map(([, p]) => (
-            <li>
-              <a class="hover:underline" href={p.photoUrl} rel="noopener">{p.location || 'Morocco'}</a> by{' '}
-              <a class="hover:underline" href={p.photographerUrl} rel="noopener">{p.photographer}</a>
-            </li>
-          ))}
-        </ul>
-      )}
-      <p class="mt-4 font-sans text-[0.78rem] text-ink/85">
+      <p class="font-sans text-[0.78rem] text-ink/85">
         Photos from <a class="underline" href="https://unsplash.com/?utm_source=azul_morocco&utm_medium=referral" rel="noopener">Unsplash</a>
         {heroVideo && (
           <> · Video by <a class="underline" href={heroVideo.videoUrl} rel="noopener">{heroVideo.videographer}</a> on <a class="underline" href="https://www.pexels.com" rel="noopener">Pexels</a></>
-        )}.
-        Entry rules and prices change; always confirm visa requirements with official sources before you travel.
+        )}, credited below. Entry rules and prices change; always confirm visa requirements with official sources before you travel.
       </p>
+      {credits.length > 0 && (
+        <details class="group mt-6 border-t border-ink/30 pt-4">
+          <summary class="flex cursor-pointer list-none items-center justify-between font-sans text-[0.75rem] uppercase tracking-[0.15em] text-gold [&::-webkit-details-marker]:hidden">
+            Photo credits · {credits.length} photos
+            <span class="text-base transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <ul class="mt-4 grid gap-x-8 gap-y-1.5 font-sans text-[0.78rem] text-ink/85 sm:grid-cols-2 lg:grid-cols-4">
+            {credits.map(([, p]) => (
+              <li>
+                <a class="hover:underline" href={p.photoUrl} rel="noopener">{p.location || 'Morocco'}</a> by{' '}
+                <a class="hover:underline" href={p.photographerUrl} rel="noopener">{p.photographer}</a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
     </div>
 
     <div class="mt-14 flex flex-col justify-between gap-3 border-b border-ink pb-4 sm:flex-row">

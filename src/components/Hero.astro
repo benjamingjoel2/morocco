@@ -14,7 +14,7 @@ const SLIDES = [
   <h1 class="sr-only">Azul Morocco: slow, tailor-made journeys through Morocco</h1>
   {SLIDES.map((s, i) => (
     <div class:list={['hero-slide absolute inset-0 -z-20 transition-opacity duration-[1600ms]', i === 0 ? 'opacity-100' : 'opacity-0']} data-caption={s.caption} data-coords={s.coords}>
-      <Photo slot={s.slot} eager={i === 0} class="!absolute inset-0 h-full w-full" imgClass="kenburns" />
+      <Photo slot={s.slot} eager={i === 0} defer={i > 0} class="!absolute inset-0 h-full w-full" imgClass="kenburns" />
     </div>
   ))}
   {heroVideo && (
@@ -50,8 +50,14 @@ const SLIDES = [
     }));
   };
   if (!calm && slides.length > 1) {
-    // Fetch the later slides once the page is idle, so cross-fades never show a blank frame.
-    window.addEventListener('load', () => slides.forEach((sl) => sl.querySelectorAll('img').forEach((im) => (im.loading = 'eager'))));
+    // Later slides download only after the page has loaded, so they never compete with the first paint.
+    const reveal = () => slides.forEach((sl) => sl.querySelectorAll<HTMLImageElement>('img[data-src]').forEach((im) => {
+      im.srcset = im.dataset.srcset ?? '';
+      im.src = im.dataset.src ?? '';
+      im.loading = 'eager';
+    }));
+    if (document.readyState === 'complete') setTimeout(reveal, 1000);
+    else window.addEventListener('load', () => setTimeout(reveal, 1000));
     run();
     setInterval(() => {
       if (document.hidden) return;

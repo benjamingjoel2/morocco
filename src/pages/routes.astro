@@ -5,12 +5,26 @@ import Photo from '../components/Photo.astro';
 import { ROUTES } from '../data/routes';
 
 const meta = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
+const site = Astro.site!;
+const tripsLd = ROUTES.map((r) => ({
+  '@context': 'https://schema.org',
+  '@type': 'TouristTrip',
+  name: `${r.title} (${r.nights})`,
+  description: r.intro,
+  url: new URL(`/routes/#${r.id}`, site).toString(),
+  touristType: r.bestFor,
+  itinerary: {
+    '@type': 'ItemList',
+    itemListElement: r.days.map((d, i) => ({ '@type': 'ListItem', position: i + 1, name: `${d.day}: ${d.place}`, description: d.text })),
+  },
+}));
 ---
 <Base
   title="Morocco itineraries: 5 days, 8 days and two weeks"
   description="Three tried-and-tested Morocco itineraries: Marrakech and the Atlas in five nights, Marrakech to Fes via the Sahara in eight, and a slow two-week journey from Chefchaouen to Essaouira."
   overlayHeader
 >
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(tripsLd)} />
   <PageHero
     slot="dades"
     eyebrow="Routes"
