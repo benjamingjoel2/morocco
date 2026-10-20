@@ -1,87 +1,90 @@
 ---
 import Logo from './Logo.astro';
-import { NAV, CTA } from '../data/nav';
+import Photo from './Photo.astro';
 
 interface Props { overlay?: boolean; }
 const { overlay = false } = Astro.props;
 const path = Astro.url.pathname;
+
+const MENU = [
+  { href: '/', label: 'Home' },
+  { href: '/destinations/', label: 'Destinations' },
+  { href: '/things-to-do/', label: 'Things to Do' },
+  { href: '/travel-tips/', label: 'Travel Tips' },
+  { href: '/contact/', label: 'Plan a Trip' },
+];
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const bar = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
 ---
 <header
   id="site-header"
   data-overlay={overlay ? 'true' : 'false'}
-  class:list={[
-    'fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,color] duration-500',
-    overlay ? 'text-sand' : 'bg-sand/95 text-ink shadow-[0_1px_0_rgba(31,26,21,0.08)] backdrop-blur',
-  ]}
+  class:list={['fixed inset-x-0 top-0 z-50 transition-[background-color,color,border-color] duration-500 border-b', overlay ? 'border-transparent text-white' : 'border-ink/10 bg-white text-ink']}
 >
-  <div class="container-x flex h-20 items-center justify-between gap-6">
-    <a href="/" aria-label="Azul Morocco, home" class="logo-link">
-      <Logo tone={overlay ? 'light' : 'dark'} />
-    </a>
-    <nav aria-label="Main" class="hidden items-center gap-9 md:flex">
-      {NAV.map((n) => (
-        <a
-          href={n.href}
-          class:list={['text-sm font-semibold tracking-wide underline-offset-8 hover:underline', path.startsWith(n.href) && 'underline decoration-saffron decoration-2']}
-          aria-current={path.startsWith(n.href) ? 'page' : undefined}
-        >{n.label}</a>
-      ))}
-      <a href={CTA.href} class="btn-clay">{CTA.label}</a>
-    </nav>
-    <button
-      id="menu-open"
-      class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-current md:hidden"
-      aria-label="Open menu"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-    >
-      <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 8h16M4 16h16" /></svg>
-    </button>
+  <div class="container-x grid h-[72px] grid-cols-3 items-center">
+    <div class="flex items-center gap-8 sm:gap-12">
+      <button id="menu-open" class={bar} aria-expanded="false" aria-controls="site-menu">Menu</button>
+      <a href="/contact/" class:list={[bar, 'hidden sm:inline']}>Plan a trip</a>
+    </div>
+    <a href="/" class="justify-self-center" aria-label="Azul Morocco, home"><Logo /></a>
+    <a href="/travel-tips/" class:list={[bar, 'justify-self-end']}>Travel tips</a>
   </div>
 </header>
 
-<div id="mobile-menu" class="zellige-bg fixed inset-0 z-[60] hidden flex-col bg-ink text-sand md:hidden" role="dialog" aria-modal="true" aria-label="Menu">
-  <div class="container-x flex h-20 items-center justify-between">
-    <Logo tone="light" />
-    <button id="menu-close" class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-sand/60" aria-label="Close menu">
-      <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
-    </button>
+<div id="site-menu" class="fixed inset-0 z-[60] hidden bg-white text-ink" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="container-x grid h-[72px] grid-cols-3 items-center border-b border-ink/10">
+    <div class="flex items-center gap-8 sm:gap-12">
+      <button id="menu-close" class={bar}>Close</button>
+      <a href="/contact/" class:list={[bar, 'hidden sm:inline']}>Plan a trip</a>
+    </div>
+    <a href="/" class="justify-self-center" aria-label="Azul Morocco, home"><Logo /></a>
+    <a href="/travel-tips/" class:list={[bar, 'justify-self-end']}>Travel tips</a>
   </div>
-  <nav aria-label="Mobile" class="container-x mt-10 flex flex-col gap-6">
-    <a href="/" class="font-display text-4xl">Home</a>
-    {NAV.map((n) => <a href={n.href} class="font-display text-4xl">{n.label}</a>)}
-    <a href={CTA.href} class="btn-clay mt-6 self-start">{CTA.label}</a>
-    <p class="mt-10 text-sm text-sand/70">ⴰⵣⵓⵍ · Azul means hello in Tamazight.</p>
-  </nav>
+  <div class="grid h-[calc(100%-72px)] md:grid-cols-2">
+    <nav aria-label="Main" class="flex flex-col justify-between px-5 py-10 sm:px-8 lg:px-[42px]">
+      <ul class="max-w-[550px]">
+        {MENU.map((m) => (
+          <li class="border-b border-dashed border-ink/40 first:border-solid first:border-ink">
+            <a
+              href={m.href}
+              class:list={['block py-2 font-sans text-[2rem] font-light leading-tight transition-colors hover:text-ink', isActive(m.href) ? 'text-ink' : 'text-ink/50']}
+              aria-current={isActive(m.href) ? 'page' : undefined}
+            >{m.label}</a>
+          </li>
+        ))}
+      </ul>
+      <p class="eyebrow !text-ink/40">ⴰⵣⵓⵍ · Azul means hello in Tamazight</p>
+    </nav>
+    <a href="/#route" class="group relative hidden overflow-hidden text-white md:block">
+      <Photo slot="essaouira" class="!absolute inset-0 h-full w-full" imgClass="transition-transform duration-[1.5s] group-hover:scale-105" sizes="50vw" label="Essaouira" />
+      <div class="absolute inset-0 bg-night/35"></div>
+      <div class="relative flex h-full flex-col items-center justify-center px-8 text-center">
+        <p class="display !text-white text-[5rem]">Marrakech<br />to Fes</p>
+        <span class="link-dash mt-8">See a first route</span>
+      </div>
+    </a>
+  </div>
 </div>
 
 <script>
   const header = document.getElementById('site-header')!;
-  const overlay = header.dataset.overlay === 'true';
-  const solid = ['bg-sand/95', 'text-ink', 'shadow-[0_1px_0_rgba(31,26,21,0.08)]', 'backdrop-blur'];
-  const setLogoTone = (dark: boolean) => {
-    header.querySelectorAll('.logo-link > span').forEach((el) => {
-      el.classList.toggle('text-ink', dark);
-      el.classList.toggle('text-sand', !dark);
-    });
-  };
-  if (overlay) {
+  if (header.dataset.overlay === 'true') {
+    const solid = ['bg-white', 'text-ink', 'border-ink/10'];
     const onScroll = () => {
-      const scrolled = window.scrollY > 60;
+      const scrolled = window.scrollY > window.innerHeight * 0.85;
       solid.forEach((c) => header.classList.toggle(c, scrolled));
-      header.classList.toggle('text-sand', !scrolled);
-      setLogoTone(scrolled);
+      header.classList.toggle('text-white', !scrolled);
+      header.classList.toggle('border-transparent', !scrolled);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  const menu = document.getElementById('mobile-menu')!;
+  const menu = document.getElementById('site-menu')!;
   const openBtn = document.getElementById('menu-open')!;
   const closeBtn = document.getElementById('menu-close')!;
   const toggle = (open: boolean) => {
     menu.classList.toggle('hidden', !open);
-    menu.classList.toggle('flex', open);
     document.body.style.overflow = open ? 'hidden' : '';
     openBtn.setAttribute('aria-expanded', String(open));
     (open ? closeBtn : openBtn).focus();

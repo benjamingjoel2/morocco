@@ -10,13 +10,15 @@ interface Props {
   class?: string;
   imgClass?: string;
   label?: string;
+  /** Crop to `ratio` but let CSS classes size the box (for split layouts). */
+  fluid?: boolean;
 }
 
-const { slot, ratio, sizes = '100vw', eager = false, class: cls = '', imgClass = '', label } = Astro.props;
+const { slot, ratio, sizes = '100vw', eager = false, class: cls = '', imgClass = '', label, fluid = false } = Astro.props;
 const photo = getPhoto(slot);
 const widths = [480, 768, 1080, 1440, 1920, 2400];
 const [rw, rh] = (ratio ?? '1/1').split('/').map(Number);
-const style = ratio ? `aspect-ratio:${ratio}` : undefined;
+const style = ratio && !fluid ? `aspect-ratio:${ratio}` : undefined;
 ---
 {photo ? (
   <div class:list={['relative overflow-hidden', cls]} style={`${style ?? ''};background:${photo.color}`}>
@@ -35,13 +37,15 @@ const style = ratio ? `aspect-ratio:${ratio}` : undefined;
   </div>
 ) : (
   <div
-    class:list={['relative flex items-end overflow-hidden bg-clay-deep text-sand', cls]}
+    class:list={['relative flex items-center justify-center overflow-hidden bg-greige text-gold', cls]}
     style={style}
     role="img"
     aria-label={label ?? slot}
   >
-    <div class="zellige-bg absolute inset-0 opacity-20"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-ink/70 via-clay-deep/40 to-clay/30"></div>
-    {label && <span class="relative m-5 font-display text-xl italic opacity-90">{label}</span>}
+    <svg viewBox="0 0 48 60" class="h-16 w-12 opacity-40" aria-hidden="true">
+      <path d="M10 58V30A16 16 0 1 1 38 30V58" fill="none" stroke="currentColor" stroke-width="1.6" />
+      <g fill="currentColor"><rect x="18" y="22" width="12" height="12" /><rect x="18" y="22" width="12" height="12" transform="rotate(45 24 28)" /></g>
+    </svg>
+    {label && <span class="eyebrow absolute bottom-5 left-5">{label}</span>}
   </div>
 )}

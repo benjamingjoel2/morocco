@@ -2,6 +2,21 @@
 
 > *Azul* (ⴰⵣⵓⵍ) is the Amazigh greeting for hello. The site should feel like that: a warm welcome from someone who knows the country, not a brochure.
 
+## Revision 2 (20 Oct 2026): close match to the reference
+
+After v1 shipped, the client asked for the site to look like sabbatical.travel instead of being only loosely inspired by it. **The design below replaces sections 2, 3, 4, 6 and 7.** Sections 1, 5 and 8 still apply.
+
+**What now mirrors the reference (structure and style only):**
+- **Home section order:** a full-screen photo slideshow (hero) with corner coordinates, a centred wordmark and a progress bar for the caption; a charcoal band of experience cards you scroll sideways; a 50/50 photo and greige panel with the mark and a dashed button; a full-bleed photo with a giant capitals statement; a short centred "why" paragraph; a three-row checkerboard of photo and panel; a numbered 01/02/03 process with clickable tabs and a progress hairline; a chalk-coloured "travel lightly" panel with a dashed vertical rule; a second full-bleed statement; a centred quote on linen; and three "field notes" cards.
+- **Header and menu:** MENU and PLAN A TRIP on the left, the mark centred and TRAVEL TIPS on the right. The menu is a split screen: a sans-serif link list with dashed dividers, next to a full-height photo with a statement.
+- **Type:** huge condensed capitals in muted gold (*Instrument Serif*, horizontally condensed), light serif body text (*Newsreader*), and small tracked caps labels (*Manrope*).
+- **Palette:** charcoal `#231f20` / `#2f2d2c`, ink `#313131`, gold `#968361`, greige `#e3dfd4`, linen `#f1eee8`, chalk `#faf8f4`.
+- **Details:** dashed outline buttons, dashed caps links, dashed list dividers and a slow zoom on photos.
+
+**What stays our own (and must not be copied):** all text, all photos (Unsplash, credited), the Azul logo (a horseshoe arch with an 8-point zellige star; *not* their 4-point star), the fonts (free Google fonts, not their licensed Flecha/Matter), and all code. There are no press logos and no invented reviews.
+
+---
+
 ## 1. Positioning
 
 Azul Morocco is an independent travel guide and trip-planning service for travellers who want to slow down. They might spend a week in one riad or a night in a desert camp instead of rushing through ten cities. The site helps people choose where to go, what to do and how to get around, then lets them ask for a tailor-made itinerary through the Contact/Booking page.

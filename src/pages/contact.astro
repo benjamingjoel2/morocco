@@ -4,8 +4,8 @@ import Photo from '../components/Photo.astro';
 
 const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
 const interests = ['Medinas & history', 'Food & cooking', 'Sahara nights', 'Mountain walks', 'Coast & surf', 'Crafts & shopping', 'Festivals & music', 'Hammam & rest'];
-const input = 'mt-2 w-full rounded-xl border border-ink/20 bg-plaster px-4 py-3 text-base outline-none transition focus:border-clay focus:ring-2 focus:ring-clay/25 aria-[invalid=true]:border-clay-deep';
-const label = 'text-sm font-semibold';
+const input = 'mt-1 w-full border-0 border-b border-dashed border-ink/50 bg-transparent px-0 py-2.5 font-serif text-lg font-light outline-none transition focus:border-solid focus:border-ink aria-[invalid=true]:border-solid aria-[invalid=true]:border-[#9a3b2a]';
+const label = 'font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold';
 ---
 <Base
   title="Plan Your Morocco Trip: Contact & Booking"
@@ -15,29 +15,29 @@ const label = 'text-sm font-semibold';
     <div class="md:col-span-5">
       <div class="md:sticky md:top-28">
         <p class="eyebrow">Contact & booking</p>
-        <h1 class="mt-4 text-balance text-5xl leading-[1] md:text-7xl">Let’s sketch <em class="text-clay">your</em> Morocco</h1>
-        <p class="mt-6 text-lg text-ink/75">
+        <h1 class="display-left mt-5 text-[4rem] md:text-[6rem]">Let’s sketch<br />your Morocco</h1>
+        <p class="body-copy mt-6 text-ink/85">
           Tell us a little about your trip. Within two working days you will receive a first day-by-day route with places to stay, drive times and honest notes. No payment and no obligation.
         </p>
         <div class="mt-10 hidden md:block">
-          <Photo slot="jemaa" ratio="4/5" sizes="40vw" class="arch-mask" label="Jemaa el-Fnaa" />
+          <Photo slot="jemaa" ratio="4/5" sizes="40vw" label="Jemaa el-Fnaa" />
         </div>
       </div>
     </div>
 
     <div class="md:col-span-7">
-      <form id="trip-form" class="rounded-[1.75rem] bg-plaster/60 p-6 ring-1 ring-ink/10 sm:p-10" novalidate data-endpoint={endpoint}>
+      <form id="trip-form" class="bg-linen p-6 sm:p-12" novalidate data-endpoint={endpoint}>
         <fieldset class="grid gap-6 sm:grid-cols-2">
           <legend class="eyebrow mb-6">About you</legend>
           <div>
             <label class={label} for="name">Your name</label>
             <input class={input} id="name" name="name" autocomplete="name" required />
-            <p class="field-error mt-1 hidden text-sm text-clay-deep">Please tell us your name.</p>
+            <p class="field-error mt-1 hidden text-sm text-[#9a3b2a]">Please tell us your name.</p>
           </div>
           <div>
             <label class={label} for="email">Email</label>
             <input class={input} id="email" name="email" type="email" autocomplete="email" required />
-            <p class="field-error mt-1 hidden text-sm text-clay-deep">Please enter a valid email address.</p>
+            <p class="field-error mt-1 hidden text-sm text-[#9a3b2a]">Please enter a valid email address.</p>
           </div>
           <div class="sm:col-span-2">
             <label class={label} for="country">Travelling from <span class="font-normal text-ink/60">(optional)</span></label>
@@ -50,17 +50,17 @@ const label = 'text-sm font-semibold';
           <div>
             <label class={label} for="arrival">Arrival date</label>
             <input class={input} id="arrival" name="arrival" type="date" required />
-            <p class="field-error mt-1 hidden text-sm text-clay-deep">Please choose a future date.</p>
+            <p class="field-error mt-1 hidden text-sm text-[#9a3b2a]">Please choose a future date.</p>
           </div>
           <div>
             <label class={label} for="nights">Nights</label>
             <input class={input} id="nights" name="nights" type="number" min="2" max="60" value="8" required />
-            <p class="field-error mt-1 hidden text-sm text-clay-deep">Between 2 and 60 nights.</p>
+            <p class="field-error mt-1 hidden text-sm text-[#9a3b2a]">Between 2 and 60 nights.</p>
           </div>
           <div>
             <label class={label} for="travellers">Travellers</label>
             <input class={input} id="travellers" name="travellers" type="number" min="1" max="20" value="2" required />
-            <p class="field-error mt-1 hidden text-sm text-clay-deep">Between 1 and 20 people.</p>
+            <p class="field-error mt-1 hidden text-sm text-[#9a3b2a]">Between 1 and 20 people.</p>
           </div>
           <div class="sm:col-span-3">
             <label class={label} for="budget">Budget per person, excluding flights</label>
@@ -80,7 +80,7 @@ const label = 'text-sm font-semibold';
             {interests.map((i) => (
               <label class="cursor-pointer">
                 <input type="checkbox" name="interests" value={i} class="peer sr-only" />
-                <span class="inline-block rounded-full border border-ink/20 px-4 py-2 text-sm transition peer-checked:border-clay peer-checked:bg-clay peer-checked:text-plaster peer-focus-visible:ring-2 peer-focus-visible:ring-majorelle">{i}</span>
+                <span class="inline-block border border-dashed border-ink/50 px-4 py-2 font-sans text-[0.68rem] uppercase tracking-[0.12em] text-ink/80 transition peer-checked:border-solid peer-checked:border-night peer-checked:bg-night peer-checked:text-white peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-gold">{i}</span>
               </label>
             ))}
           </div>
@@ -92,9 +92,9 @@ const label = 'text-sm font-semibold';
             {[['slow', 'Slow', 'Few places, long stays'], ['balanced', 'Balanced', 'A bit of everything'], ['full', 'Full', 'See as much as possible']].map(([v, t, d], idx) => (
               <label class="cursor-pointer">
                 <input type="radio" name="pace" value={v} class="peer sr-only" checked={idx === 0} />
-                <span class="block rounded-2xl border border-ink/20 p-4 transition peer-checked:border-clay peer-checked:bg-clay/10 peer-focus-visible:ring-2 peer-focus-visible:ring-majorelle">
-                  <span class="block font-semibold">{t}</span>
-                  <span class="block text-sm text-ink/65">{d}</span>
+                <span class="block border border-dashed border-ink/50 p-4 transition peer-checked:border-solid peer-checked:border-night peer-checked:bg-white peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-gold">
+                  <span class="block font-serif text-xl">{t}</span>
+                  <span class="block font-sans text-xs text-ink/65">{d}</span>
                 </span>
               </label>
             ))}
@@ -107,12 +107,12 @@ const label = 'text-sm font-semibold';
         </div>
 
         <label class="mt-8 flex items-start gap-3 text-sm">
-          <input type="checkbox" name="consent" id="consent" required class="mt-1 h-4 w-4 accent-clay" />
-          <span>I agree that Azul Morocco may use these details to reply to my request.</span>
+          <input type="checkbox" name="consent" id="consent" required class="mt-1 h-4 w-4 accent-[#231f20]" />
+          <span class="body-copy text-[1rem]">I agree that Azul Morocco may use these details to reply to my request.</span>
         </label>
-        <p class="field-error consent-error mt-1 hidden text-sm text-clay-deep">Please tick this box so we can reply.</p>
+        <p class="field-error consent-error mt-1 hidden text-sm text-[#9a3b2a]">Please tick this box so we can reply.</p>
 
-        <button type="submit" class="btn-clay mt-8 w-full justify-center sm:w-auto">Send my trip request</button>
+        <button type="submit" class="btn-dash mt-10 w-full py-3.5 text-night sm:w-auto">Send my trip request</button>
         <p id="form-status" class="mt-5 text-sm" role="status" aria-live="polite"></p>
       </form>
     </div>
@@ -142,7 +142,7 @@ const label = 'text-sm font-semibold';
     form.querySelector('.consent-error')!.classList.toggle('hidden', consent.checked);
     if (!valid || !consent.checked) {
       status.textContent = 'Please check the highlighted fields.';
-      status.className = 'mt-5 text-sm text-clay-deep';
+      status.className = 'mt-5 font-sans text-sm text-[#9a3b2a]';
       (form.querySelector('[aria-invalid=true]') as HTMLElement | null ?? consent).focus();
       return;
     }
@@ -154,12 +154,12 @@ const label = 'text-sm font-semibold';
     if (!endpoint) {
       // No backend connected yet: be honest rather than pretend it was sent.
       status.textContent = 'Thank you! Online requests are not switched on yet, so nothing has been sent. Please check back soon.';
-      status.className = 'mt-5 rounded-xl bg-saffron/20 p-4 text-sm text-ink';
+      status.className = 'mt-5 bg-greige p-4 font-sans text-sm text-ink';
       return;
     }
 
     status.textContent = 'Sending…';
-    status.className = 'mt-5 text-sm text-ink/70';
+    status.className = 'mt-5 font-sans text-sm text-ink/70';
     try {
       const res = await fetch(endpoint, {
         method: 'POST',
@@ -169,10 +169,10 @@ const label = 'text-sm font-semibold';
       if (!res.ok) throw new Error(String(res.status));
       form.reset();
       status.textContent = 'Shukran! Your request is on its way. Expect a first route within two working days.';
-      status.className = 'mt-5 rounded-xl bg-mint/15 p-4 text-sm text-mint';
+      status.className = 'mt-5 bg-greige p-4 font-sans text-sm text-ink';
     } catch {
       status.textContent = 'Something went wrong while sending. Please try again in a moment.';
-      status.className = 'mt-5 rounded-xl bg-clay/10 p-4 text-sm text-clay-deep';
+      status.className = 'mt-5 bg-greige p-4 font-sans text-sm text-[#9a3b2a]';
     }
   });
 </script>

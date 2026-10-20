@@ -3,12 +3,10 @@ import Photo from './Photo.astro';
 interface Props { slot: string; eyebrow: string; title: string; intro: string; label?: string; }
 const { slot, eyebrow, title, intro, label } = Astro.props;
 ---
-<section class="relative isolate flex min-h-[78vh] items-end overflow-hidden text-sand">
+<section class="relative isolate flex h-[88svh] min-h-[520px] flex-col items-center justify-center overflow-hidden px-5 text-center text-white">
   <Photo slot={slot} eager class="!absolute inset-0 -z-20 h-full w-full" imgClass="kenburns" label={label} />
-  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink/85 via-ink/35 to-ink/30"></div>
-  <div class="container-x pb-16 pt-36 md:pb-24">
-    <p class="eyebrow !text-saffron">{eyebrow}</p>
-    <h1 class="mt-5 max-w-4xl text-balance text-5xl leading-[0.98] sm:text-6xl md:text-7xl lg:text-8xl" set:html={title} />
-    <p class="mt-6 max-w-xl text-lg text-sand/85">{intro}</p>
-  </div>
+  <div class="absolute inset-0 -z-10 bg-night/45"></div>
+  <p class="eyebrow !text-white/85">{eyebrow}</p>
+  <h1 class="display mt-6 !text-white text-[4rem] sm:text-[6rem] lg:text-[8.75rem]" set:html={title} />
+  <p class="body-copy mt-8 max-w-[520px] text-white/90">{intro}</p>
 </section>

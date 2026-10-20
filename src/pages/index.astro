@@ -2,48 +2,48 @@
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import Photo from '../components/Photo.astro';
-import SectionHead from '../components/SectionHead.astro';
-import { DESTINATIONS } from '../data/destinations';
-import { EXPERIENCES, FOODS } from '../data/experiences';
+import Logo from '../components/Logo.astro';
+import { EXPERIENCES } from '../data/experiences';
 
-const featured = DESTINATIONS.filter((d) => ['marrakech', 'chefchaouen', 'sahara', 'essaouira'].includes(d.id));
-
-const ways = [
+const pillars = [
   {
     slot: 'fes',
-    eyebrow: 'The medina',
-    title: 'Get <em>gloriously</em> lost',
-    text: 'Fes and Marrakech reward slow wandering: the scent of cedar shavings in the carpenters’ souk, a fountain of zellige tucked in a dead-end lane, bread carried to the communal oven on a boy’s head. We’ll show you how to enjoy the maze, and how to find your way out.',
-    link: { href: '/destinations/#fes', label: 'Discover Fes' },
+    title: 'Get lost<br />well',
+    text: 'In the lanes of Fes and Marrakech, the best moments are the unplanned ones. We show you how to enjoy the maze, and how to find your way out.',
+    href: '/destinations/#fes',
   },
   {
     slot: 'atlas',
-    eyebrow: 'The mountains',
-    title: 'Walk with the <em>Atlas</em>',
-    text: 'An hour and a half from the souks, mule paths climb between walnut terraces and earth-walled villages. Stay in a family guesthouse in Imlil, hike to a pass for lunch, and fall asleep to nothing but the river.',
-    link: { href: '/destinations/#atlas', label: 'Discover the High Atlas' },
+    title: 'Walk the<br />Atlas',
+    text: 'Ninety minutes from the souks, mule paths climb between walnut terraces and earth-walled Amazigh villages.',
+    href: '/destinations/#atlas',
   },
   {
     slot: 'sahara',
-    eyebrow: 'The desert',
-    title: 'Hear the <em>silence</em> of the dunes',
-    text: 'The Erg Chebbi rises out of the stony plain like a wave of apricot sand. Arrive before sunset, eat around the fire, and climb a dune in the blue hour before dawn. It is the night most travellers talk about for years.',
-    link: { href: '/destinations/#sahara', label: 'Discover the Sahara' },
+    title: 'Hear the<br />silence',
+    text: 'A night beneath the Erg Chebbi dunes, a fire, a sky full of stars: the evening most travellers talk about for years.',
+    href: '/destinations/#sahara',
   },
+];
+
+const steps = [
+  { n: '01', word: 'Listen', text: 'Tell us your dates, your pace and what you dream of seeing. A short form, no payment, no obligation.' },
+  { n: '02', word: 'Sketch', text: 'Within two working days we send a day-by-day route: riads and camps, drive times, guides, and honest notes on what to skip.' },
+  { n: '03', word: 'Travel', text: 'We fine-tune it together, then you go. A local contact is one message away for the whole journey.' },
 ];
 
 const route = [
   { day: 'Days 1–3', place: 'Marrakech', text: 'Riad, souks, gardens and a food walk through Jemaa el-Fnaa.' },
-  { day: 'Day 4', place: 'Tizi n’Tichka → Aït Benhaddou', text: 'Cross the High Atlas and sleep near the ksar.' },
-  { day: 'Day 5', place: 'Dadès & Todra gorges', text: 'Canyon walks and the Road of a Thousand Kasbahs.' },
-  { day: 'Day 6', place: 'Merzouga', text: 'Sunset ride into the Erg Chebbi and a night in camp.' },
-  { day: 'Days 7–8', place: 'Fes', text: 'Ziz valley drive north, then two days in the old medina.' },
+  { day: 'Day 4', place: 'Tizi n’Tichka to Aït Benhaddou', text: 'Cross the High Atlas and sleep near the ksar.' },
+  { day: 'Day 5', place: 'Dadès & Todra gorges', text: 'Canyon walks along the Road of a Thousand Kasbahs.' },
+  { day: 'Day 6', place: 'Merzouga', text: 'Sunset into the Erg Chebbi and a night in camp.' },
+  { day: 'Days 7–8', place: 'Fes', text: 'North through the Ziz valley, then two days in the old medina.' },
 ];
 
-const steps = [
-  { n: '01', title: 'Tell us', text: 'Share your dates, pace and wish list in our short trip form. No commitment, no payment.' },
-  { n: '02', title: 'We sketch a route', text: 'Within two working days you get a day-by-day draft with stays, drives and honest notes.' },
-  { n: '03', title: 'You travel', text: 'Fine-tune it together, then go. A local contact is a message away the whole trip.' },
+const notes = [
+  { slot: 'chefchaouen', tag: 'Guide', title: 'Eight places to go in Morocco, and how long to stay', by: 'Destinations', href: '/destinations/' },
+  { slot: 'souk', tag: 'Guide', title: 'Desert camps, hammams, festivals and what to eat', by: 'Things to do', href: '/things-to-do/' },
+  { slot: 'madrasa', tag: 'Practical', title: 'Visas, dirhams, trains and how to dress in the medina', by: 'Travel tips', href: '/travel-tips/' },
 ];
 ---
 <Base
@@ -53,174 +53,180 @@ const steps = [
 >
   <Hero />
 
-  <!-- Welcome -->
-  <section class="container-x grid items-center gap-12 py-24 md:grid-cols-12 md:py-36">
-    <div class="reveal md:col-span-7">
-      <p class="eyebrow">Azul · ⴰⵣⵓⵍ · Hello</p>
-      <h2 class="mt-5 text-balance text-4xl leading-[1.05] md:text-6xl">
-        In Tamazight, <em class="text-clay">azul</em> is how you say hello. It is also how we would like your trip to begin: warmly, and without a rush.
-      </h2>
-      <p class="mt-8 max-w-xl text-lg text-ink/75">
-        Morocco rewards travellers who slow down. Instead of ten cities in ten days, we help you choose a few places and really arrive: the same café two mornings in a row, a guide who knows your name, time to say yes to a second glass of tea.
-      </p>
-      <a href="/travel-tips/" class="mt-8 inline-flex items-center gap-2 font-semibold text-clay underline-offset-8 hover:underline">Read our honest travel tips →</a>
+  <!-- Experiences rail -->
+  <section class="bg-char pb-24 pt-20 text-white md:pb-36 md:pt-[78px]">
+    <div class="container-x">
+      <h2 class="eyebrow text-center">Experiences in Morocco</h2>
+      <div class="mt-14 h-px bg-white/25"></div>
     </div>
-    <div class="reveal md:col-span-5">
-      <Photo slot="madrasa" ratio="4/5" sizes="(min-width: 768px) 40vw, 100vw" class="arch-mask rounded-b-[2rem]" label="Ben Youssef Madrasa" />
-    </div>
-  </section>
-
-  <!-- Three ways (checkerboard) -->
-  <section class="bg-plaster">
-    <div class="container-x pt-24 md:pt-32">
-      <SectionHead eyebrow="Three ways to feel Morocco" title="Medina, mountain, <em>desert</em>" />
-    </div>
-    <div class="mt-16">
-      {ways.map((w, i) => (
-        <div class="grid md:grid-cols-12">
-          <div class:list={['md:col-span-7', i % 2 === 1 && 'md:order-2']}>
-            <Photo slot={w.slot} ratio="4/3" sizes="(min-width: 768px) 58vw, 100vw" class="h-full" label={w.eyebrow} />
-          </div>
-          <div class:list={['reveal flex items-center px-6 py-14 sm:px-10 md:col-span-5 md:px-14 lg:px-20', i === 1 ? 'bg-chaouen/40' : 'bg-sand']}>
-            <div>
-              <p class="eyebrow">{w.eyebrow}</p>
-              <h3 class="mt-4 text-4xl leading-tight md:text-5xl" set:html={w.title} />
-              <p class="mt-5 text-ink/75">{w.text}</p>
-              <a href={w.link.href} class="mt-6 inline-flex font-semibold text-clay underline-offset-8 hover:underline">{w.link.label} →</a>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- Destinations -->
-  <section class="container-x py-24 md:py-36">
-    <div class="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-      <SectionHead eyebrow="Where to go" title="Places that <em>stay</em> with you" intro="Eight regions, each with its own light, food and rhythm. Start with these four." />
-      <a href="/destinations/" class="btn-ghost shrink-0 self-start text-clay md:self-end">All destinations</a>
-    </div>
-    <div class="rail -mx-5 mt-14 flex gap-5 overflow-x-auto px-5 pb-4 md:mx-0 md:grid md:grid-cols-4 md:gap-6 md:overflow-visible md:px-0">
-      {featured.map((d, i) => (
-        <a href={`/destinations/#${d.id}`} class:list={['reveal group block w-[78%] shrink-0 sm:w-[45%] md:w-auto', i % 2 === 1 && 'md:mt-16']}>
-          <Photo slot={d.slot} ratio="3/4" sizes="(min-width: 768px) 25vw, 80vw" class="rounded-t-full" imgClass="transition-transform duration-700 group-hover:scale-[1.04]" label={d.name} />
-          <p class="eyebrow mt-5">{d.region}</p>
-          <h3 class="mt-2 text-3xl">{d.name}</h3>
-          <p class="mt-2 text-ink/70">{d.tagline}</p>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <!-- Things to do rail -->
-  <section class="zellige-bg relative overflow-hidden bg-ink py-24 text-sand md:py-32">
-    <div class="absolute inset-0 bg-ink/[0.93]"></div>
-    <div class="container-x relative">
-      <div class="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-        <SectionHead tone="light" eyebrow="Things to do" title="Days you’ll <em>remember</em>" intro="Drag or scroll the row. Every one of these can be woven into a tailor-made trip." />
-        <div class="flex gap-3" aria-hidden="true">
-          <button class="rail-prev h-12 w-12 rounded-full border border-sand/40 hover:bg-sand hover:text-ink" tabindex="-1">←</button>
-          <button class="rail-next h-12 w-12 rounded-full border border-sand/40 hover:bg-sand hover:text-ink" tabindex="-1">→</button>
-        </div>
-      </div>
-    </div>
-    <div id="exp-rail" class="rail relative mt-14 flex gap-6 overflow-x-auto pb-6" style="padding-inline: max(1.25rem, calc((100vw - 1320px) / 2 + 3rem)); scroll-padding-inline: max(1.25rem, calc((100vw - 1320px) / 2 + 3rem));" tabindex="0" aria-label="Experiences">
+    <div class="rail mt-6 flex scroll-px-5 gap-6 overflow-x-auto px-5 sm:scroll-px-8 sm:px-8 lg:scroll-px-[42px] lg:px-[42px]" tabindex="0" aria-label="Experiences">
       {EXPERIENCES.map((e) => (
-        <article class="w-[78vw] shrink-0 sm:w-[380px]">
-          <Photo slot={e.slot} ratio="4/5" sizes="380px" class="arch-mask" label={e.title} />
-          <p class="eyebrow mt-6 !text-saffron">{e.tag} · {e.where}</p>
-          <h3 class="mt-3 text-3xl">{e.title}</h3>
-          <p class="mt-3 text-sand/75">{e.text}</p>
+        <article class="w-[82vw] shrink-0 sm:w-[513px]">
+          <Photo slot={e.slot} ratio="3/2" sizes="(min-width: 640px) 513px, 82vw" label={e.title} />
+          <p class="mt-6 font-sans text-[0.62rem] uppercase tracking-[0.15em] text-white/70">{e.tag} · {e.where}</p>
+          <h3 class="mt-2 font-serif text-[1.9rem] leading-tight">{e.title}</h3>
+          <p class="body-copy mt-4 max-w-[440px] text-white/90">{e.text}</p>
+          <a href="/things-to-do/" class="mt-6 inline-block font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold-soft hover:text-white">Discover more</a>
         </article>
       ))}
     </div>
-    <div class="container-x relative mt-10">
-      <a href="/things-to-do/" class="btn-clay">See all things to do</a>
+  </section>
+
+  <!-- Welcome split -->
+  <section class="grid md:grid-cols-2">
+    <Photo slot="aitbenhaddou" ratio="1/1" sizes="(min-width: 768px) 50vw, 100vw" label="Aït Benhaddou" />
+    <div class="reveal flex flex-col items-center justify-center bg-greige px-8 py-20 text-center">
+      <Logo class="h-14 w-11 text-gold" />
+      <p class="eyebrow mt-8">An independent guide to Morocco</p>
+      <p class="body-copy mt-4 max-w-[420px] text-ink/85">
+        <em>Azul</em> is how you say hello in Tamazight. We plan slow, tailor-made journeys through Morocco for travellers who would rather stay a little longer and see a little deeper.
+      </p>
+      <a href="/contact/" class="btn-dash mt-10 text-mute">Plan a trip</a>
     </div>
   </section>
 
-  <!-- Breather + proverb -->
-  <section class="relative isolate flex min-h-[70vh] items-center overflow-hidden text-sand">
+  <!-- Full-bleed statement -->
+  <section class="relative isolate flex min-h-[90vh] items-center justify-center overflow-hidden text-white">
+    <Photo slot="marrakech" class="!absolute inset-0 -z-20 h-full w-full" label="Marrakech" />
+    <div class="absolute inset-0 -z-10 bg-night/40"></div>
+    <h2 class="display reveal px-4 text-center !text-white text-[4.2rem] sm:text-[6.5rem] lg:text-[8.75rem]">Come in,<br />the tea is poured</h2>
+  </section>
+
+  <!-- Purpose -->
+  <section class="container-x py-24 text-center md:py-32">
+    <div class="reveal mx-auto max-w-[420px]">
+      <h2 class="eyebrow">Why travel slowly</h2>
+      <p class="body-copy mt-4 text-ink/85">Morocco rewards those who stay. Fewer places, longer stays, and time to say yes to the second glass of tea.</p>
+    </div>
+  </section>
+
+  <!-- Checkerboard -->
+  <section>
+    {pillars.map((p, i) => (
+      <div class:list={['grid', i % 2 === 0 ? 'md:grid-cols-[1.86fr_1fr]' : 'md:grid-cols-[1fr_1.86fr]']}>
+        <div class:list={[i % 2 === 1 && 'md:order-2']}>
+          <Photo slot={p.slot} ratio="1/1" sizes="(min-width: 768px) 65vw, 100vw" fluid class="aspect-[1/1] min-w-0 h-full md:aspect-auto md:min-h-[640px]" label={p.title.replace('<br />', ' ')} />
+        </div>
+        <div class="reveal flex flex-col items-center justify-center bg-greige px-8 py-20 text-center">
+          <h3 class="display text-[3.4rem] md:text-[4.4rem]" set:html={p.title} />
+          <p class="body-copy mt-6 max-w-[230px] text-[1rem] text-ink/85">{p.text}</p>
+          <a href={p.href} class="mt-8 font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold hover:text-ink">Discover more</a>
+        </div>
+      </div>
+    ))}
+  </section>
+
+  <!-- Process -->
+  <section class="container-x py-24 md:py-32" id="process">
+    <div class="reveal mx-auto max-w-[420px] text-center">
+      <h2 class="eyebrow">How we plan</h2>
+      <p class="body-copy mt-4 text-ink/85">Every trip is drawn by hand, around you. Here is how it works:</p>
+      <a href="/contact/" class="btn-dash mt-10 text-mute">Start here</a>
+    </div>
+    <div class="mt-24" data-tabs>
+      <div class="grid grid-cols-3" role="tablist" aria-label="How we plan">
+        {steps.map((s, i) => (
+          <button role="tab" aria-selected={i === 0 ? 'true' : 'false'} aria-controls={`step-${i}`} id={`tab-${i}`} class="group flex flex-col items-center pb-3 text-ink/70 aria-selected:text-ink" data-tab={i}>
+            <span class="font-sans text-[0.72rem]">{s.n}</span>
+            <span class="display !text-current mt-1 text-[2.4rem] sm:text-[3.4rem] md:text-[4.4rem]">{s.word}</span>
+          </button>
+        ))}
+      </div>
+      <div class="relative text-ink/50">
+        <div class="rule-dots w-full"></div>
+        <div id="tab-bar" class="absolute left-0 top-0 h-px w-1/3 bg-gold transition-transform duration-500"></div>
+      </div>
+      {steps.map((s, i) => (
+        <p id={`step-${i}`} role="tabpanel" aria-labelledby={`tab-${i}`} class:list={['body-copy mx-auto mt-10 max-w-[520px] text-center text-ink/85', i !== 0 && 'hidden']}>{s.text}</p>
+      ))}
+    </div>
+  </section>
+
+  <!-- First route -->
+  <section id="route" class="scroll-mt-20 bg-linen py-24 md:py-32">
+    <div class="container-x grid gap-14 md:grid-cols-2">
+      <div class="reveal">
+        <h2 class="eyebrow">A first route</h2>
+        <p class="display-left mt-6 text-[3.4rem] md:text-[4.4rem] !text-ink">Eight days,<br />Marrakech to Fes</p>
+        <p class="body-copy mt-6 max-w-md text-ink/85">Our most-requested first journey: city, mountains, desert and medina, with no day longer than it needs to be.</p>
+        <a href="/contact/" class="btn-dash mt-10 text-mute">Make it mine</a>
+      </div>
+      <ol class="reveal">
+        {route.map((r) => (
+          <li class="grid grid-cols-[6.5rem_1fr] gap-4 border-b border-dashed border-ink/40 py-5 first:border-t first:border-solid first:border-t-ink">
+            <span class="pt-1.5 font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold">{r.day}</span>
+            <div>
+              <h3 class="font-serif text-[1.5rem] leading-tight">{r.place}</h3>
+              <p class="body-copy mt-1 text-[1rem] text-ink/75">{r.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Travel lightly -->
+  <section class="bg-chalk pt-24 text-center md:pt-36">
+    <div class="reveal container-x mx-auto max-w-[420px]">
+      <h2 class="eyebrow">Travel lightly</h2>
+      <p class="body-copy mt-4 text-ink/85">We work with local guides, family-run riads and women’s cooperatives, so more of what you spend stays in the valleys you visit.</p>
+    </div>
+    <div class="mx-auto mt-14 h-28 w-px border-l border-dashed border-ink/40"></div>
+  </section>
+  <section class="relative isolate flex min-h-[90vh] items-center justify-center overflow-hidden text-white">
     <Photo slot="atlasValley" class="!absolute inset-0 -z-20 h-full w-full" label="High Atlas valley" />
-    <div class="absolute inset-0 -z-10 bg-ink/55"></div>
-    <figure class="container-x reveal py-24 text-center">
-      <blockquote class="mx-auto max-w-4xl font-display text-4xl italic leading-tight md:text-6xl">
-        “Whoever wants honey must be patient with the sting of the bees.”
+    <div class="absolute inset-0 -z-10 bg-night/35"></div>
+    <h2 class="display reveal px-4 text-center !text-white text-[4.2rem] sm:text-[6.5rem] lg:text-[8.75rem]">Stay longer,<br />go deeper</h2>
+  </section>
+
+  <!-- Quote -->
+  <section class="bg-linen py-24 md:py-32">
+    <figure class="reveal container-x text-center">
+      <figcaption class="eyebrow">A Moroccan saying</figcaption>
+      <blockquote class="mx-auto mt-14 max-w-[560px] font-display text-[2.6rem] leading-[1.05] text-night md:text-[3.2rem]">
+        “Whoever wants honey must be patient with the sting of the bees”
       </blockquote>
-      <figcaption class="eyebrow mt-8 !text-saffron">Moroccan proverb</figcaption>
+      <p class="body-copy mt-6 text-gold">Darija proverb</p>
     </figure>
   </section>
 
-  <!-- Sample route -->
-  <section class="container-x grid gap-14 py-24 md:grid-cols-12 md:py-36">
-    <div class="md:col-span-5">
-      <div class="md:sticky md:top-28">
-        <SectionHead eyebrow="A first idea" title="Eight days, <em>Marrakech to Fes</em>" intro="Our most-requested first route: city, mountains, desert and medina, with no day longer than it needs to be." />
-        <a href="/contact/" class="btn-clay reveal mt-8">Make it mine</a>
-      </div>
-    </div>
-    <ol class="md:col-span-7">
-      {route.map((r, i) => (
-        <li class="reveal grid grid-cols-[auto_1fr] gap-6 border-t border-ink/15 py-7 last:border-b">
-          <span class="font-display text-5xl italic text-clay/80 tabular-nums">{String(i + 1).padStart(2, '0')}</span>
-          <div>
-            <p class="eyebrow">{r.day}</p>
-            <h3 class="mt-2 text-2xl md:text-3xl">{r.place}</h3>
-            <p class="mt-2 text-ink/70">{r.text}</p>
-          </div>
-        </li>
+  <!-- Field notes -->
+  <section class="container-x py-24 md:py-32">
+    <h2 class="eyebrow text-center">Field notes</h2>
+    <div class="mt-14 grid gap-10 sm:grid-cols-3 sm:gap-4">
+      {notes.map((n) => (
+        <a href={n.href} class="reveal group block">
+          <Photo slot={n.slot} ratio="2/3" sizes="(min-width: 640px) 33vw, 100vw" imgClass="transition-transform duration-700 group-hover:scale-[1.03]" label={n.by} />
+          <p class="mt-5 font-sans text-[0.62rem] uppercase tracking-[0.15em] text-ink/60">{n.tag}</p>
+          <h3 class="mt-2 font-serif text-[1.6rem] leading-tight">{n.title}</h3>
+          <p class="mt-4 font-sans text-sm text-ink">{n.by}</p>
+          <span class="mt-5 inline-block font-sans text-[0.72rem] text-gold">Read more</span>
+        </a>
       ))}
-    </ol>
-  </section>
-
-  <!-- Food strip -->
-  <section class="bg-plaster py-24 md:py-32">
-    <div class="container-x grid items-center gap-14 md:grid-cols-12">
-      <div class="reveal md:col-span-5">
-        <Photo slot="tea" ratio="1/1" sizes="(min-width: 768px) 40vw, 100vw" class="rounded-full" label="Mint tea" />
-      </div>
-      <div class="md:col-span-7">
-        <SectionHead eyebrow="At the table" title="Eat like you’re <em>expected</em>" intro="Moroccan hospitality is measured in food. Eight things to try before you leave:" />
-        <ul class="reveal mt-10 grid gap-x-10 gap-y-6 sm:grid-cols-2">
-          {FOODS.map((f) => (
-            <li>
-              <h3 class="text-xl font-semibold">{f.name}</h3>
-              <p class="mt-1 text-sm text-ink/70">{f.text}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- How we plan -->
-  <section class="container-x py-24 md:py-36">
-    <SectionHead center eyebrow="How we plan your trip" title="Three steps, <em>no pressure</em>" />
-    <ol class="mt-16 grid gap-12 md:grid-cols-3 md:gap-8">
-      {steps.map((s, i) => (
-        <li class="reveal text-center">
-          <span class="text-sm font-bold tracking-[0.3em] text-clay">{s.n}</span>
-          <h3 class="mt-3 text-4xl md:text-5xl">{s.title}</h3>
-          <div class:list={['dot-rule mx-auto mt-6 w-full', i === 0 ? 'text-clay' : 'text-ink/25']}></div>
-          <p class="mx-auto mt-6 max-w-xs text-ink/70">{s.text}</p>
-        </li>
-      ))}
-    </ol>
-  </section>
-
-  <!-- CTA -->
-  <section class="relative isolate overflow-hidden bg-clay text-plaster">
-    <div class="zellige-bg absolute inset-0 -z-10 opacity-10"></div>
-    <div class="container-x flex flex-col items-start justify-between gap-10 py-20 md:flex-row md:items-center md:py-28">
-      <h2 class="max-w-3xl text-balance text-4xl leading-tight md:text-6xl">Ready when you are. <em>Tell us</em> where your Morocco begins.</h2>
-      <a href="/contact/" class="btn shrink-0 bg-plaster text-clay-deep hover:bg-ink hover:text-sand">Start planning</a>
     </div>
   </section>
 </Base>
 
 <script>
-  const rail = document.getElementById('exp-rail');
-  const step = () => (rail?.clientWidth ?? 600) * 0.8;
-  document.querySelector('.rail-prev')?.addEventListener('click', () => rail?.scrollBy({ left: -step(), behavior: 'smooth' }));
-  document.querySelector('.rail-next')?.addEventListener('click', () => rail?.scrollBy({ left: step(), behavior: 'smooth' }));
+  const root = document.querySelector('[data-tabs]');
+  if (root) {
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[role=tab]'));
+    const bar = document.getElementById('tab-bar')!;
+    const select = (i: number) => {
+      tabs.forEach((t, j) => {
+        t.setAttribute('aria-selected', String(i === j));
+        document.getElementById(`step-${j}`)?.classList.toggle('hidden', i !== j);
+      });
+      bar.style.transform = `translateX(${i * 100}%)`;
+    };
+    tabs.forEach((t, i) => t.addEventListener('click', () => select(i)));
+    root.addEventListener('keydown', (e) => {
+      const k = (e as KeyboardEvent).key;
+      const cur = tabs.findIndex((t) => t.getAttribute('aria-selected') === 'true');
+      if (k === 'ArrowRight' || k === 'ArrowLeft') {
+        const next = (cur + (k === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
+        select(next); tabs[next].focus();
+      }
+    });
+  }
 </script>
