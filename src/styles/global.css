@@ -9,7 +9,8 @@
   --color-night: #231f20;
   --color-char: #2f2d2c;
   --color-ink: #313131;
-  --color-gold: #968361;
+  --color-gold: #6e5d40;          /* small text: >= 4.5:1 on greige */
+  --color-gold-display: #7f6c4b;  /* large statements */
   --color-gold-soft: #b8a684;
   --color-greige: #e3dfd4;
   --color-linen: #f1eee8;
@@ -36,11 +37,11 @@
 
 /* Small, widely tracked caps label used above every section */
 @utility eyebrow {
-  @apply font-sans text-[0.72rem] font-medium uppercase tracking-[0.15em] text-gold;
+  @apply font-sans text-[0.75rem] font-medium uppercase tracking-[0.15em] text-gold;
 }
 /* Huge condensed capitals for statements */
 @utility display {
-  @apply font-display uppercase text-gold;
+  @apply font-display uppercase text-gold-display;
   line-height: 0.92;
   letter-spacing: -0.01em;
   /* individual-transform property, so it composes with reveal animations */
@@ -53,11 +54,11 @@
 }
 /* Dashed outline button */
 @utility btn-dash {
-  @apply inline-flex items-center justify-center border border-dashed border-current px-10 py-2.5 font-sans text-[0.66rem] uppercase tracking-[0.15em] transition-colors duration-300 hover:bg-current/10;
+  @apply inline-flex items-center justify-center border border-dashed border-current px-10 py-3 font-sans text-[0.72rem] uppercase tracking-[0.15em] transition-colors duration-300 hover:bg-current/10;
 }
 /* Caps link with a dashed underline */
 @utility link-dash {
-  @apply inline-block border-b border-dashed border-current pb-2 font-sans text-[0.72rem] uppercase tracking-[0.15em];
+  @apply inline-block border-b border-dashed border-current pb-2 font-sans text-[0.75rem] uppercase tracking-[0.15em];
 }
 @utility container-x {
   @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-[42px];

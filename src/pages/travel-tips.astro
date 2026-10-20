@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Photo from '../components/Photo.astro';
+import { SEASONS } from '../data/seasons';
 
 const toc = [
   { id: 'when', label: 'When to go' },
@@ -13,6 +14,7 @@ const toc = [
   { id: 'safety', label: 'Health & safety' },
   { id: 'practical', label: 'Practicalities' },
   { id: 'phrases', label: 'Useful words' },
+  { id: 'faq', label: 'FAQ' },
 ];
 
 const seasons = [
@@ -21,6 +23,21 @@ const seasons = [
   { name: 'Autumn', months: 'Sep–Nov', text: 'Warm sea, golden light, date and olive harvests. Excellent for trekking.' },
   { name: 'Winter', months: 'Dec–Feb', text: 'Sunny days, cold nights. Snow on the Atlas and in Ifrane, surf season on the coast.' },
 ];
+
+const faqs = [
+  { q: 'Do I need a visa to visit Morocco?', a: 'Citizens of many countries, including the UK, EU member states, the USA, Canada, Australia and New Zealand, can currently visit visa-free for up to 90 days as tourists. Other nationalities may need a visa or an e-visa. Always confirm with your government and the Moroccan consulate before booking.' },
+  { q: 'How many days do I need for a first trip?', a: 'Eight to ten days lets you combine a city, the High Atlas and a night in the Sahara without rushing. With five days, pair Marrakech with either the Atlas Mountains or Essaouira.' },
+  { q: 'Is Morocco safe for travellers?', a: 'Morocco is generally safe and welcoming. The usual nuisances are petty theft in crowds and persistent touts. Keep valuables zipped away and politely decline unsolicited guides.' },
+  { q: 'Should I bring cash or cards?', a: 'Both. Riads and larger hotels usually take cards, but souks, taxis and small restaurants are cash only. The dirham is a closed currency, so withdraw dirhams from ATMs on arrival; they are scarce in the desert and mountains.' },
+  { q: 'What should I wear?', a: 'Light, loose layers that cover shoulders and knees are respectful everywhere, especially in medinas and villages. Bring a scarf, comfortable shoes for cobbled lanes, and warm layers for desert and mountain nights.' },
+  { q: 'Can I travel during Ramadan?', a: 'Yes. Hotels and tourist restaurants stay open, though some cafés close by day and hours are shorter. Avoid eating or drinking openly in the street during daylight, and enjoy the festive evenings after sunset.' },
+  { q: 'Do I need a guide in the medina?', a: 'Not to wander, but an official licensed guide for your first morning in Fes or Marrakech is worth it: you learn the layout and the history, then explore on your own.' },
+];
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
 
 const phrases = [
   { say: 'Salam alaykum', mean: 'Peace be upon you (hello)', lang: 'Darija' },
@@ -39,6 +56,7 @@ const phrases = [
   description="Practical Morocco travel tips: best time to visit, visas and entry, the dirham, trains and buses, dress and etiquette, Ramadan, safety, plugs and useful Darija and Tamazight phrases."
   overlayHeader
 >
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqLd)} />
   <PageHero
     slot="hassan2"
     eyebrow="Travel tips"
@@ -69,11 +87,20 @@ const phrases = [
         <div class="mt-8 grid gap-4 sm:grid-cols-2">
           {seasons.map((s) => (
             <div class="bg-linen p-6">
-              <p class="font-serif text-2xl">{s.name} <span class="font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold">{s.months}</span></p>
+              <p class="font-serif text-2xl">{s.name} <span class="font-sans text-[0.72rem] uppercase tracking-[0.15em] text-gold">{s.months}</span></p>
               <p class="body-copy mt-2 text-[1rem] text-ink/80">{s.text}</p>
             </div>
           ))}
         </div>
+        <h3 class="eyebrow mt-12">Month by month</h3>
+        <ol class="mt-4 grid gap-px bg-ink/15 sm:grid-cols-2 lg:grid-cols-3">
+          {SEASONS.map((m) => (
+            <li class="bg-white p-5">
+              <p class="font-serif text-xl">{m.month}</p>
+              <p class="body-copy mt-1 text-[0.98rem] text-ink/80">{m.text}</p>
+            </li>
+          ))}
+        </ol>
       </section>
 
       <section id="entry" class="reveal scroll-mt-28 prose-azul">
@@ -152,11 +179,27 @@ const phrases = [
             <li class="grid grid-cols-[1fr_auto] items-baseline gap-4 py-4 sm:grid-cols-[14rem_1fr_auto]">
               <span class="font-serif text-2xl italic text-ink">{p.say}</span>
               <span class="body-copy hidden text-[1rem] text-ink/80 sm:block">{p.mean}</span>
-              <span class="font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold">{p.lang}</span>
+              <span class="font-sans text-[0.72rem] uppercase tracking-[0.15em] text-gold">{p.lang}</span>
               <span class="body-copy col-span-2 text-[1rem] text-ink/80 sm:hidden">{p.mean}</span>
             </li>
           ))}
         </ul>
+      </section>
+
+      <section id="faq" class="reveal scroll-mt-28">
+        <p class="eyebrow">10</p>
+        <h2 class="display-left mt-3 text-[3rem] md:text-[3.8rem]">Questions we hear</h2>
+        <div class="mt-8 border-t border-ink">
+          {faqs.map((f) => (
+            <details class="group border-b border-dashed border-ink/40 py-5">
+              <summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-serif text-[1.35rem] leading-snug [&::-webkit-details-marker]:hidden">
+                {f.q}
+                <span class="mt-1 font-sans text-lg text-gold transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+              </summary>
+              <p class="body-copy mt-3 max-w-2xl text-ink/85">{f.a}</p>
+            </details>
+          ))}
+        </div>
       </section>
     </div>
   </div>

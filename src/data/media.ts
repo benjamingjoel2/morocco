@@ -52,7 +52,7 @@ export const allPhotos = (): [string, PhotoRecord][] => Object.entries(photos);
 export const heroVideo = (data as { heroVideo: VideoRecord | null }).heroVideo;
 
 /** Unsplash (imgix) URL at a given width and optional aspect ratio. */
-export function unsplashUrl(src: string, w: number, ar?: string, q = 70) {
+export function unsplashUrl(src: string, w: number, ar?: string, q = 60) {
   const u = new URL(src);
   u.searchParams.set('w', String(w));
   u.searchParams.set('q', String(q));

@@ -87,6 +87,10 @@ Dates move every year, so confirm them before mentioning them in marketing.
 | 7.3 | Darija: *Salam alaykum, Shukran, La shukran, Bshhal?, Wakha, Bslama*. | A native speaker |
 | 7.4 | The proverb on the Home page ("Whoever wants honey must be patient with the sting of the bees") is a Moroccan saying. | A native speaker / proverb collections |
 
+## 7b. Travel Tips FAQ
+
+The FAQ on the Travel Tips page repeats facts 1.1 (visa-free 90 days), 2.2 and 2.4 (closed currency, ATMs), 3.6–3.8 and the dress guidance. Update the FAQ whenever those change, because Google may show these answers directly in search results.
+
 ## 8. Business claims to confirm or adjust
 
 - "Within **two working days** you receive a first route" (Home, Contact) is a service promise you need to be able to keep.

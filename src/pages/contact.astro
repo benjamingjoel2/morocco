@@ -1,11 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import Photo from '../components/Photo.astro';
+import { DESTINATIONS } from '../data/destinations';
 
 const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
 const interests = ['Medinas & history', 'Food & cooking', 'Sahara nights', 'Mountain walks', 'Coast & surf', 'Crafts & shopping', 'Festivals & music', 'Hammam & rest'];
 const input = 'mt-1 w-full border-0 border-b border-dashed border-ink/50 bg-transparent px-0 py-2.5 font-serif text-lg font-light outline-none transition focus:border-solid focus:border-ink aria-[invalid=true]:border-solid aria-[invalid=true]:border-[#9a3b2a]';
-const label = 'font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold';
+const label = 'font-sans text-[0.72rem] uppercase tracking-[0.15em] text-gold';
 ---
 <Base
   title="Plan Your Morocco Trip: Contact & Booking"
@@ -26,7 +27,7 @@ const label = 'font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold';
     </div>
 
     <div class="md:col-span-7">
-      <form id="trip-form" class="bg-linen p-6 sm:p-12" novalidate data-endpoint={endpoint}>
+      <form id="trip-form" class="bg-linen p-6 sm:p-12" novalidate data-endpoint={endpoint} data-places={JSON.stringify(DESTINATIONS.map((d) => d.name))}>
         <fieldset class="grid gap-6 sm:grid-cols-2">
           <legend class="eyebrow mb-6">About you</legend>
           <div>
@@ -40,7 +41,7 @@ const label = 'font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold';
             <p class="field-error mt-1 hidden text-sm text-[#9a3b2a]">Please enter a valid email address.</p>
           </div>
           <div class="sm:col-span-2">
-            <label class={label} for="country">Travelling from <span class="font-normal text-ink/60">(optional)</span></label>
+            <label class={label} for="country">Travelling from <span class="font-normal text-ink/75">(optional)</span></label>
             <input class={input} id="country" name="country" autocomplete="country-name" />
           </div>
         </fieldset>
@@ -80,7 +81,7 @@ const label = 'font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold';
             {interests.map((i) => (
               <label class="cursor-pointer">
                 <input type="checkbox" name="interests" value={i} class="peer sr-only" />
-                <span class="inline-block border border-dashed border-ink/50 px-4 py-2 font-sans text-[0.68rem] uppercase tracking-[0.12em] text-ink/80 transition peer-checked:border-solid peer-checked:border-night peer-checked:bg-night peer-checked:text-white peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-gold">{i}</span>
+                <span class="inline-block border border-dashed border-ink/50 px-4 py-2 font-sans text-[0.72rem] uppercase tracking-[0.12em] text-ink/80 transition peer-checked:border-solid peer-checked:border-night peer-checked:bg-night peer-checked:text-white peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-gold">{i}</span>
               </label>
             ))}
           </div>
@@ -94,7 +95,7 @@ const label = 'font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold';
                 <input type="radio" name="pace" value={v} class="peer sr-only" checked={idx === 0} />
                 <span class="block border border-dashed border-ink/50 p-4 transition peer-checked:border-solid peer-checked:border-night peer-checked:bg-white peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-gold">
                   <span class="block font-serif text-xl">{t}</span>
-                  <span class="block font-sans text-xs text-ink/65">{d}</span>
+                  <span class="block font-sans text-xs text-ink/80">{d}</span>
                 </span>
               </label>
             ))}
@@ -102,7 +103,7 @@ const label = 'font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold';
         </fieldset>
 
         <div class="mt-12">
-          <label class={label} for="message">Anything else? <span class="font-normal text-ink/60">(optional)</span></label>
+          <label class={label} for="message">Anything else? <span class="font-normal text-ink/75">(optional)</span></label>
           <textarea class={`${input} min-h-36`} id="message" name="message" rows="5" placeholder="A special occasion, mobility needs, a place you’ve always wanted to see…"></textarea>
         </div>
 
@@ -123,6 +124,12 @@ const label = 'font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold';
   const form = document.getElementById('trip-form') as HTMLFormElement;
   const status = document.getElementById('form-status')!;
   const arrival = form.querySelector<HTMLInputElement>('#arrival')!;
+
+  // "Plan a trip to Fes" links pass ?place=Fes; only known destinations are accepted.
+  const place = new URLSearchParams(location.search).get('place');
+  const places: string[] = JSON.parse(form.dataset.places ?? '[]');
+  const message = form.querySelector<HTMLTextAreaElement>('#message')!;
+  if (place && places.includes(place) && !message.value) message.value = `I’d love my trip to include ${place}.`;
   arrival.min = new Date().toISOString().slice(0, 10);
 
   const fields = Array.from(form.querySelectorAll<HTMLInputElement>('input[required]:not([type=checkbox])'));

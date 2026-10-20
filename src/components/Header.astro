@@ -47,13 +47,13 @@ const bar = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
           <li class="border-b border-dashed border-ink/40 first:border-solid first:border-ink">
             <a
               href={m.href}
-              class:list={['block py-2 font-sans text-[2rem] font-light leading-tight transition-colors hover:text-ink', isActive(m.href) ? 'text-ink' : 'text-ink/50']}
+              class:list={['block py-2 font-sans text-[2rem] font-light leading-tight transition-colors hover:text-ink', isActive(m.href) ? 'text-ink' : 'text-ink/65']}
               aria-current={isActive(m.href) ? 'page' : undefined}
             >{m.label}</a>
           </li>
         ))}
       </ul>
-      <p class="eyebrow !text-ink/40">ⴰⵣⵓⵍ · Azul means hello in Tamazight</p>
+      <p class="eyebrow !text-ink/70">ⴰⵣⵓⵍ · Azul means hello in Tamazight</p>
     </nav>
     <a href="/#route" class="group relative hidden overflow-hidden text-white md:block">
       <Photo slot="essaouira" class="!absolute inset-0 h-full w-full" imgClass="transition-transform duration-[1.5s] group-hover:scale-105" sizes="50vw" label="Essaouira" />

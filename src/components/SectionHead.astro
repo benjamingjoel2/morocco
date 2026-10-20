@@ -3,7 +3,7 @@ interface Props { eyebrow: string; title?: string; intro?: string; tone?: 'dark'
 const { eyebrow, title, intro, tone = 'dark' } = Astro.props;
 ---
 <div class="reveal mx-auto max-w-[620px] text-center">
-  <p class="eyebrow">{eyebrow}</p>
+  <p class:list={['eyebrow', tone === 'light' && '!text-gold-soft']}>{eyebrow}</p>
   {title && <h2 class:list={['display mt-6 text-[3.4rem] md:text-[4.4rem]', tone === 'light' && '!text-white']} set:html={title} />}
   {intro && <p class:list={['body-copy mx-auto mt-5 max-w-[460px]', tone === 'light' ? 'text-white/85' : 'text-ink/85']}>{intro}</p>}
 </div>

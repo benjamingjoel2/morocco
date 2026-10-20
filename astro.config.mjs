@@ -9,6 +9,7 @@ const site = process.env.SITE_URL || 'https://morocco-liart.vercel.app';
 export default defineConfig({
   site,
   trailingSlash: 'ignore',
+  build: { inlineStylesheets: 'always' },
   integrations: [sitemap()],
   vite: { plugins: [tailwindcss()] },
 });

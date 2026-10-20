@@ -56,17 +56,21 @@ const notes = [
   <!-- Experiences rail -->
   <section class="bg-char pb-24 pt-20 text-white md:pb-36 md:pt-[78px]">
     <div class="container-x">
-      <h2 class="eyebrow text-center">Experiences in Morocco</h2>
-      <div class="mt-14 h-px bg-white/25"></div>
+      <h2 class="eyebrow text-center !text-gold-soft">Experiences in Morocco</h2>
+      <div class="relative mt-14 h-px bg-white/25"><div id="rail-progress" class="absolute inset-y-0 left-0 w-1/4 bg-white transition-[width] duration-300"></div></div>
+      <div class="mt-5 hidden justify-end gap-6 md:flex">
+        <button class="rail-btn font-sans text-[0.72rem] uppercase tracking-[0.15em] text-white/80 hover:text-white disabled:opacity-30" data-dir="-1" aria-controls="exp-rail">← Previous</button>
+        <button class="rail-btn font-sans text-[0.72rem] uppercase tracking-[0.15em] text-white/80 hover:text-white disabled:opacity-30" data-dir="1" aria-controls="exp-rail">Next →</button>
+      </div>
     </div>
-    <div class="rail mt-6 flex scroll-px-5 gap-6 overflow-x-auto px-5 sm:scroll-px-8 sm:px-8 lg:scroll-px-[42px] lg:px-[42px]" tabindex="0" aria-label="Experiences">
+    <div id="exp-rail" class="rail mt-6 flex scroll-px-5 gap-6 overflow-x-auto px-5 sm:scroll-px-8 sm:px-8 lg:scroll-px-[42px] lg:px-[42px]" tabindex="0" aria-label="Experiences">
       {EXPERIENCES.map((e) => (
         <article class="w-[82vw] shrink-0 sm:w-[513px]">
           <Photo slot={e.slot} ratio="3/2" sizes="(min-width: 640px) 513px, 82vw" label={e.title} />
-          <p class="mt-6 font-sans text-[0.62rem] uppercase tracking-[0.15em] text-white/70">{e.tag} · {e.where}</p>
+          <p class="mt-6 font-sans text-[0.72rem] uppercase tracking-[0.15em] text-white/70">{e.tag} · {e.where}</p>
           <h3 class="mt-2 font-serif text-[1.9rem] leading-tight">{e.title}</h3>
           <p class="body-copy mt-4 max-w-[440px] text-white/90">{e.text}</p>
-          <a href="/things-to-do/" class="mt-6 inline-block font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold-soft hover:text-white">Discover more</a>
+          <a href={`/things-to-do/#exp-${e.slot}`} class="mt-6 inline-block font-sans text-[0.72rem] uppercase tracking-[0.15em] text-gold-soft hover:text-white">Discover more</a>
         </article>
       ))}
     </div>
@@ -110,7 +114,7 @@ const notes = [
         <div class="reveal flex flex-col items-center justify-center bg-greige px-8 py-20 text-center">
           <h3 class="display text-[3.4rem] md:text-[4.4rem]" set:html={p.title} />
           <p class="body-copy mt-6 max-w-[230px] text-[1rem] text-ink/85">{p.text}</p>
-          <a href={p.href} class="mt-8 font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold hover:text-ink">Discover more</a>
+          <a href={p.href} class="mt-8 font-sans text-[0.72rem] uppercase tracking-[0.15em] text-gold hover:text-ink">Discover more</a>
         </div>
       </div>
     ))}
@@ -154,7 +158,7 @@ const notes = [
       <ol class="reveal">
         {route.map((r) => (
           <li class="grid grid-cols-[6.5rem_1fr] gap-4 border-b border-dashed border-ink/40 py-5 first:border-t first:border-solid first:border-t-ink">
-            <span class="pt-1.5 font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold">{r.day}</span>
+            <span class="pt-1.5 font-sans text-[0.72rem] uppercase tracking-[0.15em] text-gold">{r.day}</span>
             <div>
               <h3 class="font-serif text-[1.5rem] leading-tight">{r.place}</h3>
               <p class="body-copy mt-1 text-[1rem] text-ink/75">{r.text}</p>
@@ -197,7 +201,7 @@ const notes = [
       {notes.map((n) => (
         <a href={n.href} class="reveal group block">
           <Photo slot={n.slot} ratio="2/3" sizes="(min-width: 640px) 33vw, 100vw" imgClass="transition-transform duration-700 group-hover:scale-[1.03]" label={n.by} />
-          <p class="mt-5 font-sans text-[0.62rem] uppercase tracking-[0.15em] text-ink/60">{n.tag}</p>
+          <p class="mt-5 font-sans text-[0.72rem] uppercase tracking-[0.15em] text-ink/75">{n.tag}</p>
           <h3 class="mt-2 font-serif text-[1.6rem] leading-tight">{n.title}</h3>
           <p class="mt-4 font-sans text-sm text-ink">{n.by}</p>
           <span class="mt-5 inline-block font-sans text-[0.72rem] text-gold">Read more</span>
@@ -208,6 +212,24 @@ const notes = [
 </Base>
 
 <script>
+  // Experiences rail: arrow buttons and a progress hairline
+  const rail = document.getElementById('exp-rail');
+  const progress = document.getElementById('rail-progress');
+  const btns = Array.from(document.querySelectorAll<HTMLButtonElement>('.rail-btn'));
+  if (rail && progress) {
+    const update = () => {
+      const max = rail.scrollWidth - rail.clientWidth;
+      const ratio = rail.clientWidth / rail.scrollWidth;
+      const pos = max > 0 ? rail.scrollLeft / max : 1;
+      progress.style.width = `${Math.max(ratio, Math.min(1, ratio + pos * (1 - ratio))) * 100}%`;
+      btns.forEach((b) => (b.disabled = b.dataset.dir === '-1' ? rail.scrollLeft <= 2 : rail.scrollLeft >= max - 2));
+    };
+    rail.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    btns.forEach((b) => b.addEventListener('click', () => rail.scrollBy({ left: Number(b.dataset.dir) * rail.clientWidth * 0.75, behavior: 'smooth' })));
+    update();
+  }
+
   const root = document.querySelector('[data-tabs]');
   if (root) {
     const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[role=tab]'));

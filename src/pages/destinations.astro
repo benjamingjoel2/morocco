@@ -4,7 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import Photo from '../components/Photo.astro';
 import { DESTINATIONS } from '../data/destinations';
 
-const label = 'font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold';
+const label = 'font-sans text-[0.72rem] uppercase tracking-[0.15em] text-gold';
 ---
 <Base
   title="Destinations in Morocco: Marrakech, Fes, Chefchaouen, Sahara & more"
@@ -22,7 +22,7 @@ const label = 'font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold';
   <nav aria-label="Jump to destination" class="sticky top-[72px] z-30 border-b border-ink/10 bg-white">
     <ul class="rail container-x flex gap-8 overflow-x-auto py-4">
       {DESTINATIONS.map((d) => (
-        <li class="shrink-0"><a href={`#${d.id}`} class="font-sans text-[0.68rem] uppercase tracking-[0.15em] text-ink/70 hover:text-ink">{d.name}</a></li>
+        <li class="shrink-0"><a href={`#${d.id}`} class="font-sans text-[0.72rem] uppercase tracking-[0.15em] text-ink/70 hover:text-ink">{d.name}</a></li>
       ))}
     </ul>
   </nav>
@@ -30,7 +30,7 @@ const label = 'font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold';
   {DESTINATIONS.map((d, i) => (
     <article id={d.id} class="grid scroll-mt-32 md:grid-cols-2">
       <div class:list={[i % 2 === 1 && 'md:order-2']}>
-        <Photo slot={d.slot} ratio="4/5" sizes="(min-width: 768px) 50vw, 100vw" fluid class="aspect-[4/5] min-w-0 h-full md:aspect-auto md:min-h-[760px]" label={d.name} />
+        <Photo slot={d.slot} eager={i === 0} ratio="4/5" sizes="(min-width: 768px) 50vw, 100vw" fluid class="aspect-[4/5] min-w-0 h-full md:aspect-auto md:min-h-[760px]" label={d.name} />
       </div>
       <div class:list={['reveal flex flex-col justify-center px-6 py-20 sm:px-12 lg:px-20', i % 2 === 0 ? 'bg-greige' : 'bg-chalk']}>
         <p class="eyebrow">{d.region}</p>
@@ -48,14 +48,15 @@ const label = 'font-sans text-[0.62rem] uppercase tracking-[0.15em] text-gold';
         <ul class="mt-2">
           {d.dontMiss.map((x) => <li class="border-b border-dashed border-ink/30 py-2.5 font-serif text-[1.05rem] font-light">{x}</li>)}
         </ul>
-        <p class="mt-6 font-sans text-[0.62rem] uppercase tracking-[0.15em] text-ink/60">Best for · {d.bestFor.join(' · ')}</p>
+        <p class="mt-6 font-sans text-[0.72rem] uppercase tracking-[0.15em] text-ink/75">Best for · {d.bestFor.join(' · ')}</p>
+        <a href={`/contact/?place=${encodeURIComponent(d.name)}`} class="btn-dash mt-8 self-start text-ink">Plan a trip to {d.name.split(',')[0].split(' & ')[0]}</a>
       </div>
     </article>
   ))}
 
   <section class="bg-char py-24 text-center text-white md:py-32">
     <div class="reveal container-x">
-      <p class="eyebrow">Can’t choose?</p>
+      <p class="eyebrow !text-gold-soft">Can’t choose?</p>
       <p class="display mt-6 !text-white text-[3.4rem] md:text-[5.5rem]">One city, one landscape,<br />one place to rest</p>
       <p class="body-copy mx-auto mt-6 max-w-md text-white/85">That is the shape of most good first trips. Tell us what you love and we will sketch the rest.</p>
       <a href="/contact/" class="btn-dash mt-10 text-white">Ask for a route</a>
