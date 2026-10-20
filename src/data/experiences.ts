@@ -10,9 +10,9 @@ export const EXPERIENCES: Experience[] = [
   {
     slot: 'desertCamp',
     tag: 'Desert',
-    title: 'A night in the Erg Chebbi',
-    where: 'Merzouga',
-    text: 'Walk or ride into the dunes at sunset, eat tagine around a fire to the sound of drums, and sleep in a camp far from any light pollution.',
+    title: 'A night in the dunes',
+    where: 'Merzouga or M’hamid',
+    text: 'Walk or ride into the Erg Chebbi or the wilder Erg Chigaga at sunset, eat tagine around a fire to the sound of drums, and sleep far from any light pollution.',
   },
   {
     slot: 'atlasValley',
