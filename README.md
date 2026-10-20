@@ -9,15 +9,16 @@ An independent travel guide to Morocco, built with **Astro** and **Tailwind CSS*
 ```bash
 npm install
 npm run dev        # http://localhost:4321
-npm run build      # fetches media (if keys are set), then builds to dist/
+npm run media      # look up photos on Unsplash (needs UNSPLASH_ACCESS_KEY)
+npm run build      # builds to dist/ from the committed src/data/media.json
 ```
 
 ## Photos
-All photos come from the **Unsplash API** and are looked up by `scripts/fetch-media.mjs`, which runs before every build.
+All photos come from the **Unsplash API** and are looked up by `scripts/fetch-media.mjs` (`npm run media`). It does *not* run during deploys: new photos are reviewed by eye before `src/data/media.json` is committed, so the hosting platform never needs the API key.
 
 - Set `UNSPLASH_ACCESS_KEY` in your environment (never commit it). See `.env.example`.
 - A photo is only accepted when its Unsplash **location** or the photographer's **own description or tags** say Morocco and match the place we searched for. A Fes slot can't get a Marrakech or Spanish photo.
-- Results are saved to `src/data/media.json` (no secrets inside). Commit that file so builds without a key still show the photos.
+- Results are saved to `src/data/media.json` (no secrets inside). Check each new photo by eye (it must show the place its slot is for), add hand-written alt text in `src/data/media.ts`, then commit the file.
 - Unsplash demo keys allow 50 requests/hour, which is enough for about 14 slots per run. The script saves progress, so run `npm run media` again an hour later to fill the rest.
 - Photographer credits are generated in the footer automatically, as Unsplash's guidelines require (hotlinked images, download endpoint triggered, attribution links with UTM).
 - Any slot without a photo renders as a patterned clay panel.
@@ -27,7 +28,7 @@ All photos come from the **Unsplash API** and are looked up by `scripts/fetch-me
 ## Environment variables
 | Name | Required | Purpose |
 |---|---|---|
-| `UNSPLASH_ACCESS_KEY` | for photos | Unsplash API access key |
+| `UNSPLASH_ACCESS_KEY` | only for `npm run media` | Unsplash API access key (not needed on Vercel) |
 | `PEXELS_API_KEY` | optional | Hero video |
 | `PUBLIC_FORM_ENDPOINT` | optional | URL the trip form POSTs JSON to (e.g. Formspree). Without it, the form says honestly that nothing was sent. |
 | `SITE_URL` | optional | Canonical URL for the sitemap and Open Graph (default `https://morocco.vercel.app`) |

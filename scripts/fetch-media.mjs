@@ -40,6 +40,8 @@ export const SLOTS = [
   { slot: 'aitbenhaddou', query: 'Ait Benhaddou kasbah', places: ['benhaddou', 'ouarzazate'] },
   { slot: 'taghazout', query: 'Taghazout surf Morocco', places: ['taghazout', 'tamraght', 'imsouane', 'agadir'] },
   { slot: 'dades', query: 'Dades gorges Morocco', places: ['dades', 'todra', 'tinghir', 'boumalne'] },
+  { slot: 'jemaa', query: 'Jemaa el-Fnaa Marrakech', places: ['jemaa', 'fna', 'marrakech', 'marrakesh'] },
+  { slot: 'madrasa', query: 'Ben Youssef Madrasa Marrakech', places: ['ben youssef', 'madrasa', 'medersa'] },
   { slot: 'majorelle', query: 'Jardin Majorelle Marrakech', places: ['majorelle'] },
   { slot: 'souk', query: 'Marrakech souk spices', places: ['marrakech', 'marrakesh', 'souk', 'fes', 'fez'] },
   { slot: 'tagine', query: 'Moroccan tagine food', places: ['morocc', 'maroc', 'tagine', 'tajine'] },
@@ -53,7 +55,17 @@ export const SLOTS = [
   { slot: 'desertCamp', query: 'desert camp Morocco night', places: ['merzouga', 'sahara', 'zagora', 'agafay', 'desert'] },
 ];
 
-const isMorocco = (s = '') => /morocc|maroc|المغرب|ⵍⵎⵖⵔⵉⴱ/i.test(s);
+const isMorocco = (s = '') => /morocc|maroc|marroc|marokk|marrueco|marocc|المغرب|ⵍⵎⵖⵔⵉⴱ/i.test(s);
+
+/** "Medina, Marrakesh 40000, Morocco" + city/country -> "Medina, Marrakesh, Morocco" */
+export function placeLabel(parts) {
+  const seen = new Set();
+  return parts
+    .flatMap((p) => (p || '').split(','))
+    .map((p) => p.replace(/\d{4,}/g, '').trim())
+    .filter((p) => p && !seen.has(p.toLowerCase()) && seen.add(p.toLowerCase()))
+    .join(', ');
+}
 const lower = (s) => (s || '').toLowerCase();
 
 function load(path, fallback) {
@@ -85,12 +97,14 @@ async function unsplash(path) {
 /** Returns how the photo was verified as Moroccan, or null. */
 function verify(photo, places) {
   const loc = photo.location || {};
-  const locText = [loc.name, loc.city, loc.country].filter(Boolean).join(', ');
+  const locText = placeLabel([loc.name, loc.city, loc.country]);
   const ownText = [photo.description, ...(photo.tags || []).map((t) => t.title)].join(' ');
   const allText = lower(`${locText} ${ownText} ${photo.alt_description || ''}`);
   const placeMatch = places.some((p) => allText.includes(p));
   if (!placeMatch) return null;
   if (isMorocco(loc.country) || isMorocco(loc.name)) return { by: 'location', where: locText };
+  // A location elsewhere always wins over a caption that mentions Morocco.
+  if (loc.country || loc.city || loc.name) return null;
   // Photographer's own words (not the auto-generated alt text) must say Morocco.
   if (isMorocco(ownText)) return { by: 'description', where: locText || 'Morocco' };
   return null;
