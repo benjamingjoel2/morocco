@@ -91,6 +91,16 @@ Dates move every year, so confirm them before mentioning them in marketing.
 
 The FAQ on the Travel Tips page repeats facts 1.1 (visa-free 90 days), 2.2 and 2.4 (closed currency, ATMs), 3.6–3.8 and the dress guidance. Update the FAQ whenever those change, because Google may show these answers directly in search results.
 
+## 7c. Destination guides & routes (new pages)
+
+| # | Claim | Check with |
+|---|---|---|
+| 7c.1 | Friday afternoons are calmer in the Marrakech souks, and many Fes workshops close on Friday. | Local partners |
+| 7c.2 | Many medina riads can't be reached by car. | General knowledge |
+| 7c.3 | Imsouane has one of the longest right-hand waves in Morocco. | Surf guides |
+| 7c.4 | Route drive times and night counts (Routes page): Marrakech→Imlil ~1.5 h; the Fes→Merzouga route goes through the Middle Atlas cedar forests. | Google Maps / drivers |
+| 7c.5 | Fes: the Merenid tombs viewpoint, the Nejjarine museum and Seffarine square; Essaouira: Skala du Port and Skala de la Ville. | Local guides |
+
 ## 8. Business claims to confirm or adjust
 
 - "Within **two working days** you receive a first route" (Home, Contact) is a service promise you need to be able to keep.

@@ -10,19 +10,19 @@ const pillars = [
     slot: 'fes',
     title: 'Get lost<br />well',
     text: 'In the lanes of Fes and Marrakech, the best moments are the unplanned ones. We show you how to enjoy the maze, and how to find your way out.',
-    href: '/destinations/#fes',
+    href: '/destinations/fes/',
   },
   {
     slot: 'atlas',
     title: 'Walk the<br />Atlas',
     text: 'Ninety minutes from the souks, mule paths climb between walnut terraces and earth-walled Amazigh villages.',
-    href: '/destinations/#atlas',
+    href: '/destinations/atlas/',
   },
   {
     slot: 'sahara',
     title: 'Hear the<br />silence',
     text: 'A night beneath the Erg Chebbi dunes, a fire, a sky full of stars: the evening most travellers talk about for years.',
-    href: '/destinations/#sahara',
+    href: '/destinations/sahara/',
   },
 ];
 
@@ -153,7 +153,7 @@ const notes = [
         <h2 class="eyebrow">A first route</h2>
         <p class="display-left mt-6 text-[3.4rem] md:text-[4.4rem] !text-ink">Eight days,<br />Marrakech to Fes</p>
         <p class="body-copy mt-6 max-w-md text-ink/85">Our most-requested first journey: city, mountains, desert and medina, with no day longer than it needs to be.</p>
-        <a href="/contact/" class="btn-dash mt-10 text-mute">Make it mine</a>
+        <div class="mt-10 flex flex-wrap items-center gap-8"><a href="/contact/?route=eight-days" class="btn-dash text-mute">Make it mine</a><a href="/routes/" class="link-dash text-ink">See all routes</a></div>
       </div>
       <ol class="reveal">
         {route.map((r) => (
