@@ -92,5 +92,14 @@ const bar = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
   };
   openBtn.addEventListener('click', () => toggle(true));
   closeBtn.addEventListener('click', () => toggle(false));
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.classList.contains('hidden')) toggle(false); });
+  document.addEventListener('keydown', (e) => {
+    if (menu.classList.contains('hidden')) return;
+    if (e.key === 'Escape') return toggle(false);
+    if (e.key !== 'Tab') return;
+    // Keep keyboard focus inside the open menu
+    const items = Array.from(menu.querySelectorAll<HTMLElement>('a[href], button')).filter((el) => el.offsetParent !== null);
+    const first = items[0], last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
 </script>

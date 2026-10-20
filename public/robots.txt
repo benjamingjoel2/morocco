@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://morocco-liart.vercel.app/sitemap-index.xml

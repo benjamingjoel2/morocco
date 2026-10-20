@@ -104,6 +104,27 @@ const notes = [
     </div>
   </section>
 
+  <!-- At a glance -->
+  <section class="container-x pb-24 md:pb-32" aria-labelledby="glance-title">
+    <h2 id="glance-title" class="eyebrow text-center">Morocco at a glance</h2>
+    <dl class="reveal mt-10 grid grid-cols-2 border-t border-ink md:grid-cols-5">
+      {[
+        ['Currency', 'Dirham (MAD)', 'A closed currency: get it on arrival'],
+        ['Languages', 'Arabic & Tamazight', 'French is widely spoken'],
+        ['Time', 'GMT+1', 'Usually GMT during Ramadan'],
+        ['Plugs', 'Type C & E', '220 V'],
+        ['Visa', 'Often not needed', 'Up to 90 days for many passports'],
+      ].map(([k, v, note]) => (
+        <div class="border-b border-dashed border-ink/40 px-2 py-6 text-center md:border-b-0 md:border-r md:last:border-r-0">
+          <dt class="font-sans text-[0.72rem] uppercase tracking-[0.15em] text-gold">{k}</dt>
+          <dd class="mt-2 font-serif text-[1.35rem] leading-tight">{v}</dd>
+          <dd class="mt-1 font-sans text-xs text-ink/80">{note}</dd>
+        </div>
+      ))}
+    </dl>
+    <p class="mt-8 text-center"><a href="/travel-tips/" class="link-dash text-ink">All travel tips</a></p>
+  </section>
+
   <!-- Checkerboard -->
   <section>
     {pillars.map((p, i) => (

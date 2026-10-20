@@ -12,7 +12,7 @@
  * Usage: node scripts/fetch-media.mjs [--refresh]
  */
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, join } from 'node:path';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -94,7 +94,7 @@ async function unsplash(path) {
 }
 
 /** Returns how the photo was verified as Moroccan, or null. */
-function verify(photo, places) {
+export function verify(photo, places) {
   const loc = photo.location || {};
   const locText = placeLabel([loc.name, loc.city, loc.country]);
   const ownText = [photo.description, ...(photo.tags || []).map((t) => t.title)].join(' ');
@@ -109,7 +109,7 @@ function verify(photo, places) {
   return null;
 }
 
-function toRecord(p, v) {
+export function toRecord(p, v) {
   return {
     id: p.id,
     src: p.urls.raw,
@@ -211,7 +211,8 @@ async function main() {
   console.log(`[media] ${filled}/${SLOTS.length} photo slots filled.`);
 }
 
-main().catch((e) => {
+// Run only when executed directly (the candidate picker imports helpers from here).
+if (import.meta.url === pathToFileURL(process.argv[1]).href) main().catch((e) => {
   // Never fail the site build because of media lookups; the cached file still works.
   console.error(`[media] ${e.message}`);
 });

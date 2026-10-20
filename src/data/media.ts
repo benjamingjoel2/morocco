@@ -51,6 +51,10 @@ const ALT: Record<string, string> = {
   cvucpKVTsUo: 'Tents of a desert camp at golden hour in the Erg Chebbi',
   bNqDGEqXiEg: 'A tanner working in the stone dye vats of a Fes tannery',
   'rpzZ2G-fC0o': 'An older Moroccan musician in a white djellaba playing a traditional lute',
+  XqGQCsiAjaI: 'A camel caravan crossing the vast dunes of the Erg Chebbi near Merzouga',
+  NncAbldgViA: 'Blue-washed houses of Chefchaouen climbing the hillside under a clear sky',
+  OQT24ujdL9M: 'Blue fishing boats moored in Essaouira harbour below the town walls',
+  bnXUaEq9xYQ: 'Brass and glass lanterns glowing in a Marrakech souk',
 };
 
 export const getPhoto = (slot: string): PhotoRecord | undefined => {
@@ -61,7 +65,7 @@ export const allPhotos = (): [string, PhotoRecord][] => Object.entries(photos);
 export const heroVideo = (data as { heroVideo: VideoRecord | null }).heroVideo;
 
 /** Unsplash (imgix) URL at a given width and optional aspect ratio. */
-export function unsplashUrl(src: string, w: number, ar?: string, q = 60) {
+export function unsplashUrl(src: string, w: number, ar?: string, q = w >= 1440 ? 74 : 64) {
   const u = new URL(src);
   u.searchParams.set('w', String(w));
   u.searchParams.set('q', String(q));

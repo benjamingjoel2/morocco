@@ -7,3 +7,4 @@ dist/
 !.env.example
 .DS_Store
 scripts/.media-cache.json
+scripts/.candidates.json
