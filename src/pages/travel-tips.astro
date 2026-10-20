@@ -1,0 +1,163 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Photo from '../components/Photo.astro';
+
+const toc = [
+  { id: 'when', label: 'When to go' },
+  { id: 'entry', label: 'Visas & entry' },
+  { id: 'money', label: 'Money' },
+  { id: 'getting-around', label: 'Getting around' },
+  { id: 'etiquette', label: 'Etiquette & dress' },
+  { id: 'ramadan', label: 'Ramadan' },
+  { id: 'safety', label: 'Health & safety' },
+  { id: 'practical', label: 'Practicalities' },
+  { id: 'phrases', label: 'Useful words' },
+];
+
+const seasons = [
+  { name: 'Spring', months: 'Mar–May', text: 'Our favourite. Green valleys, roses in the Dadès, comfortable desert days.' },
+  { name: 'Summer', months: 'Jun–Aug', text: 'Hot inland (Marrakech and Fes often reach 38–40°C). Go to the coast and the mountains.' },
+  { name: 'Autumn', months: 'Sep–Nov', text: 'Warm sea, golden light, date and olive harvests. Excellent for trekking.' },
+  { name: 'Winter', months: 'Dec–Feb', text: 'Sunny days, cold nights. Snow on the Atlas and in Ifrane, surf season on the coast.' },
+];
+
+const phrases = [
+  { say: 'Salam alaykum', mean: 'Peace be upon you (hello)', lang: 'Darija' },
+  { say: 'Azul', mean: 'Hello', lang: 'Tamazight' },
+  { say: 'Shukran', mean: 'Thank you', lang: 'Darija' },
+  { say: 'Tanmirt', mean: 'Thank you', lang: 'Tamazight' },
+  { say: 'La, shukran', mean: 'No, thank you', lang: 'Darija' },
+  { say: 'Bshhal?', mean: 'How much?', lang: 'Darija' },
+  { say: 'Wakha', mean: 'OK', lang: 'Darija' },
+  { say: 'Bslama', mean: 'Goodbye', lang: 'Darija' },
+  { say: 'Bismillah', mean: 'In the name of God (said before eating)', lang: 'Arabic' },
+];
+---
+<Base
+  title="Morocco Travel Tips: Visas, Money, Transport, Etiquette & Ramadan"
+  description="Practical Morocco travel tips: best time to visit, visas and entry, the dirham, trains and buses, dress and etiquette, Ramadan, safety, plugs and useful Darija and Tamazight phrases."
+  overlayHeader
+>
+  <PageHero
+    slot="hassan2"
+    eyebrow="Travel tips"
+    title="Honest advice, <em>before</em> you pack"
+    intro="Everything we wish someone had told us before our first trip: what to wear, how to pay, how to get around and how to be a good guest."
+    label="Hassan II Mosque, Casablanca"
+  />
+
+  <div class="container-x grid gap-14 py-20 md:grid-cols-12 md:py-28">
+    <aside class="md:col-span-3">
+      <nav aria-label="On this page" class="md:sticky md:top-28">
+        <p class="eyebrow">On this page</p>
+        <ul class="mt-4 flex flex-wrap gap-2 md:flex-col md:gap-1">
+          {toc.map((t) => (
+            <li><a href={`#${t.id}`} class="inline-block rounded-full border border-ink/15 px-3 py-1.5 text-sm hover:text-clay md:border-0 md:px-0 md:py-1">{t.label}</a></li>
+          ))}
+        </ul>
+        <p class="mt-8 rounded-xl bg-mint/10 p-4 text-sm text-mint">
+          Rules change. Always check entry requirements with your own government and the nearest Moroccan embassy or consulate before you book.
+        </p>
+      </nav>
+    </aside>
+
+    <div class="space-y-20 md:col-span-9">
+      <section id="when" class="reveal scroll-mt-28">
+        <p class="eyebrow">01</p>
+        <h2 class="mt-2 text-4xl md:text-5xl">When to go</h2>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          {seasons.map((s) => (
+            <div class="rounded-2xl bg-plaster p-6">
+              <p class="font-display text-2xl">{s.name} <span class="text-base italic text-clay">{s.months}</span></p>
+              <p class="mt-2 text-ink/75">{s.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="entry" class="reveal scroll-mt-28 prose-azul">
+        <p class="eyebrow">02</p>
+        <h2 class="mb-6 mt-2 text-4xl md:text-5xl">Visas & entry</h2>
+        <p>Citizens of many countries, including the UK, EU member states, the USA, Canada, Australia and New Zealand, can currently visit Morocco visa-free for up to 90 days as tourists. Other nationalities may need a visa or can apply for an e-visa through Morocco’s official portal.</p>
+        <p>Your passport should be valid for the whole of your stay, and many airlines and governments recommend at least six months’ validity. You may be asked for an onward or return ticket and the address where you’re staying.</p>
+        <p>Drones need prior authorisation and are routinely held at customs, so leave yours at home.</p>
+      </section>
+
+      <section id="money" class="reveal scroll-mt-28 prose-azul">
+        <p class="eyebrow">03</p>
+        <h2 class="mb-6 mt-2 text-4xl md:text-5xl">Money</h2>
+        <p>The currency is the <strong>Moroccan dirham (MAD)</strong>. It is a closed currency: you can only take a limited amount in or out of the country, so plan to get most of your dirhams on arrival from airport ATMs or exchange counters.</p>
+        <p>ATMs are easy to find in cities and towns, but scarce in the desert and the mountains. Carry cash for souks, taxis, small restaurants and tips. Riads and larger hotels usually take cards. Keep your exchange receipts if you want to change dirhams back when you leave.</p>
+        <p>Tipping is customary: round up in cafés, leave around 10% in restaurants, and set aside something for guides, drivers and riad staff.</p>
+      </section>
+
+      <section id="getting-around" class="reveal scroll-mt-28 prose-azul">
+        <p class="eyebrow">04</p>
+        <h2 class="mb-6 mt-2 text-4xl md:text-5xl">Getting around</h2>
+        <p><strong>Trains.</strong> ONCF runs a comfortable network linking Marrakech, Casablanca, Rabat, Meknes, Fes and Tangier. Al Boraq, Africa’s first high-speed line, connects Tangier with Kenitra, Rabat and Casablanca. Book first class for a reserved seat on busy routes.</p>
+        <p><strong>Buses.</strong> CTM and Supratours coaches are reliable and cheap, and reach places the train doesn’t: Chefchaouen, Essaouira, Ouarzazate, Merzouga.</p>
+        <p><strong>Taxis.</strong> <em>Petits taxis</em> work inside a city, so ask for the meter. <em>Grands taxis</em> run fixed routes between towns and leave when full.</p>
+        <p><strong>Driving.</strong> Main roads are good and driving is on the right, but mountain passes and night driving need care. For the desert loop, many travellers prefer a private driver.</p>
+      </section>
+
+      <section id="etiquette" class="reveal scroll-mt-28">
+        <p class="eyebrow">05</p>
+        <h2 class="mt-2 text-4xl md:text-5xl">Etiquette & dress</h2>
+        <div class="mt-8 grid gap-8 md:grid-cols-5">
+          <div class="prose-azul md:col-span-3">
+            <p>Morocco is a Muslim country with relaxed big cities and more conservative rural areas. Covering shoulders and knees is respectful everywhere, especially in medinas and villages. A light scarf is useful for both sun and mosques.</p>
+            <p>Use your right hand to eat and to pass things. Always ask before photographing people, and accept a “no” gracefully. Most mosques are closed to non-Muslims, with the Hassan II Mosque in Casablanca a notable exception.</p>
+            <p>Public displays of affection are best kept discreet, and alcohol is sold only in licensed venues and some supermarkets.</p>
+          </div>
+          <div class="md:col-span-2">
+            <Photo slot="ramparts" ratio="3/4" sizes="(min-width: 768px) 25vw, 100vw" class="arch-mask" label="Essaouira ramparts" />
+          </div>
+        </div>
+      </section>
+
+      <section id="ramadan" class="reveal scroll-mt-28 prose-azul">
+        <p class="eyebrow">06</p>
+        <h2 class="mb-6 mt-2 text-4xl md:text-5xl">Travelling during Ramadan</h2>
+        <p>During the holy month, many Moroccans fast from dawn to sunset. Tourist restaurants and hotels stay open, but some cafés close by day and hours get shorter. Avoid eating, drinking or smoking openly in the street during the day.</p>
+        <p>The reward: magical evenings. When the call to prayer marks sunset, the streets go quiet for <em>ftour</em> (harira, dates, chebakia), then come back to life late into the night. Ramadan moves about eleven days earlier each year, so check the dates for your trip.</p>
+      </section>
+
+      <section id="safety" class="reveal scroll-mt-28 prose-azul">
+        <p class="eyebrow">07</p>
+        <h2 class="mb-6 mt-2 text-4xl md:text-5xl">Health & safety</h2>
+        <p>Morocco is generally a safe and welcoming destination. The main nuisances are petty theft in crowds and persistent touts. Keep valuables zipped away and politely decline unsolicited “guides”: if someone says the road ahead is closed, it usually isn’t.</p>
+        <p>Drink bottled or filtered water, ease into street food, and carry sun protection: the sun is strong year-round. Take out travel insurance that covers medical care and any trekking you plan to do.</p>
+        <p>Emergency numbers: <strong>19</strong> for police in cities, <strong>177</strong> for the Gendarmerie in rural areas, <strong>15</strong> for ambulance and fire.</p>
+      </section>
+
+      <section id="practical" class="reveal scroll-mt-28">
+        <p class="eyebrow">08</p>
+        <h2 class="mt-2 text-4xl md:text-5xl">Practicalities</h2>
+        <dl class="mt-8 grid gap-4 sm:grid-cols-2">
+          <div class="rounded-2xl bg-plaster p-6"><dt class="eyebrow !text-mint">Plugs</dt><dd class="mt-2">Type C and E sockets, 220 V.</dd></div>
+          <div class="rounded-2xl bg-plaster p-6"><dt class="eyebrow !text-mint">Time zone</dt><dd class="mt-2">GMT+1 most of the year. Clocks usually move back an hour during Ramadan.</dd></div>
+          <div class="rounded-2xl bg-plaster p-6"><dt class="eyebrow !text-mint">SIM cards</dt><dd class="mt-2">Maroc Telecom, Orange and inwi sell prepaid SIMs at airports and phone shops. Bring your passport.</dd></div>
+          <div class="rounded-2xl bg-plaster p-6"><dt class="eyebrow !text-mint">Languages</dt><dd class="mt-2">Arabic and Tamazight are official; Darija is spoken daily, and French is widely used. English is common in tourist areas.</dd></div>
+          <div class="rounded-2xl bg-plaster p-6 sm:col-span-2"><dt class="eyebrow !text-mint">Packing</dt><dd class="mt-2">Layers for cold desert and mountain nights, comfortable shoes for cobbled medinas, a scarf, sunscreen, a refillable bottle with a filter, and a little patience for the best moments.</dd></div>
+        </dl>
+      </section>
+
+      <section id="phrases" class="reveal scroll-mt-28">
+        <p class="eyebrow">09</p>
+        <h2 class="mt-2 text-4xl md:text-5xl">Useful words</h2>
+        <p class="mt-4 max-w-2xl text-ink/75">A few words in Darija (Moroccan Arabic) or Tamazight will earn you smiles everywhere.</p>
+        <ul class="mt-8 divide-y divide-ink/10 border-y border-ink/10">
+          {phrases.map((p) => (
+            <li class="grid grid-cols-[1fr_auto] items-baseline gap-4 py-4 sm:grid-cols-[14rem_1fr_auto]">
+              <span class="font-display text-2xl italic text-clay">{p.say}</span>
+              <span class="hidden text-ink/80 sm:block">{p.mean}</span>
+              <span class="text-xs font-semibold uppercase tracking-widest text-ink/50">{p.lang}</span>
+              <span class="col-span-2 text-ink/80 sm:hidden">{p.mean}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  </div>
+</Base>

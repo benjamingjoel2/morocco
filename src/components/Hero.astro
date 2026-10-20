@@ -1,0 +1,69 @@
+---
+import Photo from './Photo.astro';
+import { heroVideo } from '../data/media';
+import { SEASONS } from '../data/seasons';
+
+const month = new Date().getMonth();
+---
+<section class="relative isolate flex min-h-[100svh] items-end overflow-hidden text-sand">
+  <Photo slot="hero" eager class="!absolute inset-0 -z-30 h-full w-full" imgClass="kenburns" />
+  {heroVideo && (
+    <video
+      id="hero-video"
+      class="absolute inset-0 -z-20 hidden h-full w-full object-cover"
+      muted
+      loop
+      playsinline
+      preload="none"
+      poster={heroVideo.poster}
+      data-src={heroVideo.src}
+      aria-hidden="true"
+    ></video>
+  )}
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink/90 via-ink/30 to-ink/40"></div>
+
+  <div class="container-x pb-10 pt-40 md:pb-14">
+    <p class="eyebrow !text-saffron">ⴰⵣⵓⵍ · Slow journeys through Morocco</p>
+    <h1 class="mt-6 max-w-5xl text-balance text-[3.2rem] leading-[0.95] sm:text-7xl md:text-8xl lg:text-[7.5rem]">
+      Azul. Come in, <em class="text-saffron">the tea</em> is poured.
+    </h1>
+    <p class="mt-7 max-w-xl text-lg text-sand/85 md:text-xl">
+      From the blue lanes of Chefchaouen to a night beneath the Erg Chebbi dunes: honest guides and tailor-made routes for travellers who would rather stay a little longer.
+    </p>
+    <div class="mt-9 flex flex-wrap gap-3">
+      <a href="/destinations/" class="btn-clay">Explore destinations</a>
+      <a href="/contact/" class="btn-ghost">Plan my trip</a>
+    </div>
+
+    <div class="mt-14 flex flex-col gap-2 border-t border-sand/25 pt-5 text-sm sm:flex-row sm:items-center sm:gap-6">
+      <span class="eyebrow !text-sand/70">Right now in Morocco</span>
+      <p id="season-line" class="text-sand/90" data-seasons={JSON.stringify(SEASONS)}>
+        <strong class="font-semibold text-saffron">{SEASONS[month].month}:</strong> {SEASONS[month].text}
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Seasonal line follows the visitor's month, not the build date.
+  const line = document.getElementById('season-line');
+  if (line?.dataset.seasons) {
+    const seasons = JSON.parse(line.dataset.seasons);
+    const s = seasons[new Date().getMonth()];
+    line.innerHTML = '';
+    const strong = document.createElement('strong');
+    strong.className = 'font-semibold text-saffron';
+    strong.textContent = `${s.month}:`;
+    line.append(strong, ` ${s.text}`);
+  }
+
+  // Video only on larger screens with motion allowed; phones keep the still.
+  const video = document.getElementById('hero-video') as HTMLVideoElement | null;
+  const wide = window.matchMedia('(min-width: 768px)').matches;
+  const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (video && wide && !calm && video.dataset.src) {
+    video.src = video.dataset.src;
+    video.classList.remove('hidden');
+    video.play().catch(() => video.classList.add('hidden'));
+  }
+</script>

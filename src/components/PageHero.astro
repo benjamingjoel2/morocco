@@ -1,0 +1,14 @@
+---
+import Photo from './Photo.astro';
+interface Props { slot: string; eyebrow: string; title: string; intro: string; label?: string; }
+const { slot, eyebrow, title, intro, label } = Astro.props;
+---
+<section class="relative isolate flex min-h-[78vh] items-end overflow-hidden text-sand">
+  <Photo slot={slot} eager class="!absolute inset-0 -z-20 h-full w-full" imgClass="kenburns" label={label} />
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink/85 via-ink/35 to-ink/30"></div>
+  <div class="container-x pb-16 pt-36 md:pb-24">
+    <p class="eyebrow !text-saffron">{eyebrow}</p>
+    <h1 class="mt-5 max-w-4xl text-balance text-5xl leading-[0.98] sm:text-6xl md:text-7xl lg:text-8xl" set:html={title} />
+    <p class="mt-6 max-w-xl text-lg text-sand/85">{intro}</p>
+  </div>
+</section>

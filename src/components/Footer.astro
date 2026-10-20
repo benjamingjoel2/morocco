@@ -1,0 +1,68 @@
+---
+import Logo from './Logo.astro';
+import { NAV, CTA } from '../data/nav';
+import { allPhotos, heroVideo } from '../data/media';
+
+const credits = allPhotos();
+const year = new Date().getFullYear();
+---
+<footer class="zellige-bg relative bg-ink text-sand">
+  <div class="absolute inset-0 bg-ink/[0.94]"></div>
+  <div class="container-x relative py-16 md:py-20">
+    <div class="grid gap-12 md:grid-cols-12">
+      <div class="md:col-span-5">
+        <Logo tone="light" />
+        <p class="mt-6 max-w-sm text-sand/75">
+          Slow, well-planned journeys through Morocco, from the blue lanes of the Rif to the dunes of the Erg Chebbi.
+        </p>
+        <p class="mt-6 text-2xl tracking-[0.2em] text-saffron" lang="zgh">ⴰⵣⵓⵍ</p>
+      </div>
+      <nav aria-label="Footer" class="md:col-span-3">
+        <p class="eyebrow !text-saffron">Explore</p>
+        <ul class="mt-5 space-y-3">
+          <li><a class="hover:text-saffron" href="/">Home</a></li>
+          {NAV.map((n) => <li><a class="hover:text-saffron" href={n.href}>{n.label}</a></li>)}
+          <li><a class="hover:text-saffron" href={CTA.href}>Contact &amp; booking</a></li>
+        </ul>
+      </nav>
+      <div class="md:col-span-4">
+        <p class="eyebrow !text-saffron">Good to know</p>
+        <p class="mt-5 text-sm leading-relaxed text-sand/75">
+          Entry rules, prices and timetables change. Always confirm visa and health requirements with your government and the Moroccan consulate before you travel.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-16 border-t border-sand/15 pt-8">
+      <p class="eyebrow !text-saffron">Photo credits</p>
+      {credits.length > 0 ? (
+        <ul class="mt-4 grid gap-x-8 gap-y-2 text-xs text-sand/70 sm:grid-cols-2 lg:grid-cols-3">
+          {credits.map(([, p]) => (
+            <li>
+              <a class="underline-offset-2 hover:underline" href={p.photoUrl} rel="noopener">{p.location || 'Morocco'}</a>
+              {' '}by{' '}
+              <a class="underline-offset-2 hover:underline" href={p.photographerUrl} rel="noopener">{p.photographer}</a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="mt-4 text-xs text-sand/60">Photography is loaded from Unsplash at build time.</p>
+      )}
+      <p class="mt-5 text-xs text-sand/70">
+        Photos from <a class="underline" href="https://unsplash.com/?utm_source=azul_morocco&utm_medium=referral" rel="noopener">Unsplash</a>
+        {heroVideo && (
+          <>
+            {' '}· Video by <a class="underline" href={heroVideo.videoUrl} rel="noopener">{heroVideo.videographer}</a> on{' '}
+            <a class="underline" href="https://www.pexels.com" rel="noopener">Pexels</a>
+          </>
+        )}
+        . Used under the Unsplash license.
+      </p>
+    </div>
+
+    <div class="mt-10 flex flex-col justify-between gap-3 text-xs text-sand/50 sm:flex-row">
+      <p>© {year} Azul Morocco. Independent travel guide.</p>
+      <p>Made with mint tea, somewhere between Fes and the sea.</p>
+    </div>
+  </div>
+</footer>

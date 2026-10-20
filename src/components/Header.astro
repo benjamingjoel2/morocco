@@ -1,0 +1,92 @@
+---
+import Logo from './Logo.astro';
+import { NAV, CTA } from '../data/nav';
+
+interface Props { overlay?: boolean; }
+const { overlay = false } = Astro.props;
+const path = Astro.url.pathname;
+---
+<header
+  id="site-header"
+  data-overlay={overlay ? 'true' : 'false'}
+  class:list={[
+    'fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,color] duration-500',
+    overlay ? 'text-sand' : 'bg-sand/95 text-ink shadow-[0_1px_0_rgba(31,26,21,0.08)] backdrop-blur',
+  ]}
+>
+  <div class="container-x flex h-20 items-center justify-between gap-6">
+    <a href="/" aria-label="Azul Morocco, home" class="logo-link">
+      <Logo tone={overlay ? 'light' : 'dark'} />
+    </a>
+    <nav aria-label="Main" class="hidden items-center gap-9 md:flex">
+      {NAV.map((n) => (
+        <a
+          href={n.href}
+          class:list={['text-sm font-semibold tracking-wide underline-offset-8 hover:underline', path.startsWith(n.href) && 'underline decoration-saffron decoration-2']}
+          aria-current={path.startsWith(n.href) ? 'page' : undefined}
+        >{n.label}</a>
+      ))}
+      <a href={CTA.href} class="btn-clay">{CTA.label}</a>
+    </nav>
+    <button
+      id="menu-open"
+      class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-current md:hidden"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 8h16M4 16h16" /></svg>
+    </button>
+  </div>
+</header>
+
+<div id="mobile-menu" class="zellige-bg fixed inset-0 z-[60] hidden flex-col bg-ink text-sand md:hidden" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="container-x flex h-20 items-center justify-between">
+    <Logo tone="light" />
+    <button id="menu-close" class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-sand/60" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+    </button>
+  </div>
+  <nav aria-label="Mobile" class="container-x mt-10 flex flex-col gap-6">
+    <a href="/" class="font-display text-4xl">Home</a>
+    {NAV.map((n) => <a href={n.href} class="font-display text-4xl">{n.label}</a>)}
+    <a href={CTA.href} class="btn-clay mt-6 self-start">{CTA.label}</a>
+    <p class="mt-10 text-sm text-sand/70">ⴰⵣⵓⵍ · Azul means hello in Tamazight.</p>
+  </nav>
+</div>
+
+<script>
+  const header = document.getElementById('site-header')!;
+  const overlay = header.dataset.overlay === 'true';
+  const solid = ['bg-sand/95', 'text-ink', 'shadow-[0_1px_0_rgba(31,26,21,0.08)]', 'backdrop-blur'];
+  const setLogoTone = (dark: boolean) => {
+    header.querySelectorAll('.logo-link > span').forEach((el) => {
+      el.classList.toggle('text-ink', dark);
+      el.classList.toggle('text-sand', !dark);
+    });
+  };
+  if (overlay) {
+    const onScroll = () => {
+      const scrolled = window.scrollY > 60;
+      solid.forEach((c) => header.classList.toggle(c, scrolled));
+      header.classList.toggle('text-sand', !scrolled);
+      setLogoTone(scrolled);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  const menu = document.getElementById('mobile-menu')!;
+  const openBtn = document.getElementById('menu-open')!;
+  const closeBtn = document.getElementById('menu-close')!;
+  const toggle = (open: boolean) => {
+    menu.classList.toggle('hidden', !open);
+    menu.classList.toggle('flex', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+    openBtn.setAttribute('aria-expanded', String(open));
+    (open ? closeBtn : openBtn).focus();
+  };
+  openBtn.addEventListener('click', () => toggle(true));
+  closeBtn.addEventListener('click', () => toggle(false));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.classList.contains('hidden')) toggle(false); });
+</script>
