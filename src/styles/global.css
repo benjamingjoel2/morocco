@@ -83,3 +83,9 @@
   .text-balance { text-wrap: balance; }
   .rule-dots { background-image: linear-gradient(to right, currentColor 50%, transparent 50%); background-size: 4px 1px; background-repeat: repeat-x; height: 1px; }
 }
+
+/* Soft cross-fade between pages (cross-document view transitions; ignored where unsupported) */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 450ms; animation-timing-function: var(--ease-soft); }
+}
