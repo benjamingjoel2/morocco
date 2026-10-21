@@ -4,7 +4,7 @@ interface Props { photo: string; eyebrow: string; title: string; intro: string; 
 const { photo, eyebrow, title, intro, label } = Astro.props;
 ---
 <section class="on-photo relative isolate flex h-[88svh] min-h-[520px] flex-col items-center justify-center overflow-hidden px-5 text-center text-white">
-  <Photo photo={photo} eager class="!absolute inset-0 -z-20 h-full w-full" imgClass="kenburns" label={label} />
+  <Photo photo={photo} eager quality={45} class="!absolute inset-0 -z-20 h-full w-full" imgClass="kenburns" label={label} />
   <div class="absolute inset-0 -z-10 bg-night/50"></div>
   <div class="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-night/60 to-transparent"></div>
   <p class="eyebrow !text-white/85">{eyebrow}</p>

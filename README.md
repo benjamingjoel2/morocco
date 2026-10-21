@@ -11,6 +11,7 @@ npm install
 npm run dev        # http://localhost:4321
 npm run media      # look up photos on Unsplash (needs UNSPLASH_ACCESS_KEY)
 npm run build      # builds to dist/ from the committed src/data/media.json
+npm run qa         # build + browser checks on every page (see tests/site.spec.ts)
 ```
 
 ## Photos
@@ -37,3 +38,12 @@ All photos come from the **Unsplash API** and are looked up by `scripts/fetch-me
 Each page has a title, meta description, canonical URL, Open Graph and Twitter tags (`public/og.jpg`) and JSON-LD. `@astrojs/sitemap` generates `sitemap-index.xml`.
 
 See `BRIEF.md` for the design brief and `FACTS-TO-VERIFY.md` for facts to check before launch.
+
+## Quality checks
+`npm run qa` builds the site and, in desktop and mobile Chrome, checks every page in the sitemap for: HTTP 200, title/description/Open Graph image, a single `<h1>`, no console errors, no horizontal scrolling, a rendered photo header, legible header text over photos at several scroll positions, all visible images loading, and working internal links. Run it before every push.
+
+## Performance notes
+- Only the first slideshow photo loads up front; each next slide downloads just before it is shown.
+- Non-header images use `loading="lazy"` and `fetchpriority="low"`; header photos are eager, high priority and more strongly compressed (they sit under a dark overlay).
+- CSS is inlined, fonts are latin-only, self-hosted and preloaded; italics are synthesised rather than downloaded.
+- `vercel.json` gives hashed assets a one-year immutable cache; Chrome prerenders internal pages on hover (Speculation Rules).

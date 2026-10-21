@@ -26,10 +26,13 @@ const SLIDES = [
 
   <div class="on-photo container-x absolute inset-x-0 bottom-0 grid grid-cols-2 items-end gap-6 pb-8 md:grid-cols-3 md:pb-10">
     <p id="hero-coords" class="hidden font-sans text-[0.72rem] uppercase tracking-[0.15em] md:block">{SLIDES[0].coords}</p>
-    <Logo variant="wordmark" class="col-span-2 justify-self-center md:col-span-1" />
+    <div class="col-span-2 flex flex-col items-center justify-self-center text-center md:col-span-1">
+      <p class="mb-4 font-serif text-[1.05rem] font-light italic leading-snug sm:text-[1.15rem]">Slow, tailor-made journeys through Morocco</p>
+      <Logo variant="wordmark" />
+    </div>
     <div class="col-span-2 w-full max-w-[200px] justify-self-center md:col-span-1 md:justify-self-end">
       <p id="hero-caption" class="font-sans text-[0.72rem] uppercase leading-snug tracking-[0.15em]">{SLIDES[0].caption}</p>
-      <div class="relative mt-2 h-px w-full bg-white/40"><div id="hero-progress" class="absolute inset-y-0 left-0 w-0 bg-white"></div></div>
+      <div class="relative mt-2 h-px w-full overflow-hidden bg-white/40"><div id="hero-progress" class="absolute inset-0 origin-left scale-x-0 bg-white will-change-transform"></div></div>
     </div>
   </div>
 </section>
@@ -45,33 +48,36 @@ const SLIDES = [
 
   const run = () => {
     bar.style.transition = 'none';
-    bar.style.width = '0';
+    bar.style.transform = 'scaleX(0)';
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      bar.style.transition = `width ${DURATION}ms linear`;
-      bar.style.width = '100%';
+      bar.style.transition = `transform ${DURATION}ms linear`;
+      bar.style.transform = 'scaleX(1)';
     }));
   };
   if (!calm && slides.length > 1) {
-    // Later slides download only after the page has loaded, so they never compete with the first paint.
-    const reveal = () => slides.forEach((sl) => sl.querySelectorAll<HTMLImageElement>('img[data-src]').forEach((im) => {
+    // Each later slide downloads only when it is next in line, so nothing competes with the first paint.
+    const prepare = (n: number) => slides[n]?.querySelectorAll<HTMLImageElement>('img[data-src]').forEach((im) => {
       im.srcset = im.dataset.srcset ?? '';
       im.src = im.dataset.src ?? '';
       im.loading = 'eager';
-    }));
-    if (document.readyState === 'complete') setTimeout(reveal, 1000);
-    else window.addEventListener('load', () => setTimeout(reveal, 1000));
+      delete im.dataset.src;
+    });
+    const afterLoad = () => setTimeout(() => prepare(1), 1500);
+    if (document.readyState === 'complete') afterLoad();
+    else window.addEventListener('load', afterLoad);
     run();
     setInterval(() => {
       if (document.hidden) return;
       slides[i].classList.replace('opacity-100', 'opacity-0');
       i = (i + 1) % slides.length;
       slides[i].classList.replace('opacity-0', 'opacity-100');
+      prepare((i + 1) % slides.length);
       caption.textContent = slides[i].dataset.caption ?? '';
       coords.textContent = slides[i].dataset.coords ?? '';
       run();
     }, DURATION);
   } else {
-    bar.style.width = '100%';
+    bar.style.transform = 'scaleX(1)';
   }
 
   // Optional Pexels video: desktop only, never with reduced motion.

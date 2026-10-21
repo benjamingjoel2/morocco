@@ -8,3 +8,5 @@ dist/
 .DS_Store
 scripts/.media-cache.json
 scripts/.candidates.json
+test-results/
+playwright-report/

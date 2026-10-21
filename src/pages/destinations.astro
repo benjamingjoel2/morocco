@@ -30,7 +30,7 @@ const label = 'font-sans text-[0.72rem] uppercase tracking-[0.15em] text-gold';
   {DESTINATIONS.map((d, i) => (
     <article id={d.id} class="grid scroll-mt-32 md:grid-cols-2">
       <div class:list={[i % 2 === 1 && 'md:order-2']}>
-        <Photo photo={d.slot} eager={i === 0} ratio="4/5" sizes="(min-width: 768px) 50vw, 100vw" fluid class="aspect-[4/5] min-w-0 h-full md:aspect-auto md:min-h-[760px]" label={d.name} />
+        <Photo photo={d.slot} ratio="4/5" sizes="(min-width: 768px) 50vw, 100vw" fluid class="aspect-[4/5] min-w-0 h-full md:aspect-auto md:min-h-[760px]" label={d.name} />
       </div>
       <div class:list={['reveal flex flex-col justify-center px-6 py-20 sm:px-12 lg:px-20', i % 2 === 0 ? 'bg-greige' : 'bg-chalk']}>
         <p class="eyebrow">{d.region}</p>

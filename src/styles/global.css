@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "@fontsource/instrument-serif/400.css";
 @import "@fontsource-variable/newsreader/wght.css";
-@import "@fontsource-variable/newsreader/wght-italic.css";
 @import "@fontsource-variable/manrope";
 
 @theme {
@@ -26,7 +25,7 @@
 
 @layer base {
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-  body { @apply bg-white font-serif text-ink antialiased; }
+  body { @apply bg-white font-serif text-ink antialiased; font-synthesis: style; }
   :focus-visible { outline: 2px solid var(--color-gold); outline-offset: 3px; }
   ::selection { background: var(--color-greige); color: var(--color-night); }
   @media (prefers-reduced-motion: reduce) {
@@ -76,6 +75,7 @@
   .reveal.is-in { opacity: 1; transform: none; }
   .no-js .reveal { opacity: 1; transform: none; }
   .kenburns { animation: kenburns 22s var(--ease-soft) infinite alternate; }
+  .hero-slide.opacity-0 .kenburns { animation-play-state: paused; }
   @keyframes kenburns { from { transform: scale(1.02); } to { transform: scale(1.1); } }
   .rail { scroll-snap-type: x mandatory; scrollbar-width: none; }
   .rail::-webkit-scrollbar { display: none; }
