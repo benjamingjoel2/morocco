@@ -47,3 +47,13 @@ See `BRIEF.md` for the design brief and `FACTS-TO-VERIFY.md` for facts to check 
 - Non-header images use `loading="lazy"` and `fetchpriority="low"`; header photos are eager, high priority and more strongly compressed (they sit under a dark overlay).
 - CSS is inlined, fonts are latin-only, self-hosted and preloaded; italics are synthesised rather than downloaded.
 - `vercel.json` gives hashed assets a one-year immutable cache; Chrome prerenders internal pages on hover (Speculation Rules).
+
+## Languages (English + French)
+- English lives at `/`, French at `/fr/`. Every page exists in both; the header switch (EN/FR) links to the counterpart, and each page declares `hreflang` alternates (also in the sitemap).
+- Pages are thin wrappers (`src/pages/**`, `src/pages/fr/**`) around views in `src/views/` that take a `lang` prop.
+- Shared UI strings: `src/i18n/index.ts`. Page strings: `src/i18n/pages/*.ts`. Content data: `src/data/*.ts` and `src/data/*.fr.ts`, selected with `content(lang)` from `src/i18n/data.ts`.
+- French dictionaries are typed against the English ones (`const fr: typeof en`), so a missing translation fails `astro check`.
+- French copy should be reviewed by a native speaker before launch.
+
+## Journal
+Markdown articles in `src/content/journal/<lang>/<slug>.md` (same slug in both languages) with `title`, `description`, `date`, `photo` (a slot from `media.json`) and `tag`. Factual claims to verify are listed in `src/content/journal/FACTS.md`.

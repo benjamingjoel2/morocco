@@ -1,0 +1,217 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Photo from '../components/Photo.astro';
+import { type Lang } from '../i18n';
+import { content } from '../i18n/data';
+import { TIPS } from '../i18n/pages/tips';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = TIPS[lang];
+const { SEASONS } = content(lang);
+
+const toc = [
+  { id: 'when', label: t.toc.when },
+  { id: 'entry', label: t.toc.entry },
+  { id: 'money', label: t.toc.money },
+  { id: 'getting-around', label: t.toc.gettingAround },
+  { id: 'etiquette', label: t.toc.etiquette },
+  { id: 'ramadan', label: t.toc.ramadan },
+  { id: 'safety', label: t.toc.safety },
+  { id: 'practical', label: t.toc.practical },
+  { id: 'packing', label: t.toc.packing },
+  { id: 'phrases', label: t.toc.phrases },
+  { id: 'faq', label: t.toc.faq },
+];
+
+const seasons = t.seasons;
+const packing = t.packing;
+const faqs = t.faqs;
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+
+const phrases = t.phrases;
+---
+<Base
+  title={t.metaTitle}
+  description={t.metaDescription}
+  overlayHeader
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+  <PageHero
+    photo="hassan2"
+    eyebrow={t.eyebrow}
+    title={t.title}
+    intro={t.intro}
+    label={t.heroLabel}
+  />
+
+  <div class="container-x grid gap-14 py-20 md:grid-cols-12 md:py-28">
+    <aside class="md:col-span-3">
+      <nav aria-label={t.tocAria} class="md:sticky md:top-28">
+        <p class="eyebrow">{t.tocTitle}</p>
+        <ul class="mt-4 flex flex-wrap gap-x-5 md:flex-col">
+          {toc.map((item) => (
+            <li><a href={`#${item.id}`} class="inline-block border-b border-dashed border-ink/30 py-2 font-sans text-[0.72rem] uppercase tracking-[0.15em] text-ink/70 hover:text-ink md:block">{item.label}</a></li>
+          ))}
+        </ul>
+        <p class="body-copy mt-8 bg-greige p-5 text-[0.95rem] text-ink/85">
+          {t.rulesChange}
+        </p>
+      </nav>
+    </aside>
+
+    <div class="space-y-20 md:col-span-9">
+      <section id="when" class="reveal scroll-mt-28">
+        <p class="eyebrow">01</p>
+        <h2 class="display-left mt-3 text-[3rem] md:text-[3.8rem]">{t.whenTitle}</h2>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          {seasons.map((s) => (
+            <div class="bg-linen p-6">
+              <p class="font-serif text-2xl">{s.name} <span class="font-sans text-[0.72rem] uppercase tracking-[0.15em] text-gold">{s.months}</span></p>
+              <p class="body-copy mt-2 text-[1rem] text-ink/80">{s.text}</p>
+            </div>
+          ))}
+        </div>
+        <h3 class="eyebrow mt-12">{t.monthByMonth}</h3>
+        <ol class="mt-4 grid gap-px bg-ink/15 sm:grid-cols-2 lg:grid-cols-3">
+          {SEASONS.map((m) => (
+            <li class="bg-white p-5">
+              <p class="font-serif text-xl">{m.month}</p>
+              <p class="body-copy mt-1 text-[0.98rem] text-ink/80">{m.text}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section id="entry" class="reveal scroll-mt-28 prose-azul">
+        <p class="eyebrow">02</p>
+        <h2 class="display-left mb-6 mt-3 text-[3rem] md:text-[3.8rem]">{t.entryTitle}</h2>
+        {t.entryBody.map((p) => <p set:html={p} />)}
+      </section>
+
+      <section id="money" class="reveal scroll-mt-28 prose-azul">
+        <p class="eyebrow">03</p>
+        <h2 class="display-left mb-6 mt-3 text-[3rem] md:text-[3.8rem]">{t.moneyTitle}</h2>
+        {t.moneyBody.map((p) => <p set:html={p} />)}
+      </section>
+
+      <section id="getting-around" class="reveal scroll-mt-28 prose-azul">
+        <p class="eyebrow">04</p>
+        <h2 class="display-left mb-6 mt-3 text-[3rem] md:text-[3.8rem]">{t.aroundTitle}</h2>
+        {t.aroundBody.map((p) => <p set:html={p} />)}
+      </section>
+
+      <section id="etiquette" class="reveal scroll-mt-28">
+        <p class="eyebrow">05</p>
+        <h2 class="display-left mt-3 text-[3rem] md:text-[3.8rem]">{t.etiquetteTitle}</h2>
+        <div class="mt-8 grid gap-8 md:grid-cols-5">
+          <div class="prose-azul md:col-span-3">
+            {t.etiquetteBody.map((p) => <p set:html={p} />)}
+          </div>
+          <div class="md:col-span-2">
+            <Photo photo="ramparts" ratio="3/4" sizes="(min-width: 768px) 25vw, 100vw" label={t.rampartsLabel} />
+          </div>
+        </div>
+      </section>
+
+      <section id="ramadan" class="reveal scroll-mt-28 prose-azul">
+        <p class="eyebrow">06</p>
+        <h2 class="display-left mb-6 mt-3 text-[3rem] md:text-[3.8rem]">{t.ramadanTitle}</h2>
+        {t.ramadanBody.map((p) => <p set:html={p} />)}
+      </section>
+
+      <section id="safety" class="reveal scroll-mt-28 prose-azul">
+        <p class="eyebrow">07</p>
+        <h2 class="display-left mb-6 mt-3 text-[3rem] md:text-[3.8rem]">{t.safetyTitle}</h2>
+        {t.safetyBody.map((p) => <p set:html={p} />)}
+      </section>
+
+      <section id="practical" class="reveal scroll-mt-28">
+        <p class="eyebrow">08</p>
+        <h2 class="display-left mt-3 text-[3rem] md:text-[3.8rem]">{t.practicalTitle}</h2>
+        <dl class="mt-8 grid gap-4 sm:grid-cols-2">
+          <div class="bg-linen p-6"><dt class="eyebrow">{t.practical.plugsLabel}</dt><dd class="body-copy mt-2 text-[1rem]">{t.practical.plugs}</dd></div>
+          <div class="bg-linen p-6"><dt class="eyebrow">{t.practical.timeLabel}</dt><dd class="body-copy mt-2 text-[1rem]">{t.practical.time}</dd></div>
+          <div class="bg-linen p-6"><dt class="eyebrow">{t.practical.simLabel}</dt><dd class="body-copy mt-2 text-[1rem]">{t.practical.sim}</dd></div>
+          <div class="bg-linen p-6"><dt class="eyebrow">{t.practical.languagesLabel}</dt><dd class="body-copy mt-2 text-[1rem]">{t.practical.languages}</dd></div>
+          <div class="bg-linen p-6 sm:col-span-2"><dt class="eyebrow">{t.practical.packingLabel}</dt><dd class="body-copy mt-2 text-[1rem]">{t.practical.packing}</dd></div>
+        </dl>
+      </section>
+
+      <section id="packing" class="reveal scroll-mt-28">
+        <p class="eyebrow">09</p>
+        <h2 class="display-left mt-3 text-[3rem] md:text-[3.8rem]">{t.packingTitle}</h2>
+        <p class="body-copy mt-4 max-w-2xl text-ink/80">{t.packingIntro}</p>
+        <div class="mt-8 grid gap-10 sm:grid-cols-2" id="packing-list">
+          {packing.map((g) => (
+            <fieldset>
+              <legend class="eyebrow">{g.group}</legend>
+              <ul class="mt-3 border-t border-ink">
+                {g.items.map((item) => (
+                  <li class="border-b border-dashed border-ink/40">
+                    <label class="flex cursor-pointer items-start gap-3 py-3">
+                      <input type="checkbox" class="mt-1.5 h-4 w-4 shrink-0 accent-[#231f20]" data-item={item} />
+                      <span class="body-copy text-[1.02rem]">{item}</span>
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </fieldset>
+          ))}
+        </div>
+        <button type="button" id="packing-reset" class="link-dash mt-6 text-ink">{t.clearTicks}</button>
+      </section>
+
+      <section id="phrases" class="reveal scroll-mt-28">
+        <p class="eyebrow">10</p>
+        <h2 class="display-left mt-3 text-[3rem] md:text-[3.8rem]">{t.phrasesTitle}</h2>
+        <p class="body-copy mt-4 max-w-2xl text-ink/80">{t.phrasesIntro}</p>
+        <ul class="mt-8 divide-y divide-dashed divide-ink/40 border-y border-ink">
+          {phrases.map((p) => (
+            <li class="grid grid-cols-[1fr_auto] items-baseline gap-4 py-4 sm:grid-cols-[14rem_1fr_auto]">
+              <span class="font-serif text-2xl italic text-ink">{p.say}</span>
+              <span class="body-copy hidden text-[1rem] text-ink/80 sm:block">{p.mean}</span>
+              <span class="font-sans text-[0.72rem] uppercase tracking-[0.15em] text-gold">{p.lang}</span>
+              <span class="body-copy col-span-2 text-[1rem] text-ink/80 sm:hidden">{p.mean}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section id="faq" class="reveal scroll-mt-28">
+        <p class="eyebrow">11</p>
+        <h2 class="display-left mt-3 text-[3rem] md:text-[3.8rem]">{t.faqTitle}</h2>
+        <div class="mt-8 border-t border-ink">
+          {faqs.map((f) => (
+            <details class="group border-b border-dashed border-ink/40 py-5">
+              <summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-serif text-[1.35rem] leading-snug [&::-webkit-details-marker]:hidden">
+                {f.q}
+                <span class="mt-1 font-sans text-lg text-gold transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+              </summary>
+              <p class="body-copy mt-3 max-w-2xl text-ink/85">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+    </div>
+  </div>
+</Base>
+
+<script>
+  // Packing checklist: remembered per browser; works fine if storage is unavailable.
+  const KEY = 'azul-packing';
+  const boxes = Array.from(document.querySelectorAll<HTMLInputElement>('#packing-list input[type=checkbox]'));
+  let saved: string[] = [];
+  try { saved = JSON.parse(localStorage.getItem(KEY) ?? '[]'); } catch { saved = []; }
+  boxes.forEach((b) => (b.checked = saved.includes(b.dataset.item ?? '')));
+  const save = () => {
+    try { localStorage.setItem(KEY, JSON.stringify(boxes.filter((b) => b.checked).map((b) => b.dataset.item))); } catch { /* private mode */ }
+  };
+  boxes.forEach((b) => b.addEventListener('change', save));
+  document.getElementById('packing-reset')?.addEventListener('click', () => { boxes.forEach((b) => (b.checked = false)); save(); });
+</script>

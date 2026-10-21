@@ -10,6 +10,9 @@ export default defineConfig({
   site,
   trailingSlash: 'ignore',
   build: { inlineStylesheets: 'always' },
-  integrations: [sitemap()],
+  integrations: [
+    // hreflang pairs in the sitemap: /page/ (en) <-> /fr/page/ (fr)
+    sitemap({ i18n: { defaultLocale: 'en', locales: { en: 'en', fr: 'fr' } } }),
+  ],
   vite: { plugins: [tailwindcss()] },
 });

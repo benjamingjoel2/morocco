@@ -1,0 +1,111 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Photo from '../components/Photo.astro';
+import SectionHead from '../components/SectionHead.astro';
+import { localize, type Lang } from '../i18n';
+import { content } from '../i18n/data';
+import { THINGS } from '../i18n/pages/things';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = THINGS[lang];
+const L = (p: string) => localize(lang, p);
+const { EXPERIENCES, FESTIVALS, FOODS } = content(lang);
+
+const small = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
+---
+<Base
+  title={t.metaTitle}
+  description={t.metaDescription}
+  overlayHeader
+>
+  <PageHero
+    photo="souk"
+    eyebrow={t.eyebrow}
+    title={t.title}
+    intro={t.intro}
+    label={t.heroLabel}
+  />
+
+  <section class="bg-char py-24 text-white md:py-32">
+    <div class="container-x">
+      <SectionHead tone="light" eyebrow={t.signatureEyebrow} title={t.signatureTitle} />
+      <div class="mt-16 grid gap-x-6 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
+        {EXPERIENCES.map((e) => (
+          <article id={`exp-${e.slot}`} class="reveal scroll-mt-28">
+            <Photo photo={e.slot} ratio="3/2" sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" label={e.title} />
+            <p class:list={[small, 'mt-5 text-white/70']}>{e.tag} · {e.where}</p>
+            <h3 class="mt-2 font-serif text-[1.6rem] leading-tight">{e.title}</h3>
+            <p class="body-copy mt-3 text-[1rem] text-white/85">{e.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="grid md:grid-cols-2">
+    <Photo photo="gnaoua" ratio="1/1" sizes="(min-width: 768px) 50vw, 100vw" fluid class="aspect-[1/1] min-w-0 h-full md:aspect-auto" label={t.gnawaLabel} />
+    <div class="px-6 py-20 sm:px-12 lg:px-20">
+      <p class="eyebrow">{t.festivalsEyebrow}</p>
+      <h2 class="display-left mt-5 text-[3.4rem] md:text-[4.4rem]" set:html={t.festivalsTitle} />
+      <p class="body-copy mt-4 max-w-md text-ink/80">{t.festivalsText}</p>
+      <ol class="mt-10">
+        {FESTIVALS.map((f, i) => (
+          <li class="reveal grid grid-cols-[2.5rem_1fr] gap-4 border-b border-dashed border-ink/40 py-5 first:border-t first:border-solid first:border-t-ink">
+            <span class="pt-1 font-sans text-[0.72rem] text-ink/75">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <p class:list={[small, 'text-gold']}>{f.when} · {f.where}</p>
+              <h3 class="mt-1 font-serif text-[1.5rem] leading-tight">{f.name}</h3>
+              <p class="body-copy mt-1 text-[1rem] text-ink/75">{f.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="grid md:grid-cols-[1fr_1.86fr]">
+    <div class="reveal flex flex-col items-center justify-center bg-greige px-8 py-20 text-center md:order-1">
+      <p class="eyebrow">{t.soukEyebrow}</p>
+      <h2 class="display mt-5 text-[3.4rem] md:text-[4.4rem]" set:html={t.soukTitle} />
+      <div class="body-copy mt-6 max-w-[300px] space-y-4 text-[1rem] text-ink/85">
+        {t.soukText.map((p) => <p set:html={p} />)}
+      </div>
+    </div>
+    <div class="md:order-2">
+      <Photo photo="zellige" ratio="1/1" sizes="(min-width: 768px) 65vw, 100vw" fluid class="aspect-[1/1] min-w-0 h-full md:aspect-auto md:min-h-[640px]" label={t.zelligeLabel} />
+    </div>
+  </section>
+
+  <section class="bg-linen py-24 md:py-32">
+    <div class="container-x">
+      <SectionHead eyebrow={t.foodEyebrow} title={t.foodTitle} />
+      <div class="mt-16 grid gap-12 md:grid-cols-[1fr_1.4fr]">
+        <Photo photo="tagine" ratio="4/5" sizes="(min-width: 768px) 40vw, 100vw" label={t.tagineLabel} />
+        <ul class="grid content-start gap-x-10 sm:grid-cols-2">
+          {FOODS.map((f) => (
+            <li class="reveal border-t border-dashed border-ink/40 py-5">
+              <h3 class="font-serif text-[1.5rem]">{f.name}</h3>
+              <p class="body-copy mt-1 text-[1rem] text-ink/75">{f.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-x py-24 md:py-32">
+    <SectionHead eyebrow={t.moreEyebrow} title={t.moreTitle} />
+    <ul class="mt-16 grid gap-px bg-ink/15 sm:grid-cols-2 lg:grid-cols-3">
+      {t.more.map((m) => (
+        <li class="reveal bg-white p-8 text-center">
+          <p class:list={[small, 'text-gold']}>{m.where}</p>
+          <h3 class="mt-3 font-serif text-[1.6rem] leading-tight">{m.title}</h3>
+          <p class="body-copy mt-3 text-[1rem] text-ink/75">{m.text}</p>
+        </li>
+      ))}
+    </ul>
+    <div class="mt-16 text-center"><a href={L('/contact/')} class="btn-dash text-mute">{t.buildThese}</a></div>
+  </section>
+</Base>

@@ -70,6 +70,19 @@
   & strong { @apply font-medium; }
 }
 
+/* Long-form journal articles rendered from Markdown */
+@utility prose-article {
+  & > * + * { @apply mt-5; }
+  & h2 { @apply mt-14 font-display text-[2.4rem] uppercase leading-none text-gold-display; scale: 0.86 1; transform-origin: left; }
+  & h3 { @apply mt-10 font-serif text-[1.5rem] font-medium leading-tight; }
+  & p, & li { @apply font-serif text-[1.18rem] font-light leading-[1.6] text-ink; }
+  & ul { @apply list-disc space-y-2 pl-6 marker:text-gold; }
+  & ol { @apply list-decimal space-y-2 pl-6 marker:text-gold; }
+  & a { @apply underline decoration-gold/60 underline-offset-4 hover:decoration-ink; }
+  & strong { @apply font-medium; }
+  & blockquote { @apply border-l-2 border-gold pl-5 italic; }
+}
+
 @layer utilities {
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s var(--ease-soft), transform 0.9s var(--ease-soft); }
   .reveal.is-in { opacity: 1; transform: none; }

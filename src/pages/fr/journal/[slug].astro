@@ -1,0 +1,10 @@
+---
+import { getCollection } from 'astro:content';
+import Article from '../../../views/Article.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('journal', (e) => e.id.startsWith('fr/'));
+  return entries.map((e) => ({ params: { slug: e.id.split('/')[1] } }));
+}
+---
+<Article lang="fr" slug={Astro.params.slug!} />

@@ -3,15 +3,18 @@ import Photo from './Photo.astro';
 import Logo from './Logo.astro';
 import { heroVideo } from '../data/media';
 
+interface Props { h1: string; tagline: string; captions: string[]; }
+const { h1, tagline, captions } = Astro.props;
+
 const SLIDES = [
   { slot: 'hero', caption: 'Erg Chebbi, Merzouga', coords: '31.1° N  4.0° W' },
   { slot: 'chefchaouen', caption: 'Chefchaouen, Rif Mountains', coords: '35.2° N  5.3° W' },
   { slot: 'atlas', caption: 'High Atlas, Tacheddirt', coords: '31.2° N  7.8° W' },
   { slot: 'essaouira', caption: 'Essaouira, Atlantic coast', coords: '31.5° N  9.8° W' },
-];
+].map((s, i) => ({ ...s, caption: captions[i] ?? s.caption }));
 ---
 <section id="hero" class="relative isolate h-[100svh] min-h-[560px] overflow-hidden bg-night text-white">
-  <h1 class="sr-only">Azul Morocco: slow, tailor-made journeys through Morocco</h1>
+  <h1 class="sr-only">{h1}</h1>
   {SLIDES.map((s, i) => (
     <div class:list={['hero-slide absolute inset-0 -z-20 transition-opacity duration-[1600ms]', i === 0 ? 'opacity-100' : 'opacity-0']} data-caption={s.caption} data-coords={s.coords}>
       <Photo photo={s.slot} eager={i === 0} defer={i > 0} class="!absolute inset-0 h-full w-full" imgClass="kenburns" />
@@ -27,7 +30,7 @@ const SLIDES = [
   <div class="on-photo container-x absolute inset-x-0 bottom-0 grid grid-cols-2 items-end gap-6 pb-8 md:grid-cols-3 md:pb-10">
     <p id="hero-coords" class="hidden font-sans text-[0.72rem] uppercase tracking-[0.15em] md:block">{SLIDES[0].coords}</p>
     <div class="col-span-2 flex flex-col items-center justify-self-center text-center md:col-span-1">
-      <p class="mb-4 font-serif text-[1.05rem] font-light italic leading-snug sm:text-[1.15rem]">Slow, tailor-made journeys through Morocco</p>
+      <p class="mb-4 font-serif text-[1.05rem] font-light italic leading-snug sm:text-[1.15rem]">{tagline}</p>
       <Logo variant="wordmark" />
     </div>
     <div class="col-span-2 w-full max-w-[200px] justify-self-center md:col-span-1 md:justify-self-end">

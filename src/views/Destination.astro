@@ -1,0 +1,156 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Photo from '../components/Photo.astro';
+import { getPhoto, unsplashUrl } from '../data/media';
+import { UI, localize, type Lang } from '../i18n';
+import { content } from '../i18n/data';
+import { DEST } from '../i18n/pages/destinations';
+
+interface Props { lang: Lang; id: string; }
+const { lang, id } = Astro.props;
+const t = DEST[lang];
+const L = (p: string) => localize(lang, p);
+const { DESTINATIONS, DETAILS } = content(lang);
+const d = DESTINATIONS.find((x) => x.id === id)!;
+const x = DETAILS[d.id];
+const nearby = x.nearby.map((id) => DESTINATIONS.find((n) => n.id === id)!).filter(Boolean);
+const short = d.name.split(',')[0].split(' & ')[0];
+const label = 'font-sans text-[0.72rem] uppercase tracking-[0.15em] text-gold';
+const site = Astro.site!;
+const gallery = [`${d.id}-g1`, `${d.id}-g2`].map((slot) => ({ slot, p: getPhoto(slot) })).filter((g) => g.p);
+const main = getPhoto(d.slot);
+// Share previews show this destination's own photo, cropped to 1200x630
+const ogImage = main ? unsplashUrl(main.src, 1200, '40/21', 80) : undefined;
+
+const ld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'TouristDestination',
+    name: d.name,
+    description: d.intro,
+    url: new URL(L(`/destinations/${d.id}/`), site).toString(),
+    containedInPlace: { '@type': 'Country', name: t.country },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: t.home, item: new URL(L('/'), site).toString() },
+      { '@type': 'ListItem', position: 2, name: UI[lang].nav.destinations, item: new URL(L('/destinations/'), site).toString() },
+      { '@type': 'ListItem', position: 3, name: d.name },
+    ],
+  },
+];
+---
+<Base
+  title={t.guideTitle(d.name)}
+  description={t.guideDescription(d.name, d.tagline)}
+  overlayHeader
+  ogImage={ogImage}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(ld)} />
+  <PageHero photo={d.slot} eyebrow={d.region} title={d.name.replace(' & ', '<br />& ').replace(', ', ',<br />')} intro={d.tagline} label={d.name} />
+
+  <nav aria-label={t.breadcrumb} class="container-x py-5">
+    <ol class="flex flex-wrap gap-2 font-sans text-[0.72rem] uppercase tracking-[0.15em] text-ink/75">
+      <li><a href={L('/')} class="hover:text-ink">{t.home}</a> /</li>
+      <li><a href={L('/destinations/')} class="hover:text-ink">{UI[lang].nav.destinations}</a> /</li>
+      <li aria-current="page" class="text-ink">{d.name}</li>
+    </ol>
+  </nav>
+
+  <section class="grid md:grid-cols-2">
+    <div class="reveal flex flex-col justify-center bg-greige px-6 py-20 sm:px-12 lg:px-20">
+      <p class="eyebrow">{t.whyGo}</p>
+      <p class="body-copy mt-5 text-[1.3rem] text-ink">{d.intro}</p>
+      <dl class="mt-10 grid gap-5 border-y border-dashed border-ink/40 py-6 sm:grid-cols-2">
+        <div><dt class={label}>{t.stay}</dt><dd class="mt-1 font-serif text-lg">{d.stay}</dd></div>
+        <div><dt class={label}>{t.bestTime}</dt><dd class="mt-1 font-serif text-lg">{d.season}</dd></div>
+        <div class="sm:col-span-2"><dt class={label}>{t.gettingThere}</dt><dd class="mt-1 font-serif text-lg font-light">{d.gettingThere}</dd></div>
+      </dl>
+      <p class="mt-6 font-sans text-[0.72rem] uppercase tracking-[0.15em] text-ink/75">{t.bestFor} · {d.bestFor.join(' · ')}</p>
+    </div>
+    <Photo photo={d.slot} ratio="4/5" fluid sizes="(min-width: 768px) 50vw, 100vw" class="aspect-[4/5] min-w-0 h-full md:aspect-auto md:min-h-[640px]" label={d.name} />
+  </section>
+
+  <section class="container-x py-24 md:py-32">
+    <div class="reveal mx-auto max-w-[620px] text-center">
+      <p class="eyebrow">{t.perfectDay(short)}</p>
+      <h2 class="display mt-6 text-[3.4rem] md:text-[4.4rem]" set:html={t.perfectDayTitle} />
+    </div>
+    <ol class="mt-16 grid gap-10 md:grid-cols-3 md:gap-8">
+      {([['01', t.morning, x.day.morning], ['02', t.afternoon, x.day.afternoon], ['03', t.evening, x.day.evening]] as const).map(([n, label, text]) => (
+        <li class="reveal text-center">
+          <span class="font-sans text-[0.72rem] text-ink/75">{n}</span>
+          <h3 class="display mt-1 text-[2.6rem]">{label}</h3>
+          <div class="rule-dots mt-5 text-ink/50"></div>
+          <p class="body-copy mx-auto mt-5 max-w-sm text-ink/85">{text}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  {gallery.length > 0 && (
+    <section class="pb-24 md:pb-32" aria-label={t.photosOf(d.name)}>
+      <div class:list={['grid gap-1', gallery.length > 1 && 'md:grid-cols-2']}>
+        {gallery.map(({ slot, p }) => (
+          <figure class="reveal">
+            <Photo photo={slot} ratio={gallery.length > 1 ? '4/3' : '21/9'} sizes={gallery.length > 1 ? '(min-width: 768px) 50vw, 100vw' : '100vw'} label={d.name} />
+            <figcaption class="container-x mt-3 font-sans text-[0.72rem] uppercase tracking-[0.15em] text-ink/75">
+              {p!.location} · <a href={p!.photographerUrl} class="hover:underline" rel="noopener">{p!.photographer}</a> / Unsplash
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <section class="bg-linen py-24 md:py-32">
+    <div class="container-x grid gap-16 md:grid-cols-2">
+      <div class="reveal">
+        <p class="eyebrow">{t.whereToStay}</p>
+        <ul class="mt-6 border-t border-ink">
+          {x.stay.map((s) => (
+            <li class="border-b border-dashed border-ink/40 py-5">
+              <h3 class="font-serif text-[1.5rem]">{s.area}</h3>
+              <p class="body-copy mt-1 text-[1rem] text-ink/80">{s.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="reveal">
+        <p class="eyebrow">{t.dontMiss}</p>
+        <ul class="mt-6 border-t border-ink">
+          {d.dontMiss.map((m) => <li class="body-copy border-b border-dashed border-ink/40 py-3 text-[1.05rem]">{m}</li>)}
+        </ul>
+        <p class="eyebrow mt-12">{t.goodToKnow}</p>
+        <ul class="mt-6 border-t border-ink">
+          {x.tips.map((tip) => <li class="body-copy border-b border-dashed border-ink/40 py-3 text-[1.05rem]">{tip}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-x py-24 md:py-32">
+    <p class="eyebrow text-center">{t.pairsWith}</p>
+    <div class="mt-14 grid gap-10 sm:grid-cols-3 sm:gap-4">
+      {nearby.map((n) => (
+        <a href={L(`/destinations/${n.id}/`)} class="reveal group block">
+          <Photo photo={n.slot} ratio="2/3" sizes="(min-width: 640px) 33vw, 100vw" imgClass="transition-transform duration-700 group-hover:scale-[1.03]" label={n.name} />
+          <p class="mt-5 font-sans text-[0.72rem] uppercase tracking-[0.15em] text-ink/75">{n.region}</p>
+          <h3 class="mt-2 font-serif text-[1.6rem] leading-tight">{n.name}</h3>
+          <p class="body-copy mt-1 text-[1rem] text-ink/80">{n.tagline}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-char py-24 text-center text-white md:py-32">
+    <div class="reveal container-x">
+      <p class="eyebrow !text-gold-soft">{t.yourTrip}</p>
+      <p class="display mt-6 !text-white text-[3.4rem] md:text-[5.5rem]" set:html={t.makePart(short)} />
+      <a href={L(`/contact/?place=${d.id}`)} class="btn-dash mt-10 text-white">{t.planTo(short)}</a>
+    </div>
+  </section>
+</Base>

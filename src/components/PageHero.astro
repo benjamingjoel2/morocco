@@ -1,13 +1,13 @@
 ---
 import Photo from './Photo.astro';
-interface Props { photo: string; eyebrow: string; title: string; intro: string; label?: string; }
-const { photo, eyebrow, title, intro, label } = Astro.props;
+interface Props { photo: string; eyebrow: string; title: string; intro: string; label?: string; /** Smaller title for long article headlines */ compact?: boolean; }
+const { photo, eyebrow, title, intro, label, compact = false } = Astro.props;
 ---
 <section class="on-photo relative isolate flex h-[88svh] min-h-[520px] flex-col items-center justify-center overflow-hidden px-5 text-center text-white">
   <Photo photo={photo} eager quality={45} class="!absolute inset-0 -z-20 h-full w-full" imgClass="kenburns" label={label} />
   <div class="absolute inset-0 -z-10 bg-night/50"></div>
   <div class="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-night/60 to-transparent"></div>
   <p class="eyebrow !text-white/85">{eyebrow}</p>
-  <h1 class="display mt-6 !text-white text-[4rem] sm:text-[6rem] lg:text-[8.75rem]" set:html={title} />
+  <h1 class:list={['display mt-6 max-w-[16ch] !text-white', compact ? 'text-[3rem] sm:text-[4.2rem] lg:text-[5.6rem]' : 'max-w-none text-[4rem] sm:text-[6rem] lg:text-[8.75rem]']} set:html={title} />
   <p class="body-copy mt-8 max-w-[520px] text-white/90">{intro}</p>
 </section>
