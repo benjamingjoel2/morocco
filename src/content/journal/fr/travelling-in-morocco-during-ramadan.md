@@ -1,6 +1,6 @@
 ---
 title: "Voyager au Maroc pendant le ramadan"
-description: "À quoi ressemble vraiment un voyage au Maroc pendant le ramadan : un autre rythme, l’iftar, ce qui reste ouvert, les usages à respecter et pourquoi ce séjour vaut le détour."
+description: "Voyager au Maroc pendant le ramadan : un autre rythme, le ftour, ce qui reste ouvert, les usages à respecter et pourquoi ce moment vaut le détour."
 date: 2026-10-07
 photo: riad
 tag: "Pratique"

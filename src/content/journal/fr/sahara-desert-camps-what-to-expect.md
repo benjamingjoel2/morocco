@@ -1,6 +1,6 @@
 ---
 title: "Bivouacs dans le Sahara : à quoi s’attendre"
-description: "Un guide honnête pour une nuit en bivouac au Sahara : Erg Chebbi ou Erg Chigaga, la longue route, les dromadaires, les tentes, les repas, le froid et quoi emporter."
+description: "Un guide honnête pour une nuit en bivouac au Sahara : Erg Chebbi ou Erg Chigaga, la longue route, les dromadaires, les tentes, le froid et quoi emporter."
 date: 2026-10-14
 photo: desertCamp
 tag: "Pratique"

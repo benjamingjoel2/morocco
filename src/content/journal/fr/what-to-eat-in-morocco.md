@@ -1,6 +1,6 @@
 ---
 title: "Que manger au Maroc"
-description: "Un guide complice de la cuisine marocaine : tajine, couscous, pastilla, harira, tanjia, en-cas de rue, pains du petit-déjeuner et thé à la menthe, pour bien manger."
+description: "Un guide complice de la cuisine marocaine : tajine, couscous, pastilla, harira, tanjia, cuisine de rue, pains du petit-déjeuner et thé à la menthe."
 date: 2026-09-30
 photo: tagine
 tag: "Cuisine"

@@ -1,6 +1,6 @@
 ---
 title: "Randonner dans le Haut Atlas depuis Imlil"
-description: "Randonner dans le Haut Atlas depuis Imlil : balades à la journée, treks de village en village, ascension du Toubkal, guides et mules, saisons, altitude et équipement."
+description: "Randonner dans le Haut Atlas depuis Imlil : balades, treks de village en village, ascension du Toubkal, guides et mules, saisons, altitude et équipement."
 date: 2026-09-23
 photo: atlas-g1
 tag: "Randonnée"
