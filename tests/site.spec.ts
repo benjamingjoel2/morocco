@@ -65,8 +65,15 @@ for (const path of PAGES) {
       await page.goto(path, { waitUntil: 'networkidle' });
       const h = await page.evaluate(() => document.body.scrollHeight);
       for (let y = 0; y < h; y += 600) { await page.evaluate((y) => window.scrollTo(0, y), y); await page.waitForTimeout(80); }
-      // Scroll sideways rails too, then wait for lazy images
-      await page.evaluate(() => document.querySelectorAll<HTMLElement>('.rail').forEach((r) => r.scrollTo(r.scrollWidth, 0)));
+      // Scroll sideways rails the way a visitor would: in view, a step at a time
+      for (const rail of await page.locator('.rail').all()) {
+        await rail.scrollIntoViewIfNeeded();
+        const width = await rail.evaluate((r) => r.scrollWidth);
+        for (let x = 0; x <= width; x += 300) {
+          await rail.evaluate((r, x) => r.scrollTo(x, 0), x);
+          await page.waitForTimeout(60);
+        }
+      }
       // Low-priority lazy images may arrive a moment later; wait for them, but fail if they never do
       await expect
         .poll(
@@ -87,7 +94,7 @@ for (const path of PAGES) {
 }
 
 test('pages with a photo header actually render it', async ({ page }) => {
-  for (const path of PAGES.filter((p) => !['/contact/'].includes(p))) {
+  for (const path of PAGES.filter((p) => !p.endsWith('/contact/'))) {
     await page.goto(path);
     await expect(page.locator('main > section').first().locator('img').first(), `photo header on ${path}`).toBeVisible();
   }

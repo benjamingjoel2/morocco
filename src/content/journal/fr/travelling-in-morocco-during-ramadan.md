@@ -6,7 +6,7 @@ photo: riad
 tag: "Pratique"
 ---
 
-Chaque année, quelqu’un me demande s’il vaut mieux éviter le Maroc pendant le ramadan. Ma réponse est presque toujours non. Voyager pendant le mois sacré implique d’ajuster vos attentes et votre rythme quotidien, mais cela vous ouvre aussi une fenêtre sur la vie marocaine que la plupart des visiteurs ne voient jamais. Voici à quoi vous attendre et comment bien voyager.
+Chaque année, quelqu’un nous demande s’il vaut mieux éviter le Maroc pendant le ramadan. Notre réponse est presque toujours non. Voyager pendant le mois sacré implique d’ajuster vos attentes et votre rythme quotidien, mais cela vous ouvre aussi une fenêtre sur la vie marocaine que la plupart des visiteurs ne voient jamais. Voici à quoi vous attendre et comment bien voyager.
 
 ## Qu’est-ce que le ramadan ?
 
@@ -18,7 +18,7 @@ Le Maroc est un pays majoritairement musulman, et le ramadan rythme la vie quoti
 
 Le ramadan suit le calendrier lunaire musulman, plus court que l’année solaire. Il avance donc d’environ 11 jours chaque année et traverse peu à peu les saisons. Son début et sa fin dépendent de l’observation du croissant de lune, et au Maroc ils sont annoncés officiellement : les dates peuvent donc différer d’un jour de celles des pays voisins.
 
-Je ne donnerai pas de dates ici, car elles changent chaque année. Si vous préparez un voyage, vérifiez les dates prévues pour votre année et prévoyez un jour de marge de part et d’autre.
+Nous ne donnerons pas de dates ici, car elles changent chaque année. Si vous préparez un voyage, vérifiez les dates prévues pour votre année et prévoyez un jour de marge de part et d’autre.
 
 Le mois se termine par l’**Aïd el-Fitr**, une fête où les familles se réunissent, s’habillent avec soin et se rendent visite. Attendez-vous à ce que certains commerces et services ferment un jour ou deux autour de l’Aïd, et à ce que les transports soient chargés, chacun rentrant chez soi.
 

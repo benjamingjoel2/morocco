@@ -6,7 +6,7 @@ photo: jemaa
 tag: "Guide"
 ---
 
-Marrakech a la réputation d’être étourdissante, et les premières heures peuvent effectivement l’être. Le bruit, les scooters dans des ruelles à peine plus larges que vos épaules, le nombre de personnes prêtes à vous aider à trouver votre chemin. Mais accordez à la ville deux jours sans précipitation, et elle commence à prendre sens. Voici comment je les passerais si un ami arrivait demain.
+Marrakech a la réputation d’être étourdissante, et les premières heures peuvent effectivement l’être. Le bruit, les scooters dans des ruelles à peine plus larges que vos épaules, le nombre de personnes prêtes à vous aider à trouver votre chemin. Mais accordez à la ville deux jours sans précipitation, et elle commence à prendre sens. Voici comment nous les passerions si un ami arrivait demain.
 
 ## Avant d’atterrir
 
@@ -35,7 +35,7 @@ De la Koutoubia, quelques minutes à pied suffisent pour rejoindre Jemaa el-Fna,
 La place change au fil de la journée, mais c’est au crépuscule qu’elle s’anime vraiment. Les stands de cuisine s’alignent, la fumée monte des grills, et des cercles se forment autour des musiciens gnaoua. Quelques conseils francs :
 
 - Si vous photographiez un artiste, attendez-vous à ce qu’on vous demande un pourboire. Prévoyez de la petite monnaie, ou rangez l’appareil.
-- Vous croiserez peut-être des charmeurs de serpents et des singes enchaînés. Beaucoup de voyageurs choisissent de ne pas payer pour des photos avec des animaux, et je vous encourage à faire de même.
+- Vous croiserez peut-être des charmeurs de serpents et des singes enchaînés. Beaucoup de voyageurs choisissent de ne pas payer pour des photos avec des animaux, et nous vous encourageons à faire de même.
 - Aux stands de nourriture, suivez les habitués. Les stands animés, où les plats tournent vite, sont généralement les plus sûrs. Mettez-vous d’accord sur ce que vous commandez avant de vous asseoir.
 
 Pour une vue plus calme, montez sur l’une des terrasses de café qui dominent la place et regardez les lumières s’allumer, un verre de thé à la main.

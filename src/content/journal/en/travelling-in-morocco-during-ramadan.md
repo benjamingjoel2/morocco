@@ -6,7 +6,7 @@ photo: riad
 tag: "Practical"
 ---
 
-Every year, someone asks me whether they should avoid Morocco during Ramadan. My answer is almost always no. Travelling during the holy month means adjusting your expectations and your daily rhythm, but it also gives you a glimpse of Moroccan life that most visitors never see. Here is what to expect and how to travel well.
+Every year, someone asks us whether they should avoid Morocco during Ramadan. Our answer is almost always no. Travelling during the holy month means adjusting your expectations and your daily rhythm, but it also gives you a glimpse of Moroccan life that most visitors never see. Here is what to expect and how to travel well.
 
 ## What Ramadan is
 
@@ -18,7 +18,7 @@ Morocco is a predominantly Muslim country, and Ramadan shapes daily life across 
 
 Ramadan follows the lunar Islamic calendar, which is shorter than the solar year. As a result, it moves about 11 days earlier each year, gradually travelling through the seasons. The start and end are confirmed by the sighting of the new moon, and in Morocco they are announced officially, so the dates can differ by a day from neighbouring countries.
 
-I'm not going to give dates here, because they change every year. If you're planning a trip, check the expected dates for your year, and allow a day either side.
+We are not going to give dates here, because they change every year. If you're planning a trip, check the expected dates for your year, and allow a day either side.
 
 The month ends with **Eid al-Fitr**, a festive holiday when families gather, dress up and visit one another. Expect some businesses and services to close for a day or two around Eid, and transport to be busy as people travel home.
 

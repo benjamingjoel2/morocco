@@ -6,7 +6,7 @@ photo: jemaa
 tag: "Guide"
 ---
 
-Marrakech has a reputation for being overwhelming, and for the first few hours it can be. The noise, the motorbikes in lanes barely wider than your shoulders, the sheer number of people who want to help you find your way. But give the city two unhurried days and it starts to make sense. Here is how I would spend them if a friend were arriving tomorrow.
+Marrakech has a reputation for being overwhelming, and for the first few hours it can be. The noise, the motorbikes in lanes barely wider than your shoulders, the sheer number of people who want to help you find your way. But give the city two unhurried days and it starts to make sense. Here is how we would spend them if a friend were arriving tomorrow.
 
 ## Before you land
 
@@ -35,7 +35,7 @@ From the Koutoubia, it is a short walk to Jemaa el-Fnaa, the great square at the
 The square changes through the day, but dusk is when it comes alive. Food stalls are set up in rows, smoke rises from the grills, and circles of people gather around Gnawa musicians. A few honest pointers:
 
 - If you photograph a performer, expect to be asked for a tip. Have small coins ready, or keep the camera down.
-- You may see snake charmers and monkeys on chains. Many travellers choose not to pay for photos with animals, and I'd encourage you to do the same.
+- You may see snake charmers and monkeys on chains. Many travellers choose not to pay for photos with animals, and we'd encourage you to do the same.
 - At the food stalls, follow the locals. Stalls that are busy and turning food over quickly are usually the safest bet. Agree on what you're ordering before you sit down.
 
 For a calmer view, climb to one of the café terraces overlooking the square and watch the lights come on over a glass of tea.

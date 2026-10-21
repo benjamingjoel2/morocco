@@ -34,7 +34,7 @@ The good news is that the road is a journey in its own right. Common stops inclu
 
 Coming from Fès, you cross the Middle Atlas instead, through cedar forests and down into the Ziz Valley. It's also a long day, but just as beautiful. Look at our [routes](/routes/) to see how a desert trip slots into a wider itinerary.
 
-I'd gently discourage the "Sahara in two days from Marrakech" trips if you can avoid them. They are possible, but you'll spend most of your time in a vehicle and arrive too tired to enjoy it. Three days is a more comfortable minimum, and more is better.
+We'd gently discourage the "Sahara in two days from Marrakech" trips if you can avoid them. They are possible, but you'll spend most of your time in a vehicle and arrive too tired to enjoy it. Three days is a more comfortable minimum, and more is better.
 
 ## Arriving at camp
 
