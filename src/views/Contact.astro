@@ -1,0 +1,204 @@
+---
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import { type Lang } from '../i18n';
+import { content } from '../i18n/data';
+import { CONTACT } from '../i18n/pages/contact';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = CONTACT[lang];
+const { DESTINATIONS, ROUTES } = content(lang);
+
+const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
+const interests = t.interests;
+const input = 'mt-1 w-full border-0 border-b border-dashed border-ink/50 bg-transparent px-0 py-2.5 font-serif text-lg font-light outline-none transition focus:border-solid focus:border-ink aria-[invalid=true]:border-solid aria-[invalid=true]:border-[#9a3b2a]';
+const label = 'font-sans text-[0.72rem] uppercase tracking-[0.15em] text-gold';
+const i18n = {
+  lang,
+  prefillPlace: t.prefillPlace,
+  prefillRoute: t.prefillRoute,
+  msgInvalid: t.msgInvalid,
+  msgOffline: t.msgOffline,
+  msgSending: t.msgSending,
+  msgSuccess: t.msgSuccess,
+  msgError: t.msgError,
+};
+---
+<Base
+  title={t.metaTitle}
+  description={t.metaDescription}
+>
+  <section class="container-x grid gap-14 pb-24 pt-32 md:grid-cols-12 md:pt-40">
+    <div class="md:col-span-5">
+      <div class="md:sticky md:top-28">
+        <p class="eyebrow">{t.eyebrow}</p>
+        <h1 class="display-left mt-5 text-[4rem] md:text-[6rem]" set:html={t.title} />
+        <p class="body-copy mt-6 text-ink/85">
+          {t.intro}
+        </p>
+        <div class="mt-10 hidden md:block">
+          <Photo photo="jemaa" ratio="4/5" sizes="40vw" label={t.photoLabel} />
+        </div>
+      </div>
+    </div>
+
+    <div class="md:col-span-7">
+      <form id="trip-form" class="bg-linen p-6 sm:p-12" novalidate data-endpoint={endpoint} data-places={JSON.stringify(Object.fromEntries(DESTINATIONS.map((d) => [d.id, d.name])))} data-routes={JSON.stringify(Object.fromEntries(ROUTES.map((r) => [r.id, `${r.title} (${r.nights})`])))}>
+        <fieldset class="grid gap-6 sm:grid-cols-2">
+          <legend class="eyebrow mb-6">{t.aboutYou}</legend>
+          <div>
+            <label class={label} for="name">{t.name}</label>
+            <input class={input} id="name" name="name" autocomplete="name" required />
+            <p class="field-error mt-1 hidden text-sm text-[#9a3b2a]">{t.nameError}</p>
+          </div>
+          <div>
+            <label class={label} for="email">{t.email}</label>
+            <input class={input} id="email" name="email" type="email" autocomplete="email" required />
+            <p class="field-error mt-1 hidden text-sm text-[#9a3b2a]">{t.emailError}</p>
+          </div>
+          <div class="sm:col-span-2">
+            <label class={label} for="country">{t.country} <span class="font-normal text-ink/75">{t.optional}</span></label>
+            <input class={input} id="country" name="country" autocomplete="country-name" />
+          </div>
+        </fieldset>
+
+        <fieldset class="mt-12 grid gap-6 sm:grid-cols-3">
+          <legend class="eyebrow mb-6">{t.yourTrip}</legend>
+          <div>
+            <label class={label} for="arrival">{t.arrival}</label>
+            <input class={input} id="arrival" name="arrival" type="date" required />
+            <p class="field-error mt-1 hidden text-sm text-[#9a3b2a]">{t.arrivalError}</p>
+          </div>
+          <div>
+            <label class={label} for="nights">{t.nights}</label>
+            <input class={input} id="nights" name="nights" type="number" min="2" max="60" value="8" required />
+            <p class="field-error mt-1 hidden text-sm text-[#9a3b2a]">{t.nightsError}</p>
+          </div>
+          <div>
+            <label class={label} for="travellers">{t.travellers}</label>
+            <input class={input} id="travellers" name="travellers" type="number" min="1" max="20" value="2" required />
+            <p class="field-error mt-1 hidden text-sm text-[#9a3b2a]">{t.travellersError}</p>
+          </div>
+          <div class="sm:col-span-3">
+            <label class={label} for="budget">{t.budget}</label>
+            <select class={input} id="budget" name="budget">
+              {t.budgetOptions.map((o) => <option>{o}</option>)}
+            </select>
+          </div>
+        </fieldset>
+
+        <fieldset class="mt-12">
+          <legend class="eyebrow mb-5">{t.dreaming}</legend>
+          <div class="flex flex-wrap gap-2">
+            {interests.map((i) => (
+              <label class="cursor-pointer">
+                <input type="checkbox" name="interests" value={i} class="peer sr-only" />
+                <span class="inline-block border border-dashed border-ink/50 px-4 py-2 font-sans text-[0.72rem] uppercase tracking-[0.12em] text-ink/80 transition peer-checked:border-solid peer-checked:border-night peer-checked:bg-night peer-checked:text-white peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-gold">{i}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <fieldset class="mt-12">
+          <legend class="eyebrow mb-5">{t.pace}</legend>
+          <div class="grid gap-3 sm:grid-cols-3">
+            {t.paceOptions.map(([v, title, d], idx) => (
+              <label class="cursor-pointer">
+                <input type="radio" name="pace" value={v} class="peer sr-only" checked={idx === 0} />
+                <span class="block border border-dashed border-ink/50 p-4 transition peer-checked:border-solid peer-checked:border-night peer-checked:bg-white peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-gold">
+                  <span class="block font-serif text-xl">{title}</span>
+                  <span class="block font-sans text-xs text-ink/80">{d}</span>
+                </span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <div class="mt-12">
+          <label class={label} for="message">{t.message} <span class="font-normal text-ink/75">{t.optional}</span></label>
+          <textarea class={`${input} min-h-36`} id="message" name="message" rows="5" placeholder={t.messagePlaceholder}></textarea>
+        </div>
+
+        <label class="mt-8 flex items-start gap-3 text-sm">
+          <input type="checkbox" name="consent" id="consent" required class="mt-1 h-4 w-4 accent-[#231f20]" />
+          <span class="body-copy text-[1rem]">{t.consent}</span>
+        </label>
+        <p class="field-error consent-error mt-1 hidden text-sm text-[#9a3b2a]">{t.consentError}</p>
+
+        <button type="submit" class="btn-dash mt-10 w-full py-3.5 text-night sm:w-auto">{t.submit}</button>
+        <p id="form-status" class="mt-5 text-sm" role="status" aria-live="polite"></p>
+      </form>
+      <script type="application/json" id="contact-i18n" set:html={JSON.stringify(i18n).replace(/</g, '\\u003c')} />
+    </div>
+  </section>
+</Base>
+
+<script>
+  const form = document.getElementById('trip-form') as HTMLFormElement;
+  const status = document.getElementById('form-status')!;
+  const arrival = form.querySelector<HTMLInputElement>('#arrival')!;
+  const i18n: Record<string, string> = JSON.parse(document.getElementById('contact-i18n')?.textContent ?? '{}');
+
+  // "Plan a trip to Fes" links pass ?place=fes (a destination id); unknown ids are ignored.
+  const params = new URLSearchParams(location.search);
+  const place = params.get('place');
+  const places: Record<string, string> = JSON.parse(form.dataset.places ?? '{}');
+  const message = form.querySelector<HTMLTextAreaElement>('#message')!;
+  if (place && Object.hasOwn(places, place) && !message.value) message.value = i18n.prefillPlace.replace('{place}', places[place]);
+  const routes: Record<string, string> = JSON.parse(form.dataset.routes ?? '{}');
+  const route = params.get('route');
+  if (route && Object.hasOwn(routes, route) && !message.value) message.value = i18n.prefillRoute.replace('{route}', routes[route]);
+  arrival.min = new Date().toISOString().slice(0, 10);
+
+  const fields = Array.from(form.querySelectorAll<HTMLInputElement>('input[required]:not([type=checkbox])'));
+  const consent = form.querySelector<HTMLInputElement>('#consent')!;
+
+  const check = (el: HTMLInputElement) => {
+    const ok = el.checkValidity() && el.value.trim() !== '';
+    el.setAttribute('aria-invalid', String(!ok));
+    el.parentElement?.querySelector('.field-error')?.classList.toggle('hidden', ok);
+    return ok;
+  };
+  fields.forEach((el) => el.addEventListener('blur', () => check(el)));
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const valid = fields.map(check).every(Boolean);
+    form.querySelector('.consent-error')!.classList.toggle('hidden', consent.checked);
+    if (!valid || !consent.checked) {
+      status.textContent = i18n.msgInvalid;
+      status.className = 'mt-5 font-sans text-sm text-[#9a3b2a]';
+      (form.querySelector('[aria-invalid=true]') as HTMLElement | null ?? consent).focus();
+      return;
+    }
+
+    const data = new FormData(form);
+    const payload = { ...Object.fromEntries(data), interests: data.getAll('interests'), lang: i18n.lang };
+    const endpoint = form.dataset.endpoint;
+
+    if (!endpoint) {
+      // No backend connected yet: be honest rather than pretend it was sent.
+      status.textContent = i18n.msgOffline;
+      status.className = 'mt-5 bg-greige p-4 font-sans text-sm text-ink';
+      return;
+    }
+
+    status.textContent = i18n.msgSending;
+    status.className = 'mt-5 font-sans text-sm text-ink/70';
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      form.reset();
+      status.textContent = i18n.msgSuccess;
+      status.className = 'mt-5 bg-greige p-4 font-sans text-sm text-ink';
+    } catch {
+      status.textContent = i18n.msgError;
+      status.className = 'mt-5 bg-greige p-4 font-sans text-sm text-[#9a3b2a]';
+    }
+  });
+</script>

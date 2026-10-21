@@ -1,0 +1,76 @@
+const en = {
+  metaTitle: 'Things to Do in Morocco: Desert Camps, Atlas Hikes, Hammams & Festivals',
+  metaDescription:
+    'The best things to do in Morocco: a night in the Merzouga dunes, High Atlas treks, cooking classes, hammams, surfing in Taghazout, the Fes tanneries and the festival calendar.',
+  eyebrow: 'Things to do',
+  title: 'Say yes to the<br />second glass',
+  intro: 'Desert nights, mountain paths, hammam steam and a festival calendar that follows the seasons. These are the experiences we build trips around.',
+  heroLabel: 'Spice souk',
+  signatureEyebrow: 'Signature experiences',
+  signatureTitle: 'What we would do<br />again tomorrow',
+  gnawaLabel: 'Gnawa musicians',
+  festivalsEyebrow: 'Festivals & moussems',
+  festivalsTitle: 'Time your trip<br />to the music',
+  festivalsText: 'Dates move every year, and some follow the lunar calendar. Check official dates before booking.',
+  soukEyebrow: 'Shopping the souks',
+  soukTitle: 'Haggle<br />with a smile',
+  soukText: [
+    'Bargaining is a conversation, not a battle. Ask the price, offer what feels fair, meet in the middle over tea. Not interested? A friendly <em>la, shukran</em> is enough.',
+    'Look for cedar boxes in Fes, Amazigh rugs woven in the Middle and High Atlas, argan oil from women’s cooperatives and thuya-wood marquetry in Essaouira.',
+  ],
+  zelligeLabel: 'Zellige tilework',
+  foodEyebrow: 'Food to try',
+  foodTitle: 'Best understood<br />at the table',
+  tagineLabel: 'Tagine',
+  moreEyebrow: 'If you have more time',
+  moreTitle: 'Six more<br />good ideas',
+  more: [
+    { title: 'Visit the Hassan II Mosque', where: 'Casablanca', text: 'One of the few mosques in Morocco that non-Muslims can enter, on a guided tour. Its minaret rises above the Atlantic.' },
+    { title: 'Walk among Roman ruins', where: 'Volubilis, near Meknes', text: 'Mosaics still in place on the floors of a Roman town at the edge of the empire.' },
+    { title: 'Taste saffron at the source', where: 'Taliouine', text: 'Visit a cooperative in the saffron capital during the autumn harvest, when the purple crocus fields bloom.' },
+    { title: 'Hike to Ouzoud falls', where: 'Azilal province', text: 'Cascades over 100 metres high, olive groves and Barbary macaques on the trail.' },
+    { title: 'Watch the sunset in the Agafay', where: 'Near Marrakech', text: 'A stony desert under an hour from the city: camel rides, quad bikes or just a long dinner under the stars.' },
+    { title: 'Learn some Darija', where: 'Anywhere', text: 'A few words of Moroccan Arabic or Tamazight open doors faster than any guidebook.' },
+  ],
+  buildThese: 'Build these into my trip',
+};
+
+/** French; typed against English so a missing string fails the build. */
+const fr: typeof en = {
+  metaTitle: 'Que faire au Maroc : bivouacs, randonnées dans l’Atlas, hammams et festivals',
+  metaDescription:
+    'Que faire au Maroc : une nuit dans les dunes de Merzouga, des randonnées dans le Haut Atlas, des cours de cuisine, le hammam, le surf à Taghazout, les tanneries de Fès et le calendrier des festivals.',
+  eyebrow: 'Que faire',
+  title: 'Accepter le<br />deuxième verre',
+  intro: 'Nuits dans le désert, sentiers de montagne, vapeur du hammam et un calendrier de festivals qui suit les saisons : voici les expériences autour desquelles nous construisons nos voyages.',
+  heroLabel: 'Souk aux épices',
+  signatureEyebrow: 'Nos incontournables',
+  signatureTitle: 'Ce que nous referions<br />dès demain',
+  gnawaLabel: 'Musiciens gnaoua',
+  festivalsEyebrow: 'Festivals et moussems',
+  festivalsTitle: 'Voyager<br />au rythme de la musique',
+  festivalsText: 'Les dates changent chaque année, et certaines suivent le calendrier lunaire. Vérifiez les dates officielles avant de réserver.',
+  soukEyebrow: 'Dans les souks',
+  soukTitle: 'Marchander<br />en souriant',
+  soukText: [
+    'Marchander est une conversation, pas une bataille. Demandez le prix, proposez ce qui vous semble juste, retrouvez-vous à mi-chemin autour d’un thé. Pas intéressé ? Un aimable <em>la, choukran</em> suffit.',
+    'Cherchez les boîtes en cèdre à Fès, les tapis amazighs tissés dans le Moyen et le Haut Atlas, l’huile d’argan des coopératives de femmes et la marqueterie de thuya à Essaouira.',
+  ],
+  zelligeLabel: 'Zellige',
+  foodEyebrow: 'À goûter',
+  foodTitle: 'Un pays qui se comprend<br />à table',
+  tagineLabel: 'Tajine',
+  moreEyebrow: 'Si vous avez plus de temps',
+  moreTitle: 'Six autres<br />bonnes idées',
+  more: [
+    { title: 'Visiter la mosquée Hassan II', where: 'Casablanca', text: 'L’une des rares mosquées du Maroc ouvertes aux non-musulmans, en visite guidée. Son minaret domine l’Atlantique.' },
+    { title: 'Marcher parmi les ruines romaines', where: 'Volubilis, près de Meknès', text: 'Des mosaïques encore en place sur les sols d’une ville romaine aux confins de l’Empire.' },
+    { title: 'Goûter le safran à la source', where: 'Taliouine', text: 'Visitez une coopérative de la capitale du safran pendant la récolte d’automne, quand les champs de crocus violets fleurissent.' },
+    { title: 'Randonner jusqu’aux cascades d’Ouzoud', where: 'Province d’Azilal', text: 'Des chutes de plus de 100 mètres, des oliveraies et des macaques de Barbarie le long du sentier.' },
+    { title: 'Admirer le coucher de soleil dans l’Agafay', where: 'Près de Marrakech', text: 'Un désert de pierres à moins d’une heure de la ville : balade à dos de dromadaire, quad, ou simplement un long dîner sous les étoiles.' },
+    { title: 'Apprendre quelques mots de darija', where: 'Partout', text: 'Quelques mots d’arabe marocain ou de tamazight ouvrent les portes plus vite que n’importe quel guide.' },
+  ],
+  buildThese: 'Les inclure dans mon voyage',
+};
+
+export const THINGS = { en, fr };

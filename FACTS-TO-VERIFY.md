@@ -106,3 +106,7 @@ The FAQ on the Travel Tips page repeats facts 1.1 (visa-free 90 days), 2.2 and 2
 - "Within **two working days** you receive a first route" (Home, Contact) is a service promise you need to be able to keep.
 - "A local contact is a message away the whole trip" is another service promise.
 - The contact form **doesn't send anywhere yet**. Set `PUBLIC_FORM_ENDPOINT` (for example a Formspree endpoint) in Vercel. Until then, the form tells visitors honestly that nothing was sent.
+
+## 9. Journal articles and French version
+- The five Journal articles make about 90 checkable claims, listed with suggested sources in `src/content/journal/FACTS.md`.
+- The French version (`/fr/`) repeats every fact above. Update both languages when something changes, and have a native French speaker review the French copy before launch.

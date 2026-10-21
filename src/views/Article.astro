@@ -1,0 +1,92 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Photo from '../components/Photo.astro';
+import { UI, localize, type Lang } from '../i18n';
+import { JOURNAL } from '../i18n/pages/journal';
+import { articles, formatDate } from '../i18n/journal';
+import { getPhoto, unsplashUrl } from '../data/media';
+
+interface Props { lang: Lang; slug: string; }
+const { lang, slug } = Astro.props;
+const t = JOURNAL[lang];
+const L = (p: string) => localize(lang, p);
+const all = await articles(lang);
+const a = all.find((x) => x.slug === slug)!;
+const { Content } = await render(a);
+const others = all.filter((x) => x.slug !== slug).slice(0, 3);
+const photo = getPhoto(a.data.photo);
+const ogImage = photo ? unsplashUrl(photo.src, 1200, '40/21', 80) : undefined;
+const site = Astro.site!;
+const small = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
+
+const ld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: a.data.title,
+    description: a.data.description,
+    datePublished: a.data.date.toISOString().slice(0, 10),
+    inLanguage: lang,
+    image: ogImage,
+    author: { '@type': 'Organization', name: 'Azul Morocco' },
+    publisher: { '@type': 'Organization', name: 'Azul Morocco' },
+    mainEntityOfPage: new URL(L(`/journal/${slug}/`), site).toString(),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: t.home, item: new URL(L('/'), site).toString() },
+      { '@type': 'ListItem', position: 2, name: t.eyebrow, item: new URL(L('/journal/'), site).toString() },
+      { '@type': 'ListItem', position: 3, name: a.data.title },
+    ],
+  },
+];
+---
+<Base title={a.data.title} description={a.data.description} overlayHeader ogImage={ogImage}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(ld)} />
+  <PageHero
+    photo={a.data.photo}
+    eyebrow={`${a.data.tag} · ${formatDate(a.data.date, lang)} · ${t.minRead(a.minutes)}`}
+    title={a.data.title}
+    intro={a.data.description}
+    label={a.data.title}
+    compact
+  />
+
+  <nav aria-label={t.breadcrumb} class="container-x py-5">
+    <a href={L('/journal/')} class:list={[small, 'text-ink/75 hover:text-ink']}>{t.back}</a>
+  </nav>
+
+  <article class="prose-article container-x max-w-[720px] pb-24 pt-8 md:pb-32">
+    <Content />
+  </article>
+
+  {others.length > 0 && (
+    <section class="bg-linen py-24 md:py-32">
+      <div class="container-x">
+        <p class="eyebrow text-center">{t.more}</p>
+        <div class="mt-14 grid gap-10 sm:grid-cols-3 sm:gap-4">
+          {others.map((o) => (
+            <a href={L(`/journal/${o.slug}/`)} class="reveal group block">
+              <Photo photo={o.data.photo} ratio="3/2" sizes="(min-width: 640px) 33vw, 100vw" imgClass="transition-transform duration-700 group-hover:scale-[1.03]" label={o.data.title} />
+              <p class:list={[small, 'mt-5 text-ink/75']}>{o.data.tag} · {t.minRead(o.minutes)}</p>
+              <h3 class="mt-2 font-serif text-[1.5rem] leading-tight">{o.data.title}</h3>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="bg-char py-24 text-center text-white md:py-32">
+    <div class="reveal container-x">
+      <p class="eyebrow !text-gold-soft">{t.ctaEyebrow}</p>
+      <p class="display mt-6 !text-white text-[3.4rem] md:text-[5.5rem]" set:html={t.ctaTitle} />
+      <p class="body-copy mx-auto mt-6 max-w-md text-white/85">{t.ctaText}</p>
+      <a href={L('/contact/')} class="btn-dash mt-10 text-white">{t.planTrip}</a>
+    </div>
+  </section>
+</Base>

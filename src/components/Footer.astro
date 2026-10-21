@@ -1,23 +1,27 @@
 ---
 import Logo from './Logo.astro';
 import { allPhotos, heroVideo } from '../data/media';
+import { UI, langFromUrl, localize } from '../i18n';
 
 const credits = allPhotos();
 const year = new Date().getFullYear();
+const lang = langFromUrl(Astro.url);
+const t = UI[lang];
 const links = [
-  { href: '/destinations/', label: 'Destinations' },
-  { href: '/things-to-do/', label: 'Things to Do' },
-  { href: '/routes/', label: 'Routes' },
-  { href: '/travel-tips/', label: 'Travel Tips' },
-  { href: '/contact/', label: 'Plan a Trip' },
-];
+  { href: '/destinations/', label: t.nav.destinations },
+  { href: '/things-to-do/', label: t.nav.things },
+  { href: '/routes/', label: t.nav.routes },
+  { href: '/travel-tips/', label: t.nav.tips },
+  { href: '/journal/', label: t.nav.journal },
+  { href: '/contact/', label: t.nav.plan },
+].map((l) => ({ ...l, href: localize(lang, l.href) }));
 const small = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
 ---
 <footer class="bg-greige text-ink">
   <div class="container-x pb-10 pt-20">
     <div class="flex flex-col items-center text-center">
       <Logo variant="wordmark" class="text-ink" />
-      <p class="body-copy mt-6 max-w-md text-ink/80">Slow, well-planned journeys through Morocco, from the blue lanes of the Rif to the dunes of the Erg Chebbi.</p>
+      <p class="body-copy mt-6 max-w-md text-ink/80">{t.footerIntro}</p>
       <ul class="mt-10 flex flex-wrap justify-center gap-x-10 gap-y-4">
         {links.map((l) => <li><a href={l.href} class="link-dash">{l.label}</a></li>)}
       </ul>
@@ -25,21 +29,21 @@ const small = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
 
     <div class="mt-20">
       <p class="font-sans text-[0.78rem] text-ink/85">
-        Photos from <a class="underline" href="https://unsplash.com/?utm_source=azul_morocco&utm_medium=referral" rel="noopener">Unsplash</a>
+        {t.photosFrom} <a class="underline" href="https://unsplash.com/?utm_source=azul_morocco&utm_medium=referral" rel="noopener">Unsplash</a>
         {heroVideo && (
           <> · Video by <a class="underline" href={heroVideo.videoUrl} rel="noopener">{heroVideo.videographer}</a> on <a class="underline" href="https://www.pexels.com" rel="noopener">Pexels</a></>
-        )}, credited below. Entry rules and prices change; always confirm visa requirements with official sources before you travel.
+        )}, {t.creditedBelow}
       </p>
       {credits.length > 0 && (
         <details class="group mt-6 border-t border-ink/30 pt-4">
           <summary class="flex cursor-pointer list-none items-center justify-between font-sans text-[0.75rem] uppercase tracking-[0.15em] text-gold [&::-webkit-details-marker]:hidden">
-            Photo credits · {credits.length} photos
+            {t.photoCredits} · {credits.length} {t.photos}
             <span class="text-base transition-transform group-open:rotate-45" aria-hidden="true">+</span>
           </summary>
           <ul class="mt-4 grid gap-x-8 gap-y-1.5 font-sans text-[0.78rem] text-ink/85 sm:grid-cols-2 lg:grid-cols-4">
             {credits.map(([, p]) => (
               <li>
-                <a class="hover:underline" href={p.photoUrl} rel="noopener">{p.location || 'Morocco'}</a> by{' '}
+                <a class="hover:underline" href={p.photoUrl} rel="noopener">{p.location || 'Morocco'}</a> {t.by}{' '}
                 <a class="hover:underline" href={p.photographerUrl} rel="noopener">{p.photographer}</a>
               </li>
             ))}
@@ -49,7 +53,7 @@ const small = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
     </div>
 
     <div class="mt-14 flex flex-col justify-between gap-3 border-b border-ink pb-4 sm:flex-row">
-      <p class:list={[small, 'text-ink/80']}>©{year} Azul Morocco. All rights reserved</p>
+      <p class:list={[small, 'text-ink/80']}>©{year} Azul Morocco. {t.rights}</p>
       <p class:list={[small, 'text-ink/80']} lang="zgh">ⴰⵣⵓⵍ</p>
     </div>
   </div>

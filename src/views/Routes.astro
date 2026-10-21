@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Photo from '../components/Photo.astro';
+import { localize, type Lang } from '../i18n';
+import { content } from '../i18n/data';
+import { ROUTES_T } from '../i18n/pages/routes';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = ROUTES_T[lang];
+const L = (p: string) => localize(lang, p);
+const { ROUTES } = content(lang);
+
+const meta = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
+const site = Astro.site!;
+const tripsLd = ROUTES.map((r) => ({
+  '@context': 'https://schema.org',
+  '@type': 'TouristTrip',
+  name: `${r.title} (${r.nights})`,
+  description: r.intro,
+  url: new URL(L(`/routes/#${r.id}`), site).toString(),
+  touristType: r.bestFor,
+  itinerary: {
+    '@type': 'ItemList',
+    itemListElement: r.days.map((d, i) => ({ '@type': 'ListItem', position: i + 1, name: `${d.day}: ${d.place}`, description: d.text })),
+  },
+}));
+---
+<Base
+  title={t.metaTitle}
+  description={t.metaDescription}
+  overlayHeader
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(tripsLd)} />
+  <PageHero
+    photo="dades"
+    eyebrow={t.eyebrow}
+    title={t.title}
+    intro={t.intro}
+    label={t.heroLabel}
+  />
+
+  <nav aria-label={t.navAria} class="container-x flex flex-wrap justify-center gap-x-10 gap-y-4 py-10">
+    {ROUTES.map((r) => <a href={`#${r.id}`} class="link-dash text-ink">{r.nights} · {r.title}</a>)}
+  </nav>
+
+  {ROUTES.map((r, i) => (
+    <section id={r.id} class:list={['scroll-mt-20 py-20 md:py-28', i % 2 === 0 ? 'bg-linen' : 'bg-white']}>
+      <div class="container-x grid gap-14 md:grid-cols-2">
+        <div class:list={['reveal', i % 2 === 1 && 'md:order-2']}>
+          <p class="eyebrow">{r.nights}</p>
+          <h2 class="display-left mt-5 text-[3.4rem] md:text-[4.6rem]">{r.title}</h2>
+          <p class="body-copy mt-5 max-w-lg text-ink/85">{r.intro}</p>
+          <dl class="mt-8 grid grid-cols-3 gap-4 border-y border-dashed border-ink/40 py-5">
+            <div><dt class:list={[meta, 'text-gold']}>{t.pace}</dt><dd class="mt-1 font-serif text-lg">{r.pace}</dd></div>
+            <div class="col-span-2"><dt class:list={[meta, 'text-gold']}>{t.bestSeason}</dt><dd class="mt-1 font-serif text-lg">{r.season}</dd></div>
+            <div class="col-span-3"><dt class:list={[meta, 'text-gold']}>{t.bestFor}</dt><dd class="mt-1 font-serif text-lg font-light">{r.bestFor}</dd></div>
+          </dl>
+          <div class="mt-10 hidden md:block">
+            <Photo photo={r.slot} ratio="4/3" sizes="45vw" label={r.title} />
+          </div>
+        </div>
+        <div class="reveal">
+          <ol class="border-t border-ink">
+            {r.days.map((d) => (
+              <li class="grid grid-cols-[6.5rem_1fr] gap-4 border-b border-dashed border-ink/40 py-5">
+                <span class:list={[meta, 'pt-1.5 text-gold']}>{d.day}</span>
+                <div>
+                  <h3 class="font-serif text-[1.5rem] leading-tight">
+                    {d.dest ? <a href={L(`/destinations/${d.dest}/`)} class="hover:underline">{d.place}</a> : d.place}
+                  </h3>
+                  <p class="body-copy mt-1 text-[1rem] text-ink/80">{d.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <a href={L(`/contact/?route=${r.id}`)} class="btn-dash mt-10 text-ink">{t.makeMine}</a>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="bg-char py-24 text-center text-white md:py-32">
+    <div class="reveal container-x">
+      <p class="eyebrow !text-gold-soft">{t.noneEyebrow}</p>
+      <p class="display mt-6 !text-white text-[3.4rem] md:text-[5.5rem]" set:html={t.noneTitle} />
+      <p class="body-copy mx-auto mt-6 max-w-md text-white/85">{t.noneText}</p>
+      <a href={L('/contact/')} class="btn-dash mt-10 text-white">{t.planTrip}</a>
+    </div>
+  </section>
+</Base>

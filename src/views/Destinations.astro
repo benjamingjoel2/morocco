@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Photo from '../components/Photo.astro';
+import { localize, type Lang } from '../i18n';
+import { content } from '../i18n/data';
+import { DEST } from '../i18n/pages/destinations';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = DEST[lang];
+const L = (p: string) => localize(lang, p);
+const { DESTINATIONS } = content(lang);
+const short = (name: string) => name.split(',')[0].split(' & ')[0];
+const label = 'font-sans text-[0.72rem] uppercase tracking-[0.15em] text-gold';
+---
+<Base
+  title={t.metaTitle}
+  description={t.metaDescription}
+  overlayHeader
+>
+  <PageHero
+    photo="chefchaouen"
+    eyebrow={t.eyebrow}
+    title={t.title}
+    intro={t.intro}
+    label="Chefchaouen"
+  />
+
+  <nav aria-label={t.jumpAria} class="sticky top-[72px] z-30 border-b border-ink/10 bg-white">
+    <ul class="rail container-x flex gap-8 overflow-x-auto py-4">
+      {DESTINATIONS.map((d) => (
+        <li class="shrink-0"><a href={`#${d.id}`} class="font-sans text-[0.72rem] uppercase tracking-[0.15em] text-ink/70 hover:text-ink">{d.name}</a></li>
+      ))}
+    </ul>
+  </nav>
+
+  {DESTINATIONS.map((d, i) => (
+    <article id={d.id} class="grid scroll-mt-32 md:grid-cols-2">
+      <div class:list={[i % 2 === 1 && 'md:order-2']}>
+        <Photo photo={d.slot} ratio="4/5" sizes="(min-width: 768px) 50vw, 100vw" fluid class="aspect-[4/5] min-w-0 h-full md:aspect-auto md:min-h-[760px]" label={d.name} />
+      </div>
+      <div class:list={['reveal flex flex-col justify-center px-6 py-20 sm:px-12 lg:px-20', i % 2 === 0 ? 'bg-greige' : 'bg-chalk']}>
+        <p class="eyebrow">{d.region}</p>
+        <h2 class="display-left mt-5 text-[3.6rem] md:text-[4.6rem]"><a href={L(`/destinations/${d.id}/`)}>{d.name}</a></h2>
+        <p class="mt-4 font-serif text-[1.35rem] italic text-ink">{d.tagline}</p>
+        <p class="body-copy mt-5 text-ink/85">{d.intro}</p>
+
+        <dl class="mt-8 grid gap-5 border-y border-dashed border-ink/40 py-6 sm:grid-cols-2">
+          <div><dt class={label}>{t.stay}</dt><dd class="mt-1 font-serif text-lg">{d.stay}</dd></div>
+          <div><dt class={label}>{t.bestTime}</dt><dd class="mt-1 font-serif text-lg">{d.season}</dd></div>
+          <div class="sm:col-span-2"><dt class={label}>{t.gettingThere}</dt><dd class="mt-1 font-serif text-lg font-light">{d.gettingThere}</dd></div>
+        </dl>
+
+        <p class:list={[label, 'mt-8']}>{t.dontMiss}</p>
+        <ul class="mt-2">
+          {d.dontMiss.map((x) => <li class="border-b border-dashed border-ink/30 py-2.5 font-serif text-[1.05rem] font-light">{x}</li>)}
+        </ul>
+        <p class="mt-6 font-sans text-[0.72rem] uppercase tracking-[0.15em] text-ink/75">{t.bestFor} · {d.bestFor.join(' · ')}</p>
+        <div class="mt-8 flex flex-wrap items-center gap-8">
+          <a href={L(`/destinations/${d.id}/`)} class="btn-dash text-ink">{t.readGuide(short(d.name))}</a>
+          <a href={L(`/contact/?place=${d.id}`)} class="link-dash text-ink">{t.planHere}</a>
+        </div>
+      </div>
+    </article>
+  ))}
+
+  <section class="bg-char py-24 text-center text-white md:py-32">
+    <div class="reveal container-x">
+      <p class="eyebrow !text-gold-soft">{t.chooseEyebrow}</p>
+      <p class="display mt-6 !text-white text-[3.4rem] md:text-[5.5rem]" set:html={t.chooseTitle} />
+      <p class="body-copy mx-auto mt-6 max-w-md text-white/85">{t.chooseText}</p>
+      <a href={L('/contact/')} class="btn-dash mt-10 text-white">{t.askRoute}</a>
+    </div>
+  </section>
+</Base>

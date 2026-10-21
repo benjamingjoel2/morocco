@@ -65,8 +65,15 @@ for (const path of PAGES) {
       await page.goto(path, { waitUntil: 'networkidle' });
       const h = await page.evaluate(() => document.body.scrollHeight);
       for (let y = 0; y < h; y += 600) { await page.evaluate((y) => window.scrollTo(0, y), y); await page.waitForTimeout(80); }
-      // Scroll sideways rails too, then wait for lazy images
-      await page.evaluate(() => document.querySelectorAll<HTMLElement>('.rail').forEach((r) => r.scrollTo(r.scrollWidth, 0)));
+      // Scroll sideways rails the way a visitor would: in view, a step at a time
+      for (const rail of await page.locator('.rail').all()) {
+        await rail.scrollIntoViewIfNeeded();
+        const width = await rail.evaluate((r) => r.scrollWidth);
+        for (let x = 0; x <= width; x += 300) {
+          await rail.evaluate((r, x) => r.scrollTo(x, 0), x);
+          await page.waitForTimeout(60);
+        }
+      }
       // Low-priority lazy images may arrive a moment later; wait for them, but fail if they never do
       await expect
         .poll(
@@ -87,7 +94,7 @@ for (const path of PAGES) {
 }
 
 test('pages with a photo header actually render it', async ({ page }) => {
-  for (const path of PAGES.filter((p) => !['/contact/'].includes(p))) {
+  for (const path of PAGES.filter((p) => !p.endsWith('/contact/'))) {
     await page.goto(path);
     await expect(page.locator('main > section').first().locator('img').first(), `photo header on ${path}`).toBeVisible();
   }
@@ -103,5 +110,31 @@ test('internal links resolve', async ({ page, request }) => {
   for (const href of seen) {
     const res = await request.get(href);
     expect(res.status(), href).toBe(200);
+  }
+});
+
+test('every page has a working counterpart in the other language', async ({ page, request }) => {
+  for (const path of PAGES) {
+    await page.goto(path);
+    const isFr = path.startsWith('/fr/');
+    expect(await page.locator('html').getAttribute('lang'), path).toBe(isFr ? 'fr' : 'en');
+    for (const lang of ['en', 'fr']) {
+      const href = await page.locator(`link[rel="alternate"][hreflang="${lang}"]`).getAttribute('href');
+      const res = await request.get(new URL(href!).pathname);
+      expect(res.status(), `${path} -> ${lang} alternate ${href}`).toBe(200);
+    }
+    // The header language switch goes to the counterpart page
+    const sw = await page.locator('#site-header a[hreflang]').getAttribute('href');
+    expect(sw, path).toBe(isFr ? path.replace(/^\/fr/, '') || '/' : `/fr${path}`);
+  }
+});
+
+test('French pages do not show leftover English UI', async ({ page }) => {
+  for (const path of PAGES.filter((p) => p.startsWith('/fr/'))) {
+    await page.goto(path);
+    const text = await page.locator('body').innerText();
+    for (const phrase of ['Plan a trip', 'Read more', 'Discover more', 'Travel tips', 'Things to Do', 'Best for', 'Getting there']) {
+      expect(text, `"${phrase}" on ${path}`).not.toContain(phrase);
+    }
   }
 });

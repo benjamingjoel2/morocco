@@ -1,18 +1,25 @@
 ---
 import Logo from './Logo.astro';
 import Photo from './Photo.astro';
+import { UI, langFromUrl, localize, unlocalize } from '../i18n';
 
 interface Props { overlay?: boolean; }
 const { overlay = false } = Astro.props;
-const path = Astro.url.pathname;
+const lang = langFromUrl(Astro.url);
+const t = UI[lang];
+const L = (p: string) => localize(lang, p);
+const path = unlocalize(Astro.url.pathname);
+const other = lang === 'en' ? 'fr' : 'en';
+const switchHref = localize(other, path);
 
 const MENU = [
-  { href: '/', label: 'Home' },
-  { href: '/destinations/', label: 'Destinations' },
-  { href: '/things-to-do/', label: 'Things to Do' },
-  { href: '/routes/', label: 'Routes' },
-  { href: '/travel-tips/', label: 'Travel Tips' },
-  { href: '/contact/', label: 'Plan a Trip' },
+  { href: '/', label: t.home },
+  { href: '/destinations/', label: t.nav.destinations },
+  { href: '/things-to-do/', label: t.nav.things },
+  { href: '/routes/', label: t.nav.routes },
+  { href: '/travel-tips/', label: t.nav.tips },
+  { href: '/journal/', label: t.nav.journal },
+  { href: '/contact/', label: t.nav.plan },
 ];
 const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 const bar = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
@@ -24,22 +31,28 @@ const bar = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
 >
   <div class="container-x grid h-[72px] grid-cols-3 items-center">
     <div class="flex items-center gap-8 sm:gap-12">
-      <button id="menu-open" class={bar} aria-expanded="false" aria-controls="site-menu">Menu</button>
-      <a href="/contact/" class:list={[bar, 'hidden sm:inline']}>Plan a trip</a>
+      <button id="menu-open" class={bar} aria-expanded="false" aria-controls="site-menu">{t.menu}</button>
+      <a href={L('/contact/')} class:list={[bar, 'hidden sm:inline']}>{t.planTrip}</a>
     </div>
-    <a href="/" class="justify-self-center" aria-label="Azul Morocco, home"><Logo /></a>
-    <a href="/travel-tips/" class:list={[bar, 'justify-self-end']}>Travel tips</a>
+    <a href={L('/')} class="justify-self-center" aria-label={t.homeAria}><Logo /></a>
+    <div class="flex items-center gap-6 justify-self-end sm:gap-10">
+      <a href={L('/journal/')} class:list={[bar, 'hidden sm:inline']}>{t.journal}</a>
+      <a href={switchHref} hreflang={other} lang={other} class={bar} aria-label={t.switchLabel} title={t.switchTo}>{t.switchShort}</a>
+    </div>
   </div>
 </header>
 
-<div id="site-menu" class="fixed inset-0 z-[60] hidden bg-white text-ink" role="dialog" aria-modal="true" aria-label="Menu">
+<div id="site-menu" class="fixed inset-0 z-[60] hidden bg-white text-ink" role="dialog" aria-modal="true" aria-label={t.menu}>
   <div class="container-x grid h-[72px] grid-cols-3 items-center border-b border-ink/10">
     <div class="flex items-center gap-8 sm:gap-12">
-      <button id="menu-close" class={bar}>Close</button>
-      <a href="/contact/" class:list={[bar, 'hidden sm:inline']}>Plan a trip</a>
+      <button id="menu-close" class={bar}>{t.close}</button>
+      <a href={L('/contact/')} class:list={[bar, 'hidden sm:inline']}>{t.planTrip}</a>
     </div>
-    <a href="/" class="justify-self-center" aria-label="Azul Morocco, home"><Logo /></a>
-    <a href="/travel-tips/" class:list={[bar, 'justify-self-end']}>Travel tips</a>
+    <a href={L('/')} class="justify-self-center" aria-label={t.homeAria}><Logo /></a>
+    <div class="flex items-center gap-6 justify-self-end sm:gap-10">
+      <a href={L('/journal/')} class:list={[bar, 'hidden sm:inline']}>{t.journal}</a>
+      <a href={switchHref} hreflang={other} lang={other} class={bar} aria-label={t.switchLabel} title={t.switchTo}>{t.switchShort}</a>
+    </div>
   </div>
   <div class="grid h-[calc(100%-72px)] md:grid-cols-2">
     <nav aria-label="Main" class="flex flex-col justify-between px-5 py-10 sm:px-8 lg:px-[42px]">
@@ -47,21 +60,21 @@ const bar = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
         {MENU.map((m) => (
           <li class="border-b border-dashed border-ink/40 first:border-solid first:border-ink">
             <a
-              href={m.href}
+              href={L(m.href)}
               class:list={['block py-2 font-sans text-[2rem] font-light leading-tight transition-colors hover:text-ink', isActive(m.href) ? 'text-ink' : 'text-ink/65']}
               aria-current={isActive(m.href) ? 'page' : undefined}
             >{m.label}</a>
           </li>
         ))}
       </ul>
-      <p class="eyebrow !text-ink/70">ⴰⵣⵓⵍ · Azul means hello in Tamazight</p>
+      <p class="eyebrow !text-ink/70">{t.azulMeans}</p>
     </nav>
-    <a href="/routes/#eight-days" class="group relative hidden overflow-hidden text-white md:block">
+    <a href={L('/routes/#eight-days')} class="group relative hidden overflow-hidden text-white md:block">
       <Photo photo="essaouira" class="!absolute inset-0 h-full w-full" imgClass="transition-transform duration-[1.5s] group-hover:scale-105" sizes="50vw" label="Essaouira" />
       <div class="absolute inset-0 bg-night/45"></div>
       <div class="on-photo relative flex h-full flex-col items-center justify-center px-8 text-center">
-        <p class="display !text-white text-[5rem]">Marrakech<br />to Fes</p>
-        <span class="link-dash mt-8">See a first route</span>
+        <p class="display !text-white text-[5rem]" set:html={t.menuFeature} />
+        <span class="link-dash mt-8">{t.menuFeatureLink}</span>
       </div>
     </a>
   </div>
