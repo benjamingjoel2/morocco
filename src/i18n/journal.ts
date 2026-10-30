@@ -1,5 +1,5 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-import type { Lang } from '.';
+import { DATE_LOCALES, type Lang } from '.';
 
 export type Article = CollectionEntry<'journal'> & { slug: string; lang: Lang; minutes: number };
 
@@ -17,4 +17,4 @@ export async function articles(lang: Lang): Promise<Article[]> {
 }
 
 export const formatDate = (d: Date, lang: Lang) =>
-  d.toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+  d.toLocaleDateString(DATE_LOCALES[lang], { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });

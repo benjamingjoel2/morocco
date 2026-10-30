@@ -2,7 +2,8 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { UI, langFromUrl, localize, unlocalize } from '../i18n';
+import { UI, LANGS, langFromUrl, localize, unlocalize } from '../i18n';
+import { SITE } from '../data/site';
 import displayFont from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
 import serifFont from '@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2?url';
 import sansFont from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url';
@@ -20,7 +21,7 @@ const t = UI[lang];
 const fullTitle = title.includes('Azul Morocco') ? title : `${title} | Azul Morocco`;
 // Every page exists in English and French; tell search engines about both
 const basePath = unlocalize(Astro.url.pathname);
-const alternates = { en: new URL(basePath, Astro.site), fr: new URL(localize('fr', basePath), Astro.site) };
+const alternates = LANGS.map((l) => ({ lang: l, href: new URL(localize(l, basePath), Astro.site) }));
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const og = new URL(ogImage, Astro.site);
 const jsonLd = {
@@ -30,6 +31,13 @@ const jsonLd = {
   url: Astro.site?.toString(),
   description: t.orgDescription,
   areaServed: { '@type': 'Country', name: 'Morocco' },
+  email: SITE.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: `${SITE.address.name}, ${SITE.address.streetAddress}`,
+    addressLocality: SITE.address.addressLocality,
+    addressCountry: SITE.address.addressCountry,
+  },
 };
 ---
 <!doctype html>
@@ -40,9 +48,8 @@ const jsonLd = {
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="en" href={alternates.en} />
-    <link rel="alternate" hreflang="fr" href={alternates.fr} />
-    <link rel="alternate" hreflang="x-default" href={alternates.en} />
+    {alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
+    <link rel="alternate" hreflang="x-default" href={alternates[0].href} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.webmanifest" />

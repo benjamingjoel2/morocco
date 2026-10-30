@@ -73,4 +73,80 @@ const fr: typeof en = {
   buildThese: 'Les inclure dans mon voyage',
 };
 
-export const THINGS = { en, fr };
+/** German. */
+const de: typeof en = {
+  metaTitle: 'Erlebnisse in Marokko: Wüstencamps, Atlas-Wanderungen, Hammams & Festivals',
+  metaDescription:
+    'Die schönsten Erlebnisse in Marokko: eine Nacht in den Dünen von Merzouga, Trekking im Hohen Atlas, Kochkurse, Hammams, Surfen in Taghazout, die Gerbereien von Fès und der Festivalkalender.',
+  eyebrow: 'Erlebnisse',
+  title: 'Sagen Sie Ja zum<br />zweiten Glas Tee',
+  intro: 'Wüstennächte, Bergpfade, Hammam-Dampf und ein Festivalkalender, der den Jahreszeiten folgt. Um diese Erlebnisse herum bauen wir unsere Reisen.',
+  heroLabel: 'Gewürz-Souk',
+  signatureEyebrow: 'Besondere Erlebnisse',
+  signatureTitle: 'Was wir morgen<br />sofort wieder tun würden',
+  gnawaLabel: 'Gnawa-Musiker',
+  festivalsEyebrow: 'Festivals & Moussems',
+  festivalsTitle: 'Reisen Sie<br />im Takt der Musik',
+  festivalsText: 'Die Termine verschieben sich jedes Jahr, manche folgen dem Mondkalender. Prüfen Sie die offiziellen Daten vor der Buchung.',
+  soukEyebrow: 'Einkaufen in den Souks',
+  soukTitle: 'Handeln<br />mit einem Lächeln',
+  soukText: [
+    'Handeln ist ein Gespräch, kein Kampf. Fragen Sie nach dem Preis, bieten Sie, was Ihnen fair erscheint, und treffen Sie sich bei einem Tee in der Mitte. Kein Interesse? Ein freundliches <em>la, shukran</em> genügt.',
+    'Halten Sie Ausschau nach Zedernholzkästchen in Fès, Amazigh-Teppichen aus dem Mittleren und Hohen Atlas, Arganöl aus Frauenkooperativen und Thuja-Intarsien in Essaouira.',
+  ],
+  zelligeLabel: 'Zellige-Fliesenkunst',
+  foodEyebrow: 'Was man probieren sollte',
+  foodTitle: 'Am besten<br />am Tisch verstanden',
+  tagineLabel: 'Tajine',
+  moreEyebrow: 'Wenn Sie mehr Zeit haben',
+  moreTitle: 'Sechs weitere<br />gute Ideen',
+  more: [
+    { title: 'Die Hassan-II.-Moschee besuchen', where: 'Casablanca', text: 'Eine der wenigen Moscheen in Marokko, die Nichtmuslime bei einer Führung betreten dürfen. Ihr Minarett erhebt sich über dem Atlantik.' },
+    { title: 'Durch römische Ruinen spazieren', where: 'Volubilis, bei Meknès', text: 'Mosaiken, die noch immer die Böden einer römischen Stadt am Rand des Reiches schmücken.' },
+    { title: 'Safran an der Quelle kosten', where: 'Taliouine', text: 'Besuchen Sie während der Herbsternte, wenn die violetten Krokusfelder blühen, eine Kooperative in der Safranhauptstadt.' },
+    { title: 'Zu den Ouzoud-Fällen wandern', where: 'Provinz Azilal', text: 'Über 100 Meter hohe Kaskaden, Olivenhaine und Berberaffen am Wegesrand.' },
+    { title: 'Sonnenuntergang in der Agafay', where: 'Bei Marrakesch', text: 'Eine Steinwüste keine Stunde von der Stadt: Kamelritte, Quads oder einfach ein langes Abendessen unter den Sternen.' },
+    { title: 'Ein wenig Darija lernen', where: 'Überall', text: 'Ein paar Worte marokkanisches Arabisch oder Tamazight öffnen Türen schneller als jeder Reiseführer.' },
+  ],
+  buildThese: 'Das in meine Reise einbauen',
+};
+
+/** Spanish. */
+const es: typeof en = {
+  metaTitle: 'Qué hacer en Marruecos: campamentos en el desierto, rutas por el Atlas, hammams y festivales',
+  metaDescription:
+    'Lo mejor que hacer en Marruecos: una noche en las dunas de Merzouga, trekking en el Alto Atlas, clases de cocina, hammams, surf en Taghazout, las curtidurías de Fez y el calendario de festivales.',
+  eyebrow: 'Qué hacer',
+  title: 'Diga sí al<br />segundo vaso de té',
+  intro: 'Noches en el desierto, caminos de montaña, vapor de hammam y un calendario de festivales que sigue las estaciones. Estas son las experiencias en torno a las que creamos nuestros viajes.',
+  heroLabel: 'Zoco de especias',
+  signatureEyebrow: 'Experiencias insignia',
+  signatureTitle: 'Lo que volveríamos<br />a hacer mañana',
+  gnawaLabel: 'Músicos gnawa',
+  festivalsEyebrow: 'Festivales y moussems',
+  festivalsTitle: 'Viaje<br />al ritmo de la música',
+  festivalsText: 'Las fechas cambian cada año y algunas siguen el calendario lunar. Compruebe las fechas oficiales antes de reservar.',
+  soukEyebrow: 'De compras por los zocos',
+  soukTitle: 'Regatear<br />con una sonrisa',
+  soukText: [
+    'Regatear es una conversación, no una batalla. Pregunte el precio, ofrezca lo que le parezca justo y encuéntrense a mitad de camino con un té. ¿No le interesa? Basta con un amable <em>la, shukran</em>.',
+    'Busque cajas de cedro en Fez, alfombras amazigh tejidas en el Atlas Medio y el Alto Atlas, aceite de argán de cooperativas de mujeres y marquetería de tuya en Esauira.',
+  ],
+  zelligeLabel: 'Azulejos zellige',
+  foodEyebrow: 'Qué probar',
+  foodTitle: 'Se entiende mejor<br />sentado a la mesa',
+  tagineLabel: 'Tajín',
+  moreEyebrow: 'Si tiene más tiempo',
+  moreTitle: 'Seis buenas<br />ideas más',
+  more: [
+    { title: 'Visitar la Mezquita Hassan II', where: 'Casablanca', text: 'Una de las pocas mezquitas de Marruecos abiertas a no musulmanes, con visita guiada. Su minarete se alza sobre el Atlántico.' },
+    { title: 'Pasear entre ruinas romanas', where: 'Volubilis, cerca de Mequinez', text: 'Mosaicos aún en su sitio en los suelos de una ciudad romana en el confín del imperio.' },
+    { title: 'Probar el azafrán en su origen', where: 'Taliouine', text: 'Visite una cooperativa en la capital del azafrán durante la cosecha de otoño, cuando florecen los campos de crocus violeta.' },
+    { title: 'Caminar hasta las cascadas de Ouzoud', where: 'Provincia de Azilal', text: 'Saltos de más de 100 metros, olivares y macacos de Berbería en el sendero.' },
+    { title: 'Ver el atardecer en el Agafay', where: 'Cerca de Marrakech', text: 'Un desierto de piedra a menos de una hora de la ciudad: paseos en dromedario, quads o simplemente una larga cena bajo las estrellas.' },
+    { title: 'Aprender algo de dariya', where: 'En cualquier parte', text: 'Unas palabras de árabe marroquí o de tamazight abren puertas más rápido que cualquier guía.' },
+  ],
+  buildThese: 'Incluir esto en mi viaje',
+};
+
+export const THINGS = { en, fr, de, es };

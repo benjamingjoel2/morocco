@@ -1,4 +1,5 @@
 import data from './media.json';
+import { ALT_I18N } from './media-alt';
 
 export interface PhotoRecord {
   id: string;
@@ -67,9 +68,12 @@ const ALT: Record<string, string> = {
   '57W456Hxmng': 'A camel resting on the sand while people play on Taghazout beach',
 };
 
-export const getPhoto = (slot: string): PhotoRecord | undefined => {
+/** Photo for a slot, with alt text in the requested language (English by default). */
+export const getPhoto = (slot: string, lang: 'en' | 'fr' | 'de' | 'es' = 'en'): PhotoRecord | undefined => {
   const p = photos[slot];
-  return p && ALT[p.id] ? { ...p, alt: ALT[p.id] } : p;
+  if (!p) return p;
+  const alt = (lang !== 'en' && ALT_I18N[lang][p.id]) || ALT[p.id];
+  return alt ? { ...p, alt } : p;
 };
 export const allPhotos = (): [string, PhotoRecord][] => Object.entries(photos);
 export const heroVideo = (data as { heroVideo: VideoRecord | null }).heroVideo;

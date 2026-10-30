@@ -94,7 +94,8 @@ for (const path of PAGES) {
 }
 
 test('pages with a photo header actually render it', async ({ page }) => {
-  for (const path of PAGES.filter((p) => !p.endsWith('/contact/'))) {
+  // Contact and the legal pages are text pages with no photo header.
+  for (const path of PAGES.filter((p) => !/\/(contact|privacy|booking-terms|cookies)\/$/.test(p))) {
     await page.goto(path);
     await expect(page.locator('main > section').first().locator('img').first(), `photo header on ${path}`).toBeVisible();
   }
@@ -113,28 +114,30 @@ test('internal links resolve', async ({ page, request }) => {
   }
 });
 
-test('every page has a working counterpart in the other language', async ({ page, request }) => {
+test('every page has a working counterpart in every other language', async ({ page, request }) => {
   for (const path of PAGES) {
     await page.goto(path);
-    const isFr = path.startsWith('/fr/');
-    expect(await page.locator('html').getAttribute('lang'), path).toBe(isFr ? 'fr' : 'en');
-    for (const lang of ['en', 'fr']) {
-      const href = await page.locator(`link[rel="alternate"][hreflang="${lang}"]`).getAttribute('href');
+    const lang = path.match(/^\/(fr|de|es)\//)?.[1] ?? 'en';
+    const base = path.replace(/^\/(fr|de|es)(?=\/)/, '') || '/';
+    expect(await page.locator('html').getAttribute('lang'), path).toBe(lang);
+    for (const other of ['en', 'fr', 'de', 'es']) {
+      const href = await page.locator(`link[rel="alternate"][hreflang="${other}"]`).getAttribute('href');
       const res = await request.get(new URL(href!).pathname);
-      expect(res.status(), `${path} -> ${lang} alternate ${href}`).toBe(200);
+      expect(res.status(), `${path} -> ${other} alternate ${href}`).toBe(200);
+      // The header language selector links to the same page in that language
+      const sel = await page.locator(`#site-header a[hreflang="${other}"]`).getAttribute('href');
+      expect(sel, `${path} selector -> ${other}`).toBe(other === 'en' ? base : `/${other}${base}`);
     }
-    // The header language switch goes to the counterpart page
-    const sw = await page.locator('#site-header a[hreflang]').getAttribute('href');
-    expect(sw, path).toBe(isFr ? path.replace(/^\/fr/, '') || '/' : `/fr${path}`);
   }
 });
 
-test('French pages do not show leftover English UI', async ({ page }) => {
-  for (const path of PAGES.filter((p) => p.startsWith('/fr/'))) {
+test('translated pages do not show leftover English UI', async ({ page }) => {
+  for (const path of PAGES.filter((p) => /^\/(fr|de|es)\//.test(p))) {
     await page.goto(path);
     const text = await page.locator('body').innerText();
-    for (const phrase of ['Plan a trip', 'Read more', 'Discover more', 'Travel tips', 'Things to Do', 'Best for', 'Getting there']) {
+    for (const phrase of ['Plan a trip', 'Read more', 'Discover more', 'Travel tips', 'Things to Do', 'Best for', 'Getting there', 'Privacy policy', 'Booking terms']) {
       expect(text, `"${phrase}" on ${path}`).not.toContain(phrase);
     }
   }
 });
+

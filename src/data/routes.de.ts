@@ -1,0 +1,55 @@
+import type { Route } from './routes';
+
+export const ROUTES: Route[] = [
+  {
+    id: 'five-days',
+    slot: 'marrakech',
+    title: 'Marrakesch & die Berge',
+    nights: '5 Nächte',
+    pace: 'Gemächlich',
+    bestFor: 'Ein langes Wochenende, Erstbesucher, Familien',
+    season: 'März–Juni, Sept.–Nov.',
+    intro: 'Die rote Stadt und der Hohe Atlas, mit nur einem kurzen Transfer und viel Zeit auf Riad-Dachterrassen und Bergpfaden.',
+    days: [
+      { day: 'Tag 1–3', place: 'Marrakesch', text: 'Medina, Gärten, ein kulinarischer Spaziergang auf dem Djemaa el-Fna und ein Hammam.', dest: 'marrakech' },
+      { day: 'Tag 4–5', place: 'Imlil, Hoher Atlas', text: 'Dorfwanderungen mit einem Bergführer, Mittagessen bei einer Familie, sternklare Nächte.', dest: 'atlas' },
+      { day: 'Tag 6', place: 'Zurück nach Marrakesch', text: 'Etwa 1,5 Stunden bis zum Flughafen.' },
+    ],
+  },
+  {
+    id: 'eight-days',
+    slot: 'sahara',
+    title: 'Von Marrakesch nach Fès durch die Sahara',
+    nights: '8 Nächte',
+    pace: 'Ausgewogen',
+    bestFor: 'Erste Reisen, die alles sehen wollen',
+    season: 'Okt.–Apr.',
+    intro: 'Unsere meistgewünschte Reise: Stadt, Berge, Schluchten, eine Nacht in den Dünen und die älteste Medina Marokkos.',
+    days: [
+      { day: 'Tag 1–3', place: 'Marrakesch', text: 'Riad, Souks, Gärten und ein kulinarischer Spaziergang.', dest: 'marrakech' },
+      { day: 'Tag 4', place: 'Über den Tizi n’Tichka nach Aït-Ben-Haddou', text: 'Über den Hohen Atlas, Übernachtung beim Ksar.', dest: 'aitbenhaddou' },
+      { day: 'Tag 5', place: 'Dadès- & Todra-Schlucht', text: 'Canyon-Wanderungen an der Straße der Kasbahs.' },
+      { day: 'Tag 6', place: 'Merzouga', text: 'Bei Sonnenuntergang in den Erg Chebbi und eine Nacht im Camp.', dest: 'sahara' },
+      { day: 'Tag 7–8', place: 'Fès', text: 'Nach Norden durch das Ziz-Tal, dann zwei Tage in der Medina.', dest: 'fes' },
+    ],
+  },
+  {
+    id: 'two-weeks',
+    slot: 'chefchaouen',
+    title: 'Von Nord nach Süd, ganz in Ruhe',
+    nights: '13 Nächte',
+    pace: 'Gemächlich',
+    bestFor: 'Zweite Reisen, Auszeiten, Fotografen',
+    season: 'März–Mai, Sept.–Nov.',
+    intro: 'Vom blauen Rif bis zum Atlantik, mit Zeit zum Bleiben: fast überall zwei Nächte und keine gehetzten Tage.',
+    days: [
+      { day: 'Tag 1–2', place: 'Chefchaouen', text: 'Blaue Gassen, Wanderungen im Rif und die Spanische Moschee bei Sonnenuntergang.', dest: 'chefchaouen' },
+      { day: 'Tag 3–5', place: 'Fès', text: 'Medresen, Gerbereien, ein Tagesausflug nach Volubilis und Meknès.', dest: 'fes' },
+      { day: 'Tag 6', place: 'Merzouga', text: 'Durch die Zedernwälder des Mittleren Atlas zu den Dünen.', dest: 'sahara' },
+      { day: 'Tag 7', place: 'Dadès-Tal', text: 'Schluchten, Rosentäler und Kasbahs.' },
+      { day: 'Tag 8', place: 'Aït-Ben-Haddou', text: 'Der Ksar bei Sonnenuntergang.', dest: 'aitbenhaddou' },
+      { day: 'Tag 9–11', place: 'Marrakesch', text: 'Gärten, Souks und ein Kochkurs.', dest: 'marrakech' },
+      { day: 'Tag 12–13', place: 'Essaouira', text: 'Meeresluft, gegrillte Sardinen und die Stadtmauern.', dest: 'essaouira' },
+    ],
+  },
+];
