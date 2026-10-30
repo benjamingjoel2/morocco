@@ -1,5 +1,6 @@
 ---
 import { getPhoto, unsplashUrl } from '../data/media';
+import { langFromUrl } from '../i18n';
 
 interface Props {
   /** Media slot key in media.json (not named `slot`: that word is reserved by Astro). */
@@ -21,8 +22,9 @@ interface Props {
 
 const { photo: slot, ratio, sizes = '100vw', eager = false, class: cls = '', imgClass = '', label, fluid = false, defer = false, quality } = Astro.props;
 const url = (w: number) => unsplashUrl(photo!.src, w, ratio, quality);
-const photo = getPhoto(slot);
-const widths = [480, 768, 1080, 1440, 1920, 2400];
+const photo = getPhoto(slot, langFromUrl(Astro.url));
+// 1100 (not 1080) so ~393px phones at 2.75x stop jumping to the 1440 file.
+const widths = [480, 768, 1100, 1440, 1920, 2400];
 const [rw, rh] = (ratio ?? '1/1').split('/').map(Number);
 const style = ratio && !fluid ? `aspect-ratio:${ratio}` : undefined;
 ---

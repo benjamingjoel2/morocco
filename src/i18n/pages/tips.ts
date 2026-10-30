@@ -266,4 +266,262 @@ const fr: typeof en = {
   ],
 };
 
-export const TIPS = { en, fr };
+/** German. */
+const de: typeof en = {
+  metaTitle: 'Marokko-Reisetipps: Visum, Geld, Verkehr, Etikette & Ramadan',
+  metaDescription:
+    'Praktische Marokko-Reisetipps: beste Reisezeit, Visum und Einreise, der Dirham, Züge und Busse, Kleidung und Etikette, Ramadan, Sicherheit, Stecker und nützliche Wörter auf Darija und Tamazight.',
+  eyebrow: 'Reisetipps',
+  title: 'Ehrliche Tipps,<br />bevor Sie packen',
+  intro: 'Alles, was wir vor unserer ersten Reise gern gewusst hätten: was man anzieht, wie man bezahlt, wie man sich fortbewegt und wie man ein guter Gast ist.',
+  heroLabel: 'Hassan-II.-Moschee, Casablanca',
+  tocAria: 'Auf dieser Seite',
+  tocTitle: 'Auf dieser Seite',
+  toc: {
+    when: 'Reisezeit',
+    entry: 'Visum & Einreise',
+    money: 'Geld',
+    gettingAround: 'Unterwegs',
+    etiquette: 'Etikette & Kleidung',
+    ramadan: 'Ramadan',
+    safety: 'Gesundheit & Sicherheit',
+    practical: 'Praktisches',
+    packing: 'Packliste',
+    phrases: 'Nützliche Wörter',
+    faq: 'FAQ',
+  },
+  rulesChange:
+    'Regeln ändern sich. Prüfen Sie die Einreisebestimmungen vor der Buchung immer bei Ihrer eigenen Regierung und der nächsten marokkanischen Botschaft oder dem Konsulat.',
+
+  whenTitle: 'Reisezeit',
+  seasons: [
+    { name: 'Frühling', months: 'März–Mai', text: 'Unser Favorit. Grüne Täler, Rosen im Dadès, angenehme Tage in der Wüste.' },
+    { name: 'Sommer', months: 'Juni–Aug.', text: 'Heiß im Landesinneren (Marrakesch und Fès erreichen oft 38–40 °C). Ab an die Küste und in die Berge.' },
+    { name: 'Herbst', months: 'Sept.–Nov.', text: 'Warmes Meer, goldenes Licht, Dattel- und Olivenernte. Ausgezeichnet zum Trekking.' },
+    { name: 'Winter', months: 'Dez.–Feb.', text: 'Sonnige Tage, kalte Nächte. Schnee im Atlas und in Ifrane, Surfsaison an der Küste.' },
+  ],
+  monthByMonth: 'Monat für Monat',
+
+  entryTitle: 'Visum & Einreise',
+  entryBody: [
+    'Staatsangehörige vieler Länder, darunter Deutschland, Österreich, die Schweiz und die übrigen EU-Staaten, das Vereinigte Königreich, die USA, Kanada, Australien und Neuseeland, können derzeit als Touristen bis zu 90 Tage ohne Visum nach Marokko reisen. Andere Nationalitäten benötigen eventuell ein Visum oder können über das offizielle Portal Marokkos ein E-Visum beantragen.',
+    'Ihr Reisepass sollte für den gesamten Aufenthalt gültig sein; viele Fluggesellschaften und Behörden empfehlen mindestens sechs Monate Gültigkeit. Möglicherweise werden Sie nach einem Weiter- oder Rückflugticket und Ihrer Unterkunftsadresse gefragt.',
+    'Drohnen benötigen eine vorherige Genehmigung und werden beim Zoll regelmäßig einbehalten – lassen Sie Ihre also zu Hause.',
+  ],
+
+  moneyTitle: 'Geld',
+  moneyBody: [
+    'Die Währung ist der <strong>marokkanische Dirham (MAD)</strong>. Er ist nicht frei konvertierbar: Sie dürfen nur begrenzte Beträge ein- und ausführen, besorgen Sie sich die meisten Dirham also bei der Ankunft an Geldautomaten oder Wechselschaltern am Flughafen.',
+    'Geldautomaten finden Sie in Städten leicht, in der Wüste und in den Bergen jedoch selten. Nehmen Sie Bargeld für Souks, Taxis, kleine Restaurants und Trinkgelder mit. Riads und größere Hotels akzeptieren meist Karten. Bewahren Sie Ihre Wechselbelege auf, wenn Sie bei der Ausreise Dirham zurücktauschen möchten.',
+    'Trinkgeld ist üblich: In Cafés aufrunden, in Restaurants etwa 10 % geben und etwas für Guides, Fahrer und das Riad-Personal einplanen.',
+  ],
+
+  aroundTitle: 'Unterwegs',
+  aroundBody: [
+    '<strong>Züge.</strong> Die ONCF betreibt ein komfortables Netz zwischen Marrakesch, Casablanca, Rabat, Meknès, Fès und Tanger. Al Boraq, Afrikas erste Hochgeschwindigkeitsstrecke, verbindet Tanger mit Kenitra, Rabat und Casablanca. Buchen Sie auf vollen Strecken die erste Klasse für einen reservierten Platz.',
+    '<strong>Busse.</strong> Die Reisebusse von CTM und Supratours sind zuverlässig und günstig und fahren dorthin, wo kein Zug hinkommt: Chefchaouen, Essaouira, Ouarzazate, Merzouga.',
+    '<strong>Taxis.</strong> <em>Petits Taxis</em> fahren innerhalb einer Stadt – bitten Sie um das Taxameter. <em>Grands Taxis</em> fahren feste Strecken zwischen Orten und starten, wenn sie voll sind.',
+    '<strong>Selbst fahren.</strong> Die Hauptstraßen sind gut, es herrscht Rechtsverkehr, doch Bergpässe und Nachtfahrten erfordern Vorsicht. Für die Wüstenrunde bevorzugen viele Reisende einen privaten Fahrer.',
+  ],
+
+  etiquetteTitle: 'Etikette & Kleidung',
+  etiquetteBody: [
+    'Marokko ist ein muslimisches Land mit entspannten Großstädten und konservativeren ländlichen Regionen. Bedeckte Schultern und Knie sind überall respektvoll, besonders in Medinas und Dörfern. Ein leichtes Tuch ist gegen die Sonne und in Moscheen nützlich.',
+    'Essen und reichen Sie Dinge mit der rechten Hand. Fragen Sie immer, bevor Sie Menschen fotografieren, und akzeptieren Sie ein „Nein“ gelassen. Die meisten Moscheen sind für Nichtmuslime geschlossen; eine bemerkenswerte Ausnahme ist die Hassan-II.-Moschee in Casablanca.',
+    'Zärtlichkeiten in der Öffentlichkeit sollten diskret bleiben, und Alkohol gibt es nur in lizenzierten Lokalen und einigen Supermärkten.',
+  ],
+  rampartsLabel: 'Stadtmauern von Essaouira',
+
+  ramadanTitle: 'Reisen im Ramadan',
+  ramadanBody: [
+    'Im heiligen Monat fasten viele Marokkaner von der Morgendämmerung bis zum Sonnenuntergang. Touristische Restaurants und Hotels bleiben geöffnet, manche Cafés schließen jedoch tagsüber, und die Öffnungszeiten werden kürzer. Essen, trinken oder rauchen Sie tagsüber nicht offen auf der Straße.',
+    'Die Belohnung: zauberhafte Abende. Wenn der Gebetsruf den Sonnenuntergang verkündet, werden die Straßen für das <em>Ftour</em> (Harira, Datteln, Chebakia) still und erwachen dann bis spät in die Nacht wieder zum Leben. Der Ramadan verschiebt sich jedes Jahr um etwa elf Tage nach vorn – prüfen Sie die Daten für Ihre Reise.',
+  ],
+
+  safetyTitle: 'Gesundheit & Sicherheit',
+  safetyBody: [
+    'Marokko ist im Allgemeinen ein sicheres und gastfreundliches Reiseziel. Die häufigsten Ärgernisse sind Taschendiebstahl im Gedränge und hartnäckige Schlepper. Verstauen Sie Wertsachen sicher und lehnen Sie ungefragte „Guides“ höflich ab: Wenn jemand sagt, der Weg vor Ihnen sei gesperrt, stimmt das meistens nicht.',
+    'Trinken Sie Wasser aus Flaschen oder gefiltertes Wasser, gewöhnen Sie sich langsam an Streetfood und denken Sie an Sonnenschutz: Die Sonne ist das ganze Jahr über stark. Schließen Sie eine Reiseversicherung ab, die medizinische Versorgung und geplante Trekkingtouren abdeckt.',
+    'Notrufnummern: <strong>19</strong> für die Polizei in Städten, <strong>177</strong> für die Gendarmerie auf dem Land, <strong>15</strong> für Rettungsdienst und Feuerwehr.',
+  ],
+
+  practicalTitle: 'Praktisches',
+  practical: {
+    plugsLabel: 'Stecker',
+    plugs: 'Steckdosen Typ C und E, 220 V.',
+    timeLabel: 'Zeitzone',
+    time: 'Den Großteil des Jahres GMT+1. Im Ramadan wird die Uhr meist eine Stunde zurückgestellt.',
+    simLabel: 'SIM-Karten',
+    sim: 'Maroc Telecom, Orange und inwi verkaufen Prepaid-SIM-Karten an Flughäfen und in Telefonläden. Reisepass mitnehmen.',
+    languagesLabel: 'Sprachen',
+    languages: 'Arabisch und Tamazight sind Amtssprachen; im Alltag spricht man Darija, und Französisch ist weit verbreitet. In touristischen Gegenden kommt man auch mit Englisch zurecht.',
+    packingLabel: 'Gepäck',
+    packing: 'Schichten für kalte Wüsten- und Bergnächte, bequeme Schuhe für Kopfsteinpflaster, ein Tuch, Sonnencreme, eine nachfüllbare Flasche mit Filter und ein wenig Geduld für die schönsten Momente.',
+  },
+
+  packingTitle: 'Packliste',
+  packingIntro: 'Haken Sie beim Packen ab. Ihre Häkchen werden nur in diesem Browser gespeichert.',
+  packing: [
+    { group: 'Kleidung', items: ['Leichte Schichten, die Schultern und Knie bedecken', 'Ein warmer Pullover oder Fleece für Wüsten- und Bergnächte', 'Ein Tuch oder Schal (Sonne, Staub, Moscheen)', 'Bequeme Wanderschuhe für gepflasterte Gassen', 'Sandalen für Riads und Hammams'] },
+    { group: 'Gesundheit & Sonne', items: ['Sonnencreme und Sonnenbrille', 'Ein Hut', 'Nachfüllbare Flasche mit Filter', 'Grundlegende Medikamente und Elektrolytpulver', 'Handdesinfektion und Taschentücher'] },
+    { group: 'Dokumente & Geld', items: ['Reisepass (Gültigkeit prüfen)', 'Angaben zur Reiseversicherung', 'Eine Karte und etwas Euro zum Tauschen', 'Buchungskopien, offline verfügbar'] },
+    { group: 'Nützliches', items: ['Reiseadapter (Typ C/E)', 'Powerbank', 'Kleine Taschenlampe für das Wüstencamp', 'Eine weiche Tasche für die Nacht in der Wüste'] },
+  ],
+  clearTicks: 'Häkchen löschen',
+
+  phrasesTitle: 'Nützliche Wörter',
+  phrasesIntro: 'Ein paar Worte Darija (marokkanisches Arabisch) oder Tamazight bringen Ihnen überall ein Lächeln ein.',
+  phrases: [
+    { say: 'Salam alaykum', mean: 'Friede sei mit dir (Hallo)', lang: 'Darija' },
+    { say: 'Azul', mean: 'Hallo', lang: 'Tamazight' },
+    { say: 'Shukran', mean: 'Danke', lang: 'Darija' },
+    { say: 'Tanmirt', mean: 'Danke', lang: 'Tamazight' },
+    { say: 'La, shukran', mean: 'Nein, danke', lang: 'Darija' },
+    { say: 'Bshhal?', mean: 'Wie viel kostet das?', lang: 'Darija' },
+    { say: 'Wakha', mean: 'Okay', lang: 'Darija' },
+    { say: 'Bslama', mean: 'Auf Wiedersehen', lang: 'Darija' },
+    { say: 'Bismillah', mean: 'Im Namen Gottes (vor dem Essen)', lang: 'Arabisch' },
+  ],
+
+  faqTitle: 'Häufige Fragen',
+  faqs: [
+    { q: 'Brauche ich ein Visum für Marokko?', a: 'Staatsangehörige vieler Länder, darunter Deutschland, Österreich, die Schweiz und die übrigen EU-Staaten, das Vereinigte Königreich, die USA, Kanada, Australien und Neuseeland, können derzeit als Touristen bis zu 90 Tage ohne Visum einreisen. Andere Nationalitäten benötigen eventuell ein Visum oder ein E-Visum. Klären Sie das vor der Buchung immer mit Ihrer Regierung und dem marokkanischen Konsulat.' },
+    { q: 'Wie viele Tage brauche ich für eine erste Reise?', a: 'Mit acht bis zehn Tagen können Sie eine Stadt, den Hohen Atlas und eine Nacht in der Sahara ohne Hektik verbinden. Bei fünf Tagen kombinieren Sie Marrakesch entweder mit dem Atlasgebirge oder mit Essaouira.' },
+    { q: 'Ist Marokko sicher für Reisende?', a: 'Marokko ist im Allgemeinen sicher und gastfreundlich. Die üblichen Ärgernisse sind Taschendiebstahl im Gedränge und hartnäckige Schlepper. Verstauen Sie Wertsachen sicher und lehnen Sie ungefragte Guides höflich ab.' },
+    { q: 'Bargeld oder Karte?', a: 'Beides. Riads und größere Hotels akzeptieren meist Karten, Souks, Taxis und kleine Restaurants aber nur Bargeld. Der Dirham ist nicht frei konvertierbar, heben Sie ihn also bei der Ankunft am Automaten ab; in der Wüste und den Bergen sind Automaten selten.' },
+    { q: 'Was sollte ich anziehen?', a: 'Leichte, lockere Schichten, die Schultern und Knie bedecken, sind überall respektvoll, besonders in Medinas und Dörfern. Nehmen Sie ein Tuch, bequeme Schuhe für Kopfsteinpflaster und warme Schichten für Wüsten- und Bergnächte mit.' },
+    { q: 'Kann ich im Ramadan reisen?', a: 'Ja. Hotels und touristische Restaurants bleiben geöffnet, auch wenn manche Cafés tagsüber schließen und die Öffnungszeiten kürzer sind. Essen und trinken Sie tagsüber nicht offen auf der Straße und genießen Sie die festlichen Abende nach Sonnenuntergang.' },
+    { q: 'Brauche ich in der Medina einen Guide?', a: 'Zum Bummeln nicht, aber ein offizieller, lizenzierter Guide für den ersten Vormittag in Fès oder Marrakesch lohnt sich: Sie lernen Aufbau und Geschichte kennen und erkunden danach auf eigene Faust.' },
+  ],
+};
+
+/** Spanish. */
+const es: typeof en = {
+  metaTitle: 'Consejos para viajar a Marruecos: visados, dinero, transporte, costumbres y Ramadán',
+  metaDescription:
+    'Consejos prácticos para viajar a Marruecos: mejor época, visados y entrada, el dírham, trenes y autobuses, vestimenta y costumbres, Ramadán, seguridad, enchufes y palabras útiles en dariya y tamazight.',
+  eyebrow: 'Consejos de viaje',
+  title: 'Consejos sinceros<br />antes de hacer la maleta',
+  intro: 'Todo lo que nos habría gustado saber antes de nuestro primer viaje: qué ponerse, cómo pagar, cómo moverse y cómo ser un buen invitado.',
+  heroLabel: 'Mezquita Hassan II, Casablanca',
+  tocAria: 'En esta página',
+  tocTitle: 'En esta página',
+  toc: {
+    when: 'Cuándo ir',
+    entry: 'Visados y entrada',
+    money: 'Dinero',
+    gettingAround: 'Cómo moverse',
+    etiquette: 'Costumbres y vestimenta',
+    ramadan: 'Ramadán',
+    safety: 'Salud y seguridad',
+    practical: 'Información práctica',
+    packing: 'Lista de equipaje',
+    phrases: 'Palabras útiles',
+    faq: 'Preguntas frecuentes',
+  },
+  rulesChange:
+    'Las normas cambian. Compruebe siempre los requisitos de entrada con su propio gobierno y con la embajada o el consulado de Marruecos más cercano antes de reservar.',
+
+  whenTitle: 'Cuándo ir',
+  seasons: [
+    { name: 'Primavera', months: 'Mar.–may.', text: 'Nuestra favorita. Valles verdes, rosas en el Dadès y días agradables en el desierto.' },
+    { name: 'Verano', months: 'Jun.–ago.', text: 'Calor en el interior (Marrakech y Fez alcanzan a menudo 38–40 °C). Vaya a la costa y a la montaña.' },
+    { name: 'Otoño', months: 'Sept.–nov.', text: 'Mar templado, luz dorada, cosecha de dátiles y aceitunas. Excelente para el trekking.' },
+    { name: 'Invierno', months: 'Dic.–feb.', text: 'Días soleados y noches frías. Nieve en el Atlas y en Ifrane, temporada de surf en la costa.' },
+  ],
+  monthByMonth: 'Mes a mes',
+
+  entryTitle: 'Visados y entrada',
+  entryBody: [
+    'Los ciudadanos de muchos países, entre ellos España y el resto de la UE, el Reino Unido, Estados Unidos, Canadá, Australia y Nueva Zelanda, pueden visitar actualmente Marruecos como turistas sin visado durante un máximo de 90 días. Otras nacionalidades pueden necesitar visado o solicitar un visado electrónico en el portal oficial de Marruecos. Algunos países latinoamericanos también están exentos; compruébelo según su pasaporte.',
+    'Su pasaporte debe ser válido durante toda la estancia, y muchas aerolíneas y gobiernos recomiendan al menos seis meses de validez. Pueden pedirle un billete de salida o de vuelta y la dirección de su alojamiento.',
+    'Los drones necesitan autorización previa y suelen retenerse en la aduana, así que mejor déjelo en casa.',
+  ],
+
+  moneyTitle: 'Dinero',
+  moneyBody: [
+    'La moneda es el <strong>dírham marroquí (MAD)</strong>. No es convertible: solo se puede entrar o sacar del país una cantidad limitada, así que obtenga la mayor parte de sus dírhams al llegar, en los cajeros o casas de cambio del aeropuerto.',
+    'Los cajeros abundan en ciudades y pueblos, pero escasean en el desierto y la montaña. Lleve efectivo para zocos, taxis, restaurantes pequeños y propinas. Los riads y hoteles grandes suelen aceptar tarjeta. Guarde los recibos de cambio si quiere volver a cambiar dírhams al salir.',
+    'La propina es costumbre: redondee en los cafés, deje alrededor del 10 % en los restaurantes y reserve algo para guías, conductores y el personal del riad.',
+  ],
+
+  aroundTitle: 'Cómo moverse',
+  aroundBody: [
+    '<strong>Trenes.</strong> La ONCF tiene una red cómoda que une Marrakech, Casablanca, Rabat, Mequinez, Fez y Tánger. Al Boraq, la primera línea de alta velocidad de África, conecta Tánger con Kenitra, Rabat y Casablanca. En rutas concurridas, reserve primera clase para tener asiento asignado.',
+    '<strong>Autobuses.</strong> Los autocares de CTM y Supratours son fiables y baratos, y llegan adonde no llega el tren: Chefchaouen, Esauira, Uarzazat, Merzouga.',
+    '<strong>Taxis.</strong> Los <em>petits taxis</em> circulan dentro de la ciudad: pida que pongan el taxímetro. Los <em>grands taxis</em> hacen rutas fijas entre poblaciones y salen cuando se llenan.',
+    '<strong>Conducir.</strong> Las carreteras principales son buenas y se circula por la derecha, pero los puertos de montaña y la conducción nocturna exigen precaución. Para el circuito del desierto, muchos viajeros prefieren un conductor privado.',
+  ],
+
+  etiquetteTitle: 'Costumbres y vestimenta',
+  etiquetteBody: [
+    'Marruecos es un país musulmán con grandes ciudades relajadas y zonas rurales más conservadoras. Cubrir hombros y rodillas es respetuoso en todas partes, sobre todo en medinas y pueblos. Un pañuelo ligero sirve tanto para el sol como para las mezquitas.',
+    'Use la mano derecha para comer y para pasar objetos. Pregunte siempre antes de fotografiar a alguien y acepte un «no» con elegancia. La mayoría de las mezquitas están cerradas a los no musulmanes; la Mezquita Hassan II de Casablanca es una excepción notable.',
+    'Las muestras de afecto en público conviene que sean discretas, y el alcohol solo se vende en locales autorizados y algunos supermercados.',
+  ],
+  rampartsLabel: 'Murallas de Esauira',
+
+  ramadanTitle: 'Viajar durante el Ramadán',
+  ramadanBody: [
+    'Durante el mes sagrado, muchos marroquíes ayunan del alba a la puesta de sol. Los restaurantes turísticos y los hoteles siguen abiertos, pero algunos cafés cierran de día y los horarios se acortan. Evite comer, beber o fumar abiertamente en la calle durante el día.',
+    'La recompensa: noches mágicas. Cuando la llamada a la oración anuncia el ocaso, las calles se quedan en silencio para el <em>ftour</em> (harira, dátiles, chebakia) y luego vuelven a la vida hasta bien entrada la noche. El Ramadán se adelanta unos once días cada año, así que consulte las fechas de su viaje.',
+  ],
+
+  safetyTitle: 'Salud y seguridad',
+  safetyBody: [
+    'Marruecos es, en general, un destino seguro y acogedor. Las molestias más habituales son los pequeños hurtos entre la multitud y los ganchos insistentes. Guarde bien los objetos de valor y rechace con educación a los «guías» espontáneos: si alguien le dice que la calle de delante está cortada, normalmente no lo está.',
+    'Beba agua embotellada o filtrada, acostúmbrese poco a poco a la comida callejera y lleve protección solar: el sol es fuerte todo el año. Contrate un seguro de viaje que cubra la asistencia médica y cualquier trekking que tenga previsto.',
+    'Números de emergencia: <strong>19</strong> para la policía en las ciudades, <strong>177</strong> para la Gendarmería en zonas rurales, <strong>15</strong> para ambulancias y bomberos.',
+  ],
+
+  practicalTitle: 'Información práctica',
+  practical: {
+    plugsLabel: 'Enchufes',
+    plugs: 'Enchufes tipo C y E, 220 V.',
+    timeLabel: 'Huso horario',
+    time: 'GMT+1 la mayor parte del año. Durante el Ramadán los relojes suelen retrasarse una hora.',
+    simLabel: 'Tarjetas SIM',
+    sim: 'Maroc Telecom, Orange e inwi venden tarjetas SIM de prepago en aeropuertos y tiendas de telefonía. Lleve el pasaporte.',
+    languagesLabel: 'Idiomas',
+    languages: 'El árabe y el tamazight son oficiales; a diario se habla dariya y el francés está muy extendido. En las zonas turísticas también se habla inglés y, en el norte, a menudo español.',
+    packingLabel: 'Equipaje',
+    packing: 'Capas para las noches frías del desierto y la montaña, calzado cómodo para el empedrado de las medinas, un pañuelo, protector solar, una botella rellenable con filtro y un poco de paciencia para los mejores momentos.',
+  },
+
+  packingTitle: 'Lista de equipaje',
+  packingIntro: 'Marque lo que vaya metiendo en la maleta. Las marcas se guardan solo en este navegador.',
+  packing: [
+    { group: 'Ropa', items: ['Capas ligeras que cubran hombros y rodillas', 'Un jersey o forro polar para las noches de desierto y montaña', 'Un pañuelo o chal (sol, polvo, mezquitas)', 'Calzado cómodo para callejuelas empedradas', 'Sandalias para riads y hammams'] },
+    { group: 'Salud y sol', items: ['Protector solar y gafas de sol', 'Un sombrero', 'Botella rellenable con filtro', 'Medicamentos básicos y sales de rehidratación', 'Gel desinfectante y pañuelos'] },
+    { group: 'Documentos y dinero', items: ['Pasaporte (compruebe la validez)', 'Datos del seguro de viaje', 'Una tarjeta y algunos euros para cambiar', 'Copias de las reservas, disponibles sin conexión'] },
+    { group: 'Extras útiles', items: ['Adaptador de enchufe (tipo C/E)', 'Batería externa', 'Linterna pequeña para el campamento', 'Una bolsa blanda para la noche en el desierto'] },
+  ],
+  clearTicks: 'Borrar marcas',
+
+  phrasesTitle: 'Palabras útiles',
+  phrasesIntro: 'Unas palabras en dariya (árabe marroquí) o en tamazight le valdrán sonrisas en todas partes.',
+  phrases: [
+    { say: 'Salam alaykum', mean: 'La paz sea contigo (hola)', lang: 'Dariya' },
+    { say: 'Azul', mean: 'Hola', lang: 'Tamazight' },
+    { say: 'Shukran', mean: 'Gracias', lang: 'Dariya' },
+    { say: 'Tanmirt', mean: 'Gracias', lang: 'Tamazight' },
+    { say: 'La, shukran', mean: 'No, gracias', lang: 'Dariya' },
+    { say: 'Bshhal?', mean: '¿Cuánto cuesta?', lang: 'Dariya' },
+    { say: 'Wakha', mean: 'Vale', lang: 'Dariya' },
+    { say: 'Bslama', mean: 'Adiós', lang: 'Dariya' },
+    { say: 'Bismillah', mean: 'En el nombre de Dios (antes de comer)', lang: 'Árabe' },
+  ],
+
+  faqTitle: 'Preguntas frecuentes',
+  faqs: [
+    { q: '¿Necesito visado para viajar a Marruecos?', a: 'Los ciudadanos de muchos países, entre ellos España y el resto de la UE, el Reino Unido, Estados Unidos, Canadá, Australia y Nueva Zelanda, pueden entrar actualmente como turistas sin visado durante un máximo de 90 días. Otras nacionalidades pueden necesitar visado o visado electrónico. Confírmelo siempre con su gobierno y con el consulado de Marruecos antes de reservar.' },
+    { q: '¿Cuántos días necesito para un primer viaje?', a: 'Con ocho a diez días puede combinar una ciudad, el Alto Atlas y una noche en el Sáhara sin prisas. Con cinco días, combine Marrakech con el Atlas o con Esauira.' },
+    { q: '¿Es Marruecos seguro para viajar?', a: 'Marruecos es, en general, seguro y acogedor. Las molestias habituales son los pequeños hurtos entre la multitud y los ganchos insistentes. Guarde bien los objetos de valor y rechace con educación a los guías espontáneos.' },
+    { q: '¿Efectivo o tarjeta?', a: 'Las dos cosas. Los riads y hoteles grandes suelen aceptar tarjeta, pero los zocos, los taxis y los restaurantes pequeños solo aceptan efectivo. El dírham no es convertible, así que saque dírhams del cajero al llegar; en el desierto y la montaña escasean.' },
+    { q: '¿Qué ropa debo llevar?', a: 'Capas ligeras y holgadas que cubran hombros y rodillas son respetuosas en todas partes, sobre todo en medinas y pueblos. Lleve un pañuelo, calzado cómodo para el empedrado y ropa de abrigo para las noches de desierto y montaña.' },
+    { q: '¿Puedo viajar durante el Ramadán?', a: 'Sí. Los hoteles y restaurantes turísticos siguen abiertos, aunque algunos cafés cierran de día y los horarios son más cortos. Evite comer o beber abiertamente en la calle durante el día y disfrute de las noches festivas tras la puesta de sol.' },
+    { q: '¿Necesito un guía en la medina?', a: 'Para pasear, no, pero un guía oficial para su primera mañana en Fez o Marrakech merece la pena: conocerá el trazado y la historia y después explorará por su cuenta.' },
+  ],
+};
+
+export const TIPS = { en, fr, de, es };

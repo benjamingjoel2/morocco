@@ -105,3 +105,8 @@
   @view-transition { navigation: auto; }
   ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 450ms; animation-timing-function: var(--ease-soft); }
 }
+
+/* Legal pages: cookie table */
+.legal-table { overflow-x: auto; margin: 1.5rem 0; }
+.legal-table table { border-collapse: collapse; width: 100%; font-family: var(--font-sans); font-size: 0.95rem; }
+.legal-table th, .legal-table td { text-align: left; vertical-align: top; padding: 0.6rem 0.75rem 0.6rem 0; border-bottom: 1px solid color-mix(in srgb, currentColor 30%, transparent); }

@@ -81,4 +81,86 @@ const fr: typeof en = {
   country: 'Maroc',
 };
 
-export const DEST = { en, fr };
+/** German. */
+const de: typeof en = {
+  metaTitle: 'Reiseziele in Marokko: Marrakesch, Fès, Chefchaouen, die Sahara und mehr',
+  metaDescription:
+    'Wohin in Marokko: Marrakesch, Fès, Chefchaouen, die Sahara bei Merzouga, der Hohe Atlas, Essaouira, Aït-Ben-Haddou und die Surfküste von Taghazout – mit idealer Aufenthaltsdauer und Anreise.',
+  eyebrow: 'Reiseziele',
+  title: 'Acht Orte,<br />acht Stimmungen',
+  intro: 'Marokko vereint Schneegipfel, Atlantikwellen und Saharadünen in einer einzigen Woche Fahrt. Hier erfahren Sie, wohin, wie lange und wie Sie hinkommen.',
+  jumpAria: 'Zu einem Reiseziel springen',
+  stay: 'Aufenthalt',
+  bestTime: 'Beste Reisezeit',
+  gettingThere: 'Anreise',
+  dontMiss: 'Nicht verpassen',
+  bestFor: 'Ideal für',
+  readGuide: (place) => `Zum Reiseführer: ${place}`,
+  planHere: 'Hier eine Reise planen',
+  chooseEyebrow: 'Die Wahl fällt schwer?',
+  chooseTitle: 'Eine Stadt, eine Landschaft,<br />ein Ort zum Ankommen',
+  chooseText: 'So sehen die meisten gelungenen ersten Reisen aus. Erzählen Sie uns, was Sie lieben, den Rest skizzieren wir.',
+  askRoute: 'Route anfragen',
+  guideTitle: (place) => `${place} Reiseführer: Erlebnisse, Unterkünfte, beste Reisezeit`,
+  guideDescription: (place, tagline) =>
+    `${tagline}. Unser Reiseführer für ${place}: ein perfekter Tag, wo man wohnt, die beste Reisezeit, Anreise und was man nicht verpassen sollte.`,
+  breadcrumb: 'Brotkrumennavigation',
+  home: 'Start',
+  whyGo: 'Warum hinfahren',
+  perfectDay: (place) => `Ein perfekter Tag in ${place}`,
+  perfectDayTitle: 'Vom ersten Licht<br />bis zum letzten Tee',
+  morning: 'Morgen',
+  afternoon: 'Nachmittag',
+  evening: 'Abend',
+  photosOf: (place) => `Fotos: ${place}`,
+  whereToStay: 'Wo übernachten',
+  goodToKnow: 'Gut zu wissen',
+  pairsWith: 'Lässt sich gut kombinieren mit',
+  yourTrip: 'Ihre Reise',
+  makePart: (place) => `Machen Sie ${place}<br />zum Teil Ihrer Route`,
+  planTo: (place) => `Reise planen: ${place}`,
+  country: 'Marokko',
+};
+
+/** Spanish. */
+const es: typeof en = {
+  metaTitle: 'Destinos en Marruecos: Marrakech, Fez, Chefchaouen, el Sáhara y más',
+  metaDescription:
+    'Adónde ir en Marruecos: Marrakech, Fez, Chefchaouen, el Sáhara en Merzouga, el Alto Atlas, Esauira, Aït Ben Haddou y la costa surfera de Taghazout, con cuánto tiempo quedarse y cómo llegar.',
+  eyebrow: 'Destinos',
+  title: 'Ocho lugares,<br />ocho estados de ánimo',
+  intro: 'Marruecos reúne cumbres nevadas, olas del Atlántico y dunas del Sáhara en una sola semana de carretera. Aquí tiene adónde ir, cuánto tiempo quedarse y cómo llegar.',
+  jumpAria: 'Ir a un destino',
+  stay: 'Estancia',
+  bestTime: 'Mejor época',
+  gettingThere: 'Cómo llegar',
+  dontMiss: 'Imprescindible',
+  bestFor: 'Ideal para',
+  readGuide: (place) => `Leer la guía: ${place}`,
+  planHere: 'Planear un viaje aquí',
+  chooseEyebrow: '¿No sabe cuál elegir?',
+  chooseTitle: 'Una ciudad, un paisaje,<br />un lugar para descansar',
+  chooseText: 'Así son casi todos los buenos primeros viajes. Cuéntenos lo que le gusta y nosotros esbozamos el resto.',
+  askRoute: 'Pedir una ruta',
+  guideTitle: (place) => `Guía de viaje de ${place}: qué hacer, dónde dormir, cuándo ir`,
+  guideDescription: (place, tagline) =>
+    `${tagline}. Nuestra guía de ${place}: un día perfecto, dónde alojarse, la mejor época, cómo llegar y lo que no hay que perderse.`,
+  breadcrumb: 'Ruta de navegación',
+  home: 'Inicio',
+  whyGo: 'Por qué ir',
+  perfectDay: (place) => `Un día perfecto en ${place}`,
+  perfectDayTitle: 'De la primera luz<br />al último té',
+  morning: 'Mañana',
+  afternoon: 'Tarde',
+  evening: 'Noche',
+  photosOf: (place) => `Fotos: ${place}`,
+  whereToStay: 'Dónde alojarse',
+  goodToKnow: 'Conviene saber',
+  pairsWith: 'Combina bien con',
+  yourTrip: 'Su viaje',
+  makePart: (place) => `Incluya ${place}<br />en su ruta`,
+  planTo: (place) => `Planear un viaje: ${place}`,
+  country: 'Marruecos',
+};
+
+export const DEST = { en, fr, de, es };

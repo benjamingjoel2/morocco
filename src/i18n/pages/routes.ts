@@ -37,4 +37,44 @@ const fr: typeof en = {
   planTrip: 'Préparer un voyage',
 };
 
-export const ROUTES_T = { en, fr };
+/** German. */
+const de: typeof en = {
+  metaTitle: 'Marokko-Routen: 5 Tage, 8 Tage und zwei Wochen',
+  metaDescription:
+    'Drei bewährte Marokko-Routen: Marrakesch und der Atlas in fünf Nächten, von Marrakesch nach Fès durch die Sahara in acht und eine gemächliche Zwei-Wochen-Reise von Chefchaouen nach Essaouira.',
+  eyebrow: 'Routen',
+  title: 'Drei Wege,<br />Marokko zu sehen',
+  intro: 'Ausgangspunkte, keine Pauschalreisen. Wählen Sie die Route, die Ihrem Tempo am nächsten kommt, und wir passen sie an Ihre Daten und Wünsche an.',
+  heroLabel: 'Straße durch die Dadès-Schlucht',
+  navAria: 'Routen auf dieser Seite',
+  pace: 'Tempo',
+  bestSeason: 'Beste Saison',
+  bestFor: 'Ideal für',
+  makeMine: 'Diese Route anpassen lassen',
+  noneEyebrow: 'Nichts Passendes dabei?',
+  noneTitle: 'Mit einem<br />leeren Blatt beginnen',
+  noneText: 'Nennen Sie uns Ihre Daten und was Sie lieben – wir zeichnen eine Route rund um Sie.',
+  planTrip: 'Reise planen',
+};
+
+/** Spanish. */
+const es: typeof en = {
+  metaTitle: 'Rutas por Marruecos: 5 días, 8 días y dos semanas',
+  metaDescription:
+    'Tres rutas probadas por Marruecos: Marrakech y el Atlas en cinco noches, de Marrakech a Fez por el Sáhara en ocho y un viaje pausado de dos semanas de Chefchaouen a Esauira.',
+  eyebrow: 'Rutas',
+  title: 'Tres maneras<br />de ver Marruecos',
+  intro: 'Puntos de partida, no paquetes. Elija la que más se acerque a su ritmo y la adaptaremos a sus fechas y a sus sueños.',
+  heroLabel: 'Carretera de la garganta del Dadès',
+  navAria: 'Rutas de esta página',
+  pace: 'Ritmo',
+  bestSeason: 'Mejor época',
+  bestFor: 'Ideal para',
+  makeMine: 'Quiero esta ruta',
+  noneEyebrow: '¿Ninguna le convence?',
+  noneTitle: 'Empezar desde<br />una página en blanco',
+  noneText: 'Díganos sus fechas y lo que le gusta: trazaremos una ruta a su medida.',
+  planTrip: 'Planear un viaje',
+};
+
+export const ROUTES_T = { en, fr, de, es };

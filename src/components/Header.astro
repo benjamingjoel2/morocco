@@ -1,7 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import Photo from './Photo.astro';
-import { UI, langFromUrl, localize, unlocalize } from '../i18n';
+import { UI, LANGS, LANG_NAMES, langFromUrl, localize, unlocalize } from '../i18n';
 
 interface Props { overlay?: boolean; }
 const { overlay = false } = Astro.props;
@@ -9,8 +9,10 @@ const lang = langFromUrl(Astro.url);
 const t = UI[lang];
 const L = (p: string) => localize(lang, p);
 const path = unlocalize(Astro.url.pathname);
-const other = lang === 'en' ? 'fr' : 'en';
-const switchHref = localize(other, path);
+// Language selector: the same page in each language.
+// The 404 page only exists once, so its selector points at each language's home page.
+const target = /^\/404/.test(path) ? '/' : path;
+const langLinks = LANGS.map((l) => ({ lang: l, href: localize(l, target), name: LANG_NAMES[l], current: l === lang }));
 
 const MENU = [
   { href: '/', label: t.home },
@@ -37,7 +39,16 @@ const bar = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
     <a href={L('/')} class="justify-self-center" aria-label={t.homeAria}><Logo /></a>
     <div class="flex items-center gap-6 justify-self-end sm:gap-10">
       <a href={L('/journal/')} class:list={[bar, 'hidden sm:inline']}>{t.journal}</a>
-      <a href={switchHref} hreflang={other} lang={other} class={bar} aria-label={t.switchLabel} title={t.switchTo}>{t.switchShort}</a>
+      <nav aria-label={t.language} class="lang-select">
+        <ul class:list={[bar, 'flex items-center']}>
+          {langLinks.map((l, i) => (
+            <li class="flex items-center">
+              {i > 0 && <span aria-hidden="true" class="px-1 opacity-60 sm:px-1.5">·</span>}
+              <a href={l.href} hreflang={l.lang} lang={l.lang} aria-label={l.name} aria-current={l.current ? 'true' : undefined} class:list={['rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4', l.current ? 'underline underline-offset-4' : 'opacity-75 hover:opacity-100']}>{l.lang.toUpperCase()}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </div>
   </div>
 </header>
@@ -51,11 +62,20 @@ const bar = 'font-sans text-[0.72rem] uppercase tracking-[0.15em]';
     <a href={L('/')} class="justify-self-center" aria-label={t.homeAria}><Logo /></a>
     <div class="flex items-center gap-6 justify-self-end sm:gap-10">
       <a href={L('/journal/')} class:list={[bar, 'hidden sm:inline']}>{t.journal}</a>
-      <a href={switchHref} hreflang={other} lang={other} class={bar} aria-label={t.switchLabel} title={t.switchTo}>{t.switchShort}</a>
+      <nav aria-label={t.language} class="lang-select">
+        <ul class:list={[bar, 'flex items-center']}>
+          {langLinks.map((l, i) => (
+            <li class="flex items-center">
+              {i > 0 && <span aria-hidden="true" class="px-1 opacity-60 sm:px-1.5">·</span>}
+              <a href={l.href} hreflang={l.lang} lang={l.lang} aria-label={l.name} aria-current={l.current ? 'true' : undefined} class:list={['rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4', l.current ? 'underline underline-offset-4' : 'opacity-75 hover:opacity-100']}>{l.lang.toUpperCase()}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </div>
   </div>
   <div class="grid h-[calc(100%-72px)] md:grid-cols-2">
-    <nav aria-label="Main" class="flex flex-col justify-between px-5 py-10 sm:px-8 lg:px-[42px]">
+    <nav aria-label={t.menu} class="flex flex-col justify-between px-5 py-10 sm:px-8 lg:px-[42px]">
       <ul class="max-w-[550px]">
         {MENU.map((m) => (
           <li class="border-b border-dashed border-ink/40 first:border-solid first:border-ink">

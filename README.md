@@ -3,7 +3,7 @@
 An independent travel guide to Morocco, built with **Astro** and **Tailwind CSS**. The site is fully static.
 
 ## Pages
-`/` Home · `/destinations/` · `/things-to-do/` · `/travel-tips/` · `/contact/` (trip request form) · `404`
+`/` Home · `/destinations/` · `/things-to-do/` · `/travel-tips/` · `/contact/` (trip request form) · `/privacy/` · `/booking-terms/` · `/cookies/` · `404`
 
 ## Develop
 ```bash
@@ -21,7 +21,7 @@ All photos come from the **Unsplash API** and are looked up by `scripts/fetch-me
 - A photo is only accepted when its Unsplash **location** or the photographer's **own description or tags** say Morocco and match the place we searched for. A Fes slot can't get a Marrakech or Spanish photo.
 - Results are saved to `src/data/media.json` (no secrets inside). Check each new photo by eye (it must show the place its slot is for), add hand-written alt text in `src/data/media.ts`, then commit the file.
 - Unsplash demo keys allow 50 requests/hour, which is enough for about 14 slots per run. The script saves progress, so run `npm run media` again an hour later to fill the rest.
-- Photographer credits are generated in the footer automatically, as Unsplash's guidelines require (hotlinked images, download endpoint triggered, attribution links with UTM).
+- On the owner's instruction the site shows no photo credits; photographer details stay in `src/data/media.json`. Note that Unsplash's API guidelines ask hotlinking apps to attribute photographers: self-host the photos, or restore credits, if that matters. Creative Commons images (none today) must always be credited.
 - Any slot without a photo renders as a patterned clay panel.
 
 **Video:** if `PEXELS_API_KEY` is set, the script looks for a Merzouga dune video whose Pexels page says Morocco. Desktop users then get a muted, looping video with a poster image, while phones and reduced-motion users keep the still photo. Pexels key issuance is currently paused, so v1 ships without video.
@@ -37,6 +37,16 @@ All photos come from the **Unsplash API** and are looked up by `scripts/fetch-me
 ## SEO
 Each page has a title, meta description, canonical URL, Open Graph and Twitter tags (`public/og.jpg`) and JSON-LD. `@astrojs/sitemap` generates `sitemap-index.xml`.
 
+## Contact and legal pages
+- Brand email (`azulmorocco@tourground.com`) and business address live in `src/data/site.ts` and feed the footer, the JSON-LD and the legal pages. The site shows no phone number, WhatsApp or social links.
+- `/privacy/`, `/booking-terms/` and `/cookies/` (and `/fr/…`) are rendered by `src/views/Legal.astro` from `src/data/legal.mjs`. The cookie policy lists the one storage item the site uses (`azul-packing`); update it if you add analytics.
+
+## Before launch
+- Confirm the business address in `src/data/site.ts` (Syllabus Coworking, Casablanca, taken from OpenStreetMap).
+- Set up the `azulmorocco@tourground.com` mailbox and the `azulmorocco.tourground.com` domain (`SITE_URL`).
+- Connect `PUBLIC_FORM_ENDPOINT` so enquiries are delivered.
+- Have a lawyer review the legal pages and native speakers the French, German and Spanish copy.
+
 See `BRIEF.md` for the design brief and `FACTS-TO-VERIFY.md` for facts to check before launch.
 
 ## Quality checks
@@ -48,12 +58,12 @@ See `BRIEF.md` for the design brief and `FACTS-TO-VERIFY.md` for facts to check 
 - CSS is inlined, fonts are latin-only, self-hosted and preloaded; italics are synthesised rather than downloaded.
 - `vercel.json` gives hashed assets a one-year immutable cache; Chrome prerenders internal pages on hover (Speculation Rules).
 
-## Languages (English + French)
-- English lives at `/`, French at `/fr/`. Every page exists in both; the header switch (EN/FR) links to the counterpart, and each page declares `hreflang` alternates (also in the sitemap).
+## Languages (English, French, German, Spanish)
+- English lives at `/`, French at `/fr/`, German at `/de/`, Spanish at `/es/`. Every page exists in all four; the header language selector (EN · FR · DE · ES) links to the same page in each language, and each page declares `hreflang` alternates for all four plus `x-default` (also in the sitemap). There is no automatic redirect by browser language.
 - Pages are thin wrappers (`src/pages/**`, `src/pages/fr/**`) around views in `src/views/` that take a `lang` prop.
-- Shared UI strings: `src/i18n/index.ts`. Page strings: `src/i18n/pages/*.ts`. Content data: `src/data/*.ts` and `src/data/*.fr.ts`, selected with `content(lang)` from `src/i18n/data.ts`.
-- French dictionaries are typed against the English ones (`const fr: typeof en`), so a missing translation fails `astro check`.
-- French copy should be reviewed by a native speaker before launch.
+- Shared UI strings: `src/i18n/index.ts`. Page strings: `src/i18n/pages/*.ts`. Content data: `src/data/*.ts` plus `*.fr.ts`, `*.de.ts` and `*.es.ts`, selected with `content(lang)` from `src/i18n/data.ts`. Photo alt text in other languages: `src/data/media-alt.ts`. Journal articles: `src/content/journal/<lang>/`.
+- Every dictionary is typed against the English one (`const de: typeof en`), so a missing translation fails `astro check`.
+- French, German and Spanish copy should be reviewed by native speakers before launch.
 
 ## Journal
 Markdown articles in `src/content/journal/<lang>/<slug>.md` (same slug in both languages) with `title`, `description`, `date`, `photo` (a slot from `media.json`) and `tag`. Factual claims to verify are listed in `src/content/journal/FACTS.md`.
