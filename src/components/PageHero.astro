@@ -3,12 +3,11 @@ import Photo from './Photo.astro';
 interface Props { photo: string; eyebrow: string; title: string; intro: string; label?: string; /** Smaller title for long article headlines */ compact?: boolean; }
 const { photo, eyebrow, title, intro, label, compact = false } = Astro.props;
 ---
-<section class="on-photo relative isolate flex h-[88svh] min-h-[520px] flex-col items-start justify-end overflow-hidden container-x pb-14 text-left text-white md:pb-20">
+<section class="on-photo relative isolate flex h-[88svh] min-h-[520px] flex-col items-center justify-center overflow-hidden px-5 text-center text-white">
   <Photo photo={photo} eager quality={45} class="!absolute inset-0 -z-20 h-full w-full" imgClass="kenburns" label={label} />
   <div class="absolute inset-0 -z-10 bg-night/50"></div>
-  <div class="absolute inset-x-0 bottom-0 -z-10 h-2/3 bg-gradient-to-t from-night/50 to-transparent"></div>
   <div class="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-night/60 to-transparent"></div>
   <p class="eyebrow !text-white/85">{eyebrow}</p>
-  <h1 class:list={['display-left mt-6 max-w-[16ch] !text-white', compact ? 'text-[2.6rem] sm:text-[3.6rem] lg:text-[4.6rem]' : 'text-[3.2rem] sm:text-[4.4rem] lg:text-[5.75rem]']} set:html={title} />
+  <h1 class:list={['display mt-6 max-w-[16ch] !text-white', compact ? 'text-[3rem] sm:text-[4.2rem] lg:text-[5.6rem]' : 'max-w-none text-[4rem] sm:text-[6rem] lg:text-[8.75rem]']} set:html={title} />
   <p class="body-copy mt-8 max-w-[520px] text-white/90">{intro}</p>
 </section>

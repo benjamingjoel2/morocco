@@ -27,14 +27,14 @@ const SLIDES = [
   <div class="absolute inset-x-0 top-0 -z-10 h-48 bg-gradient-to-b from-night/70 to-transparent"></div>
   <div class="absolute inset-x-0 bottom-0 -z-10 h-72 bg-gradient-to-t from-night/80 via-night/40 to-transparent"></div>
 
-  <div class="on-photo container-x absolute inset-x-0 bottom-0 flex flex-col items-start gap-6 pb-8 md:flex-row md:items-end md:justify-between md:pb-10">
-    <div class="flex flex-col items-start text-left">
+  <div class="on-photo container-x absolute inset-x-0 bottom-0 grid grid-cols-2 items-end gap-6 pb-8 md:grid-cols-3 md:pb-10">
+    <p id="hero-coords" class="hidden font-sans text-[0.72rem] uppercase tracking-[0.15em] md:block">{SLIDES[0].coords}</p>
+    <div class="col-span-2 flex flex-col items-center justify-self-center text-center md:col-span-1">
       <p class="mb-4 font-serif text-[1.05rem] font-light italic leading-snug sm:text-[1.15rem]">{tagline}</p>
       <Logo variant="wordmark" />
     </div>
-    <div class="w-full max-w-[220px]">
+    <div class="col-span-2 w-full max-w-[200px] justify-self-center md:col-span-1 md:justify-self-end">
       <p id="hero-caption" class="font-sans text-[0.72rem] uppercase leading-snug tracking-[0.15em]">{SLIDES[0].caption}</p>
-      <p id="hero-coords" class="mt-1 font-sans text-[0.72rem] uppercase tracking-[0.15em] text-white/80">{SLIDES[0].coords}</p>
       <div class="relative mt-2 h-px w-full overflow-hidden bg-white/40"><div id="hero-progress" class="absolute inset-0 origin-left scale-x-0 bg-white will-change-transform"></div></div>
     </div>
   </div>
