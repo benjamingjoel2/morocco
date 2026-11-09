@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-// SITE_URL can be set in Vercel once a custom domain exists.
+// Canonical host for pages, the sitemap and robots.txt. SITE_URL overrides it.
 const site = process.env.SITE_URL || 'https://azulmorocco.tourground.com';
 
 export default defineConfig({
